@@ -1,0 +1,25 @@
+{
+  "name": "clickstream-snowflake-sink",
+  "config": {
+    "connector.class": "com.snowflake.kafka.connector.SnowflakeStreamingSinkConnector",
+    "tasks.max": "4",
+    "topics": "clickstream.events",
+    "snowflake.topic2table.map": "clickstream.events:CLICKSTREAM_EVENTS",
+    "snowflake.url.name": "https://KNSMANR-BL10477.snowflakecomputing.com",
+    "snowflake.user.name": "KAFKA_INGEST_SVC",
+    "snowflake.role.name": "KAFKA_INGEST_ROLE",
+    "snowflake.database.name": "ABACUS_ANALYTICS",
+    "snowflake.schema.name": "RAW",
+    "snowflake.private.key": "${file:/opt/kafka/secrets/snowflake.properties:private_key}",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+    "snowflake.enable.schematization": "true",
+    "errors.tolerance": "all",
+    "errors.log.enable": "true",
+    "errors.deadletterqueue.topic.name": "clickstream.events.dlq",
+    "errors.deadletterqueue.topic.replication.factor": "1",
+    "errors.deadletterqueue.context.headers.enable": "true",
+    "snowflake.streaming.validate.compatibility.with.classic": "false"
+  }
+}

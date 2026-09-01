@@ -1,0 +1,64 @@
+# docker-compose.connect.yml
+#
+# Overlay for the Kafka Connect worker. Run it TOGETHER with the main file so
+# both land in the same project and share its default network:
+#
+#   cd docker
+#   docker compose -f docker-compose.yml -f docker-compose.connect.yml up -d
+#   docker compose -f docker-compose.yml -f docker-compose.connect.yml logs -f connect
+#
+# No `networks:` block and no `external:` — as part of the same project,
+# connect joins docker_default automatically and resolves `kafka` by service
+# name. That also makes depends_on work again.
+
+services:
+  connect:
+    image: confluentinc/cp-kafka-connect:7.6.0
+    container_name: connect
+    restart: unless-stopped
+    depends_on:
+      - kafka
+    ports:
+      - "8083:8083"
+    volumes:
+      # Host path holding sf_key.p8 and snowflake.properties.
+      # Adjust if your secrets live elsewhere relative to docker/.
+      - ../connectors:/opt/kafka/secrets:ro
+    environment:
+      # Matches KAFKA_ADVERTISED_LISTENERS INTERNAL://kafka:9092
+      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
+
+      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: clickstream-connect
+
+      # Connect keeps its own state in Kafka topics. RF 1 for a single broker.
+      CONNECT_CONFIG_STORAGE_TOPIC: _connect-configs
+      CONNECT_OFFSET_STORAGE_TOPIC: _connect-offsets
+      CONNECT_STATUS_STORAGE_TOPIC: _connect-status
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.storage.StringConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "false"
+
+      CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components
+
+      # Lets the connector config reference ${file:/opt/kafka/secrets/...}
+      # so the private key never appears in the config or over the REST API.
+      CONNECT_CONFIG_PROVIDERS: file
+      CONNECT_CONFIG_PROVIDERS_FILE_CLASS: org.apache.kafka.common.config.provider.FileConfigProvider
+
+    # Install the Snowflake sink connector, then hand off to the image's own
+    # entrypoint. Without that last line the container installs and exits.
+    command:
+      - bash
+      - -c
+      - |
+        echo "installing Snowflake connector..."
+        confluent-hub install --no-prompt \
+          snowflakeinc/snowflake-kafka-connector:latest
+        echo "starting Kafka Connect..."
+        /etc/confluent/docker/run
