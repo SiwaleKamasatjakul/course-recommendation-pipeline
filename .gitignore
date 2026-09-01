@@ -1,0 +1,4 @@
+connectors/secrets/*
+!connectors/secrets/*.example
+*.p8
+*.pub
