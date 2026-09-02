@@ -395,7 +395,7 @@ FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
 WHERE EVENT_TYPE = 'course_card_clicked';
 
 ```
-![alt text](image/course_card_clicked_image.png.png)
+![alt text](image/course_card_clicked_image.png)
 **Casting rules for this data**
 
 - `:` walks into JSON, `::` casts out of VARIANT. `METADATA:dwell_seconds::INT`.
