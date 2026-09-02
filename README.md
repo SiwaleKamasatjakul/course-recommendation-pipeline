@@ -339,7 +339,7 @@ QUALIFY ROW_NUMBER() OVER (
     ORDER BY 1
 ) = 1;
 ```
-
+![alt text](image/page_dwell.png)
 
 
 
