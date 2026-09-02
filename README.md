@@ -9,13 +9,6 @@ producer → kafka → connect worker → snowflake
                                     └── ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
 ```
 
-Snowflake never connects to Kafka. The Connect worker is a separate process
-that consumes from Kafka and pushes into Snowflake over HTTPS — both
-connections originate from the worker.
-
-**Every step below has a gate.** This pipeline fails quietly: a wrong key or a
-missing grant surfaces three steps later as an opaque connector error. Don't
-skip them.
 
 ---
 
@@ -57,7 +50,6 @@ CREATE SCHEMA   IF NOT EXISTS ABACUS_ANALYTICS.RAW_APP;  -- Postgres sync, typed
 CREATE SCHEMA   IF NOT EXISTS ABACUS_ANALYTICS.STAGING;  -- typed views over RAW
 ```
 
-**Do not create the target table.** The connector builds and evolves it.
 
 > A Personal Database (`USER$<name>`) will not work as a target — privileges on
 > its objects cannot be granted to account roles, `CREATE` least of all.
