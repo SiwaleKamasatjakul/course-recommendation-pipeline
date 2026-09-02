@@ -41,12 +41,8 @@ skip them.
 | Docker with Compose | Kafka, Redpanda Console and Connect all run here |
 | `openssl`, `jq`, `curl` | Standard on macOS |
 
-> **Snowsight warning — read this first.** `Cmd+Enter` runs **only the
-> statement under your cursor**, and Run All runs **everything in the
-> worksheet**, including old statements you thought were gone. Three separate
-> failures during initial setup traced back to this. Keep each object in its
-> own file under `sql/` and run one file at a time.
-
+![alt text](image/redpanda.png)
+![alt text](image/redpanda_topic_record.png)
 ---
 
 ## Phase 1 — Snowflake: the destination
