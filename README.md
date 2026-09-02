@@ -41,8 +41,7 @@ skip them.
 | Docker with Compose | Kafka, Redpanda Console and Connect all run here |
 | `openssl`, `jq`, `curl` | Standard on macOS |
 
-![alt text](image/redpanda.png)
-![alt text](image/redpanda_topic_record.png)
+
 ---
 
 ## Phase 1 — Snowflake: the destination
@@ -459,6 +458,8 @@ docker exec docker-kafka-1 /opt/kafka/bin/kafka-consumer-groups.sh \
 offsets only after a successful write, the rows reached Snowflake.
 
 Redpanda Console at <http://localhost:8080> is faster for browsing topics.
+![alt text](image/redpanda.png)
+![alt text](image/redpanda_topic_record.png)
 
 ---
 
