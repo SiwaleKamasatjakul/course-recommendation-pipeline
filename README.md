@@ -340,6 +340,9 @@ QUALIFY ROW_NUMBER() OVER (
 ) = 1;
 ```
 
+
+
+
 ```sql
 CREATE OR REPLACE VIEW ABACUS_ANALYTICS.STAGING.COMPETITION_VIEWED AS
 SELECT
@@ -362,6 +365,7 @@ SELECT
 FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
 WHERE EVENT_TYPE = 'competition_viewed';
 ```
+![alt text](image/competition_viewed.png)
 
 **Casting rules for this data**
 
