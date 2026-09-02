@@ -367,6 +367,35 @@ WHERE EVENT_TYPE = 'competition_viewed';
 ```
 ![alt text](image/competition_viewed.png)
 
+```sql
+USE ROLE ACCOUNTADMIN;
+USE DATABASE ABACUS_ANALYTICS;
+SELECT * FROM ABACUS_ANALYTICS.STAGING.COMPETITION_VIEWED;
+
+CREATE SCHEMA IF NOT EXISTS ABACUS_ANALYTICS.STAGING;
+
+CREATE OR REPLACE VIEW ABACUS_ANALYTICS.STAGING.COURSE_CARD_CLICKED AS
+SELECT
+    EVENT_TYPE                              AS event_type,
+    SESSION_ID                              AS session_id,
+    USER_ID                                 AS user_id,
+    "TIMESTAMP"                             AS event_ts_utc,
+    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,
+    METADATA:action::STRING                 AS action,
+    METADATA:course_id::STRING              AS course_id,
+    METADATA:course_name::STRING            AS course_name,
+    METADATA:course_name_en::STRING         AS course_name_en,
+    METADATA:ip::STRING                     AS ip,
+    METADATA:language::STRING               AS language,
+    METADATA:path_type::STRING              AS path_type,
+    METADATA:referer::STRING                AS referer,
+    METADATA:source::STRING                 AS source,
+    METADATA:user_agent::STRING             AS user_agent
+FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
+WHERE EVENT_TYPE = 'course_card_clicked';
+
+```
+![alt text](image/course_card_clicked_image.png.png)
 **Casting rules for this data**
 
 - `:` walks into JSON, `::` casts out of VARIANT. `METADATA:dwell_seconds::INT`.
