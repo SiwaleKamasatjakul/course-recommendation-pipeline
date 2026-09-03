@@ -20,8 +20,14 @@ Every interaction emits a JSON event to the `clickstream.events` topic, so
 clicking through the UI exercises the whole pipeline — no synthetic producer
 needed.
 
+### All course
+![alt text](image/all_course.png)
 
+### Learning Path
 ![alt text](image/app-activities-page.png)
+
+### Competition Activities
+![alt text](image/activities_competition.png)
 
 *Clicking a competition here produces a `competition_viewed` event; scrolling
 and staying on the page produces `page_dwell` and `course_card_clicked`*
