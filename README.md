@@ -421,14 +421,6 @@ chmod 600 ~/.snowflake/dbt_rsa_key.p8
 grep -v "^-" ~/.snowflake/dbt_rsa_key.pub | tr -d '\n'
 ```
 
-```sql
-ALTER USER BANASPIH SET RSA_PUBLIC_KEY='MIIBIjANBgkqh…';
-DESC USER BANASPIH;   -- RSA_PUBLIC_KEY_FP must show SHA256:…
-```
-
-**Gate** — the local key's fingerprint must equal what Snowflake registered.
-A mismatch is what produces `390144 JWT token is invalid`.
-
 ```bash
 openssl rsa -in ~/.snowflake/dbt_rsa_key.p8 -pubout -outform DER 2>/dev/null \
   | openssl dgst -sha256 -binary | openssl enc -base64
