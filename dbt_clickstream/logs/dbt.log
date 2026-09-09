@@ -1,0 +1,852 @@
+==================== 2026-09-08T08:36:23.685371Z | 01a08029-4600-7f02-929c-83ecd0612821 ====================
+08:36:23.686703 [info ]: dbt-core 2.0.0-alpha.5
+08:36:23.689898 [info ]: Started loading project
+08:36:23.701106 [info ]: Finished loading project [  0.01s]
+08:36:23.701247 [error]: [InvalidConfig (dbt1005)]: no profiles.yml found (searched: ["/Users/Siwale.Ka/Documents/2.RecommedCourse/course-recommendation-pipeline/dbt_clickstream/profiles.yml", "/Users/Siwale.Ka/.dbt/profiles.yml"]). Run `dbt init` to create one
+08:36:24.472867 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 error [787ms]
+==================== 2026-09-08T08:46:01.994696Z | 01a08032-1904-7781-aea6-097d577dfbc2 ====================
+08:46:01.995922 [info ]: dbt-core 2.0.0-alpha.5
+08:46:01.999023 [info ]: Started loading project
+08:46:02.012795 [info ]: Loading ~/.dbt/profiles.yml
+08:46:02.034827 [debug]:    Started loading packages
+08:46:02.041184 [debug]:     Loaded [  0.01s] packages
+08:46:02.044090 [info ]: Finished loading project [  0.05s]
+08:46:02.046500 [info ]: Started parsing
+08:46:02.099144 [debug]: Finished parsing models/staging/_models.yml [  0.01s]
+08:46:02.118803 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.01s]
+08:46:02.129480 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+08:46:02.130823 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+08:46:02.131158 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+08:46:02.136479 [error]: [DependencyNotFound (dbt1048)]: Source 'raw.clickstream_events' not found in project. Searched for 'clickstream_events'
+  --> models/staging/stg_competition_viewed.sql:6:10
+08:46:02.137230 [warn ]: [UnusedResourceConfigPath (dbt1097)]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.abacus_analytics.marts
+- models.abacus_analytics.marts.recommendations
+- models.abacus_analytics.staging.clickstream
+08:46:02.137676 [info ]: Finished parsing [  0.09s]
+08:46:03.582528 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 warning and 1 error for target 'dev' [1.6s]
+==================== 2026-09-08T08:55:29.303777Z | 01a0803a-c116-71a1-8e2a-1f2f2dd4ead0 ====================
+08:55:29.303833 [info ]: dbt-core 2.0.0-alpha.5
+08:55:29.303937 [info ]: Started loading project
+08:55:29.304777 [info ]: Loading ~/.dbt/profiles.yml
+08:55:29.312220 [debug]:    Started loading packages
+08:55:29.314328 [debug]:     Loaded [  0.00s] packages
+08:55:29.314961 [info ]: Finished loading project [  0.01s]
+08:55:29.315635 [info ]: Started parsing
+08:55:29.333801 [debug]: Finished parsing models/staging/_models.yml [  0.00s]
+08:55:29.334556 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.00s]
+08:55:29.336919 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+08:55:29.337258 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+08:55:29.337579 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+08:55:29.338318 [error]: [DependencyNotFound (dbt1048)]: Source 'raw.clickstream_events' not found in project. Searched for 'clickstream_events'
+  --> models/staging/stg_competition_viewed.sql:6:10
+08:55:29.338601 [warn ]: [UnusedResourceConfigPath (dbt1097)]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.abacus_analytics.marts
+- models.abacus_analytics.marts.recommendations
+- models.abacus_analytics.staging.clickstream
+08:55:29.338953 [info ]: Finished parsing [  0.02s]
+08:55:32.737629 [info ]: 
+==================== Execution Summary =====================
+Finished 'list' with 1 warning and 1 error for target 'dev' [3.4s]
+==================== 2026-09-09T02:25:13.044560Z | 01a083fb-cf48-74c3-89a8-836bc3c382c3 ====================
+02:25:13.046302 [info ]: dbt-core 2.0.0-alpha.5
+02:25:13.049346 [info ]: Started loading project
+02:25:13.061569 [info ]: Loading ~/.dbt/profiles.yml
+02:25:13.086483 [debug]:    Started loading packages
+02:25:13.093915 [debug]:     Loaded [  0.01s] packages
+02:25:13.097127 [info ]: Finished loading project [  0.05s]
+02:25:13.099628 [info ]: Started parsing
+02:25:13.132135 [debug]: Finished parsing models/staging/_models.yml [  0.00s]
+02:25:13.132866 [debug]: Finished parsing models/staging/_sources.yml [  0.00s]
+02:25:13.142636 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.01s]
+02:25:13.147696 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+02:25:13.148083 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+02:25:13.148413 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+02:25:13.152776 [warn ]: [UnusedResourceConfigPath (dbt1097)]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.abacus_analytics.marts
+- models.abacus_analytics.marts.recommendations
+- models.abacus_analytics.staging.clickstream
+02:25:13.153666 [info ]: Finished parsing [  0.05s]
+02:25:13.155405 [info ]: Started scheduling
+02:25:13.156354 [info ]: Finished scheduling [  0.00s]
+02:25:13.158398 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "ABACUS_ANALYTICS", schema: "RAW", table: "CLICKSTREAM_EVENTS" }) and interval: None
+02:25:13.163612 [info ]: Started building task graph
+02:25:13.165999 [info ]: Finished building task graph [  0.00s]
+02:26:40.406455 [error]: [DbConnectionFailed (dbt1300)]: Failed to create schema 'STAGING_DEV_staging' in database 'ABACUS_ANALYTICS' in remote for model.abacus_analytics.stg_competition_viewed: [Snowflake] 390190 (08004): There was an error related to the SAML Identity Provider account parameter. Contact Snowflake support.
+02:26:40.660201 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 1 warning and 1 error for target 'dev' [1m 28s]
+Processed: 1 model
+==================== 2026-09-09T02:42:36.905007Z | 01a0840b-bcd7-7fa1-a1be-5c73e1b637bf ====================
+02:42:36.906944 [info ]: dbt-core 2.0.0-alpha.5
+02:42:36.909679 [info ]: Started loading project
+02:42:36.927276 [info ]: Loading ~/.dbt/profiles.yml
+02:42:36.937154 [info ]: Finished loading project [  0.03s]
+02:42:36.937838 [info ]: Started debugging
+02:42:36.938231 [info ]: Debugging profile: dev
+02:42:36.938262 [info ]: Debugging dbt version: 2.0.0-alpha.5
+02:42:36.938283 [info ]: Debugging platform: macos aarch64 (unix)
+02:42:36.938581 [info ]: Debugging adapter type: snowflake (remote)
+02:42:36.975548 [info ]: Debugging dependencies:
+  git: OK
+02:42:36.977857 [info ]: Debugging connection:
+  "authenticator": "externalbrowser",
+  "account": "KNSMANR-BL10477",
+  "user": "BL10477",
+  "database": "ABACUS_ANALYTICS",
+  "warehouse": "ABACUS_WH",
+  "schema": "STAGING_DEV",
+  "role": "DBT_ROLE"
+02:42:37.660967 [info ]: Finished debugging [  0.72s]
+02:42:37.661593 [error]: [AuthenticationFailed (dbt1011)]: dbt was unable to connect to the specified database.
+The following error was returned:
+
+[Snowflake] 390190 (08004): There was an error related to the SAML Identity Provider account parameter. Contact Snowflake support.
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles
+02:42:38.353844 [info ]: 
+==================== Execution Summary =====================
+Finished 'debug' with 1 error for target 'dev' [1.4s]
+==================== 2026-09-09T02:48:20.709180Z | 01a08410-fbd4-7d02-adb1-703be22fe687 ====================
+02:48:20.711111 [info ]: dbt-core 2.0.0-alpha.5
+02:48:20.713613 [info ]: Started loading project
+02:48:20.727959 [info ]: Loading ~/.dbt/profiles.yml
+02:48:20.735396 [info ]: Finished loading project [  0.02s]
+02:48:20.736003 [info ]: Started debugging
+02:48:20.736361 [info ]: Debugging profile: dev
+02:48:20.736389 [info ]: Debugging dbt version: 2.0.0-alpha.5
+02:48:20.736410 [info ]: Debugging platform: macos aarch64 (unix)
+02:48:20.736704 [info ]: Debugging adapter type: snowflake (remote)
+02:48:20.802178 [info ]: Debugging dependencies:
+  git: OK
+02:48:20.804568 [info ]: Debugging connection:
+  "authenticator": "externalbrowser",
+  "account": "KNSMANR-BL10477",
+  "user": "BL10477",
+  "database": "ABACUS_ANALYTICS",
+  "warehouse": "ABACUS_WH",
+  "schema": "STAGING",
+  "role": "DBT_ROLE"
+02:48:20.809598 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake SSO authentication, 'password' will be ignored and can be safely removed from your profile.
+02:48:21.163088 [info ]: Finished debugging [  0.43s]
+02:48:21.163409 [error]: [AuthenticationFailed (dbt1011)]: dbt was unable to connect to the specified database.
+The following error was returned:
+
+[Snowflake] 390190 (08004): There was an error related to the SAML Identity Provider account parameter. Contact Snowflake support.
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles
+02:48:21.865041 [info ]: 
+==================== Execution Summary =====================
+Finished 'debug' with 1 warning and 1 error for target 'dev' [1.2s]
+==================== 2026-09-09T03:06:17.762425Z | 01a08421-6b11-70c3-be9b-5fd8849e9bdc ====================
+03:06:17.764228 [info ]: dbt-core 2.0.0-alpha.5
+03:06:17.766946 [info ]: Started loading project
+03:06:17.781245 [info ]: Finished loading project [  0.01s]
+03:06:17.782168 [error]: [InvalidConfig (dbt1005)]: No profiles.yml found at `./profiles.yml`.
+Try running without the --profiles-dir flag to check the default locations.
+03:06:18.650031 [info ]: 
+==================== Execution Summary =====================
+Finished 'debug' with 1 error [887ms]
+==================== 2026-09-09T03:06:34.389057Z | 01a08421-ac13-7131-99a0-2e0a5d9966ed ====================
+03:06:34.389110 [info ]: dbt-core 2.0.0-alpha.5
+03:06:34.389207 [info ]: Started loading project
+03:06:34.390745 [info ]: Loading ~/.dbt/profiles.yml
+03:06:34.395785 [info ]: Finished loading project [  0.01s]
+03:06:34.396028 [info ]: Started debugging
+03:06:34.396306 [info ]: Debugging profile: dev
+03:06:34.396333 [info ]: Debugging dbt version: 2.0.0-alpha.5
+03:06:34.396356 [info ]: Debugging platform: macos aarch64 (unix)
+03:06:34.396682 [info ]: Debugging adapter type: snowflake (remote)
+03:06:34.437274 [info ]: Debugging dependencies:
+  git: OK
+03:06:34.439375 [info ]: Debugging connection:
+  "authenticator": "externalbrowser",
+  "account": "KNSMANR-BL10477",
+  "user": "BL10477",
+  "database": "ABACUS_ANALYTICS",
+  "warehouse": "ABACUS_WH",
+  "schema": "STAGING",
+  "role": "DBT_ROLE"
+03:06:34.443725 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake SSO authentication, 'password' will be ignored and can be safely removed from your profile.
+03:06:34.782603 [info ]: Finished debugging [  0.39s]
+03:06:34.782705 [error]: [AuthenticationFailed (dbt1011)]: dbt was unable to connect to the specified database.
+The following error was returned:
+
+[Snowflake] 390190 (08004): There was an error related to the SAML Identity Provider account parameter. Contact Snowflake support.
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles
+03:06:35.633747 [info ]: 
+==================== Execution Summary =====================
+Finished 'debug' with 1 warning and 1 error for target 'dev' [1.2s]
+==================== 2026-09-09T03:26:43.866824Z | 01a08434-208a-78c3-ae3b-c7bba651ecf5 ====================
+03:26:43.868791 [info ]: dbt-core 2.0.0-alpha.5
+03:26:43.873961 [info ]: Started loading project
+03:26:43.888905 [info ]: Loading ~/.dbt/profiles.yml
+03:26:43.895043 [info ]: Finished loading project [  0.02s]
+03:26:43.895674 [info ]: Started debugging
+03:26:43.896185 [info ]: Debugging profile: dev
+03:26:43.896209 [info ]: Debugging dbt version: 2.0.0-alpha.5
+03:26:43.896232 [info ]: Debugging platform: macos aarch64 (unix)
+03:26:43.896524 [info ]: Debugging adapter type: snowflake (remote)
+03:26:43.971376 [info ]: Debugging dependencies:
+  git: OK
+03:26:43.974418 [info ]: Debugging connection:
+  "authenticator": "externalbrowser",
+  "account": "KNSMANR-BL10477",
+  "user": "banaspih",
+  "database": "ABACUS_ANALYTICS",
+  "warehouse": "ABACUS_WH",
+  "schema": "STAGING",
+  "role": "DBT_ROLE"
+03:26:43.978903 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake SSO authentication, 'password' will be ignored and can be safely removed from your profile.
+03:26:44.395234 [info ]: Finished debugging [  0.50s]
+03:26:44.395622 [error]: [AuthenticationFailed (dbt1011)]: dbt was unable to connect to the specified database.
+The following error was returned:
+
+[Snowflake] 390190 (08004): There was an error related to the SAML Identity Provider account parameter. Contact Snowflake support.
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles
+03:26:45.581670 [info ]: 
+==================== Execution Summary =====================
+Finished 'debug' with 1 warning and 1 error for target 'dev' [1.7s]
+==================== 2026-09-09T03:32:28.168306Z | 01a08439-6186-7a32-b0df-32bbcce8aa8c ====================
+03:32:28.168369 [info ]: dbt-core 2.0.0-alpha.5
+03:32:28.168484 [info ]: Started loading project
+03:32:28.169280 [info ]: Loading ~/.dbt/profiles.yml
+03:32:28.171269 [info ]: Finished loading project [  0.00s]
+03:32:28.171322 [info ]: Started debugging
+03:32:28.171349 [info ]: Debugging profile: dev
+03:32:28.171369 [info ]: Debugging dbt version: 2.0.0-alpha.5
+03:32:28.171380 [info ]: Debugging platform: macos aarch64 (unix)
+03:32:28.171391 [info ]: Debugging adapter type: snowflake (remote)
+03:32:28.207107 [info ]: Debugging dependencies:
+  git: OK
+03:32:28.207492 [info ]: Debugging connection:
+  "authenticator": "externalbrowser",
+  "account": "KNSMANR-BL10477",
+  "user": "banaspih",
+  "database": "ABACUS_ANALYTICS",
+  "warehouse": "ABACUS_WH",
+  "schema": "STAGING",
+  "role": "DBT_ROLE"
+03:32:28.207642 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake keypair authentication, 'password' will be ignored and can be safely removed from your profile.
+03:32:28.491410 [info ]: Finished debugging [  0.32s]
+03:32:28.491514 [error]: [AuthenticationFailed (dbt1011)]: dbt was unable to connect to the specified database.
+The following error was returned:
+
+[Snowflake] 390144 (08004): JWT token is invalid.  [9ac97299-79a5-498e-84f3-3ed96b132f4f]
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles
+03:32:29.387047 [info ]: 
+==================== Execution Summary =====================
+Finished 'debug' with 1 warning and 1 error for target 'dev' [1.2s]
+==================== 2026-09-09T03:45:26.579012Z | 01a08445-4225-7f00-bbd4-5f6a42482359 ====================
+03:45:26.580878 [info ]: dbt-core 2.0.0-alpha.5
+03:45:26.583381 [info ]: Started loading project
+03:45:26.597515 [info ]: Loading ~/.dbt/profiles.yml
+03:45:26.603942 [info ]: Finished loading project [  0.02s]
+03:45:26.604605 [info ]: Started debugging
+03:45:26.605020 [info ]: Debugging profile: dev
+03:45:26.605043 [info ]: Debugging dbt version: 2.0.0-alpha.5
+03:45:26.605095 [info ]: Debugging platform: macos aarch64 (unix)
+03:45:26.605411 [info ]: Debugging adapter type: snowflake (remote)
+03:45:26.639739 [info ]: Debugging dependencies:
+  git: OK
+03:45:26.642186 [info ]: Debugging connection:
+  "authenticator": "externalbrowser",
+  "account": "KNSMANR-BL10477",
+  "user": "banaspih",
+  "database": "ABACUS_ANALYTICS",
+  "warehouse": "ABACUS_WH",
+  "schema": "STAGING",
+  "role": "DBT_ROLE"
+03:45:26.646868 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake keypair authentication, 'password' will be ignored and can be safely removed from your profile.
+03:45:27.239107 [debug]: Query executed on node unknown:
+select 1 as id
+03:45:27.335276 [debug]: Query executed on node unknown:
+SHOW PARAMETERS LIKE 'ALLOW_ID_TOKEN' IN ACCOUNT
+03:45:27.336449 [info ]: Debugging externalbrowser connection caching: Disabled. Consider enabling the Snowflake system parameter allow_id_token, to open fewer browser tabs during authentication. See https://docs.getdbt.com/docs/local/connect-data-platform/snowflake-setup?version=2.0#supported-authentication-types for more info.
+03:45:27.336495 [info ]: Debugging connection test: OK
+03:45:27.337049 [info ]: Debugged All checks passed!
+03:45:27.337131 [info ]: Finished debugging [  0.73s]
+03:45:28.309055 [info ]: 
+==================== Execution Summary =====================
+Finished 'debug' with 1 warning for target 'dev' [1.7s]
+==================== 2026-09-09T03:46:35.788215Z | 01a08446-508a-7130-a7cf-ea8bda7be41c ====================
+03:46:35.788261 [info ]: dbt-core 2.0.0-alpha.5
+03:46:35.788723 [info ]: Started loading project
+03:46:35.789905 [info ]: Loading ~/.dbt/profiles.yml
+03:46:35.806383 [debug]:    Started loading packages
+03:46:35.820439 [debug]:     Loaded [  0.01s] packages
+03:46:35.823298 [info ]: Finished loading project [  0.03s]
+03:46:35.825191 [info ]: Started parsing
+03:46:35.865654 [debug]: Finished parsing models/staging/_models.yml [  0.00s]
+03:46:35.866614 [debug]: Finished parsing models/staging/_sources.yml [  0.00s]
+03:46:35.878132 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.01s]
+03:46:35.883948 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+03:46:35.884415 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+03:46:35.884822 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+03:46:35.889153 [warn ]: [UnusedResourceConfigPath (dbt1097)]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.abacus_analytics.marts
+- models.abacus_analytics.marts.recommendations
+- models.abacus_analytics.staging.clickstream
+03:46:35.889851 [info ]: Finished parsing [  0.06s]
+03:46:35.891240 [info ]: Started scheduling
+03:46:35.892272 [info ]: Finished scheduling [  0.00s]
+03:46:35.894188 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "ABACUS_ANALYTICS", schema: "RAW", table: "CLICKSTREAM_EVENTS" }) and interval: None
+03:46:35.898714 [info ]: Started building task graph
+03:46:35.901354 [info ]: Finished building task graph [  0.00s]
+03:46:35.906247 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake keypair authentication, 'password' will be ignored and can be safely removed from your profile.
+03:46:36.444588 [debug]: Query executed on node unknown:
+show terse schemas in database ABACUS_ANALYTICS
+    limit 10000
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+03:46:36.552598 [debug]: Query executed on node unknown:
+create schema if not exists ABACUS_ANALYTICS.STAGING_staging
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+03:46:36.553383 [info ]: Started rendering (1 nodes)
+03:46:36.554187 [info ]: Started model STAGING_staging.stg_competition_viewed
+03:46:36.554251 [debug]: Started rendering model STAGING_staging.stg_competition_viewed
+03:46:36.558952 [debug]: Compiled SQL for node model.abacus_analytics.stg_competition_viewed at target/compiled/abacus_analytics/models/staging/stg_competition_viewed.sql
+03:46:36.559408 [debug]: Finished rendering [  0.01s] model STAGING_staging.stg_competition_viewed [success]
+03:46:36.559449 [info ]: Finished rendering [  0.01s] (1 nodes, 0 skipped, 0 errors)
+03:46:36.559467 [info ]: Started running (1 nodes)
+03:46:36.559484 [info ]: Started running model STAGING_staging.stg_competition_viewed
+03:46:36.706578 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+SHOW OBJECTS IN SCHEMA "ABACUS_ANALYTICS"."STAGING_STAGING" LIMIT 10000
+03:46:36.708791 [debug]: Writing runtime sql for node "model.abacus_analytics.stg_competition_viewed"
+03:46:36.891854 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+create or replace   view ABACUS_ANALYTICS.STAGING_staging.stg_competition_viewed
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_competition_viewed.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+WITH source AS (
+    SELECT * 
+    FROM ABACUS_ANALYTICS.RAW.clickstream_events
+    WHERE EVENT_TYPE = 'competition_viewd'
+),
+
+flattened AS (
+    SELECT
+        SESSION_ID                          AS session_id,
+        USER_ID                             AS user_id,
+        METADATA:competition_id::STRING     AS competition_id,
+
+    -- timestamps
+    "TIMESTAMP"                        AS event_ts_utc,
+    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,
+
+    METADATA:action::STRING                 AS action,
+    METADATA:competition_id::STRING         AS competition_id,
+    METADATA:competition_name::STRING       AS competition_name,
+    METADATA:competition_name_en::STRING    AS competition_name_en,
+    METADATA:grade::STRING                  AS grade,
+    METADATA:program::STRING                AS program,
+    METADATA:language::STRING               AS language,
+    METADATA:source::STRING                 AS source,
+    METADATA:referer::STRING                AS referer,
+    METADATA:ip::STRING                     AS ip,
+    METADATA:user_agent::STRING             AS user_agent
+FROM source
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */
+03:46:37.895340 [error]: [DbSyntaxInvalid (dbt1302)]: Database Error in model stg_competition_viewed (target/run/abacus_analytics/models/staging/stg_competition_viewed.sql)
+  [Snowflake] 002025 (42S21): SQL compilation error:
+  duplicate column name 'COMPETITION_ID'
+  (in run/abacus_analytics/models/staging/stg_competition_viewed.sql)
+03:46:37.895636 [info ]: Finished running [  1.34s] model STAGING_staging.stg_competition_viewed [error]
+03:46:37.895692 [info ]: Finished running [  1.34s] (1 nodes, 0 skipped, 1 errors)
+03:46:37.895710 [info ]:     Failed [  1.34s] model STAGING_staging.stg_competition_viewed (view)
+03:46:37.896068 [info ]: Started on-run-end hooks (1 nodes)
+03:46:37.973912 [debug]: Query executed on node operation.abacus_analytics.abacus_analytics-on-run-end-0:
+GRANT SELECT ON ALL VIEWS IN SCHEMA STAGING TO ROLE ANALYST
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+03:46:38.979176 [info ]: Finished on-run-end hooks [  1.08s] (1 nodes, 0 skipped, 0 errors)
+03:46:38.993316 [error]: [DbDriverFailed (dbt1308)]: [Snowflake] 002003 (02000): SQL compilation error:
+Role 'ANALYST' does not exist or not authorized.
+(in <RUN_OPERATION>:1:9)
+  --> <RUN_OPERATION>:1:9
+03:46:39.291459 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 2 warnings and 2 errors for target 'dev' [3.5s]
+Processed: 1 hook | 1 model
+Summary: 2 total | 2 error
+==================== 2026-09-09T04:55:44.946963Z | 01a08485-a020-77b0-ae5e-05837af0ab28 ====================
+04:55:44.948976 [info ]: dbt-core 2.0.0-alpha.5
+04:55:44.960181 [info ]: Started loading project
+04:55:44.989577 [info ]: Loading ~/.dbt/profiles.yml
+04:55:45.039709 [debug]:    Started loading packages
+04:55:45.046433 [debug]:     Loaded [  0.01s] packages
+04:55:45.049500 [info ]: Finished loading project [  0.09s]
+04:55:45.052108 [info ]: Started parsing
+04:55:45.086398 [debug]: Finished parsing models/staging/_models.yml [  0.00s]
+04:55:45.087294 [debug]: Finished parsing models/staging/_sources.yml [  0.00s]
+04:55:45.096807 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.01s]
+04:55:45.101009 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+04:55:45.101356 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+04:55:45.101663 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+04:55:45.105169 [warn ]: [UnusedResourceConfigPath (dbt1097)]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.abacus_analytics.marts
+- models.abacus_analytics.marts.recommendations
+- models.abacus_analytics.staging.clickstream
+04:55:45.106075 [info ]: Finished parsing [  0.05s]
+04:55:45.107570 [info ]: Started scheduling
+04:55:45.108503 [info ]: Finished scheduling [  0.00s]
+04:55:45.110713 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "ABACUS_ANALYTICS", schema: "RAW", table: "CLICKSTREAM_EVENTS" }) and interval: None
+04:55:45.116114 [info ]: Started building task graph
+04:55:45.118325 [info ]: Finished building task graph [  0.00s]
+04:55:45.124235 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake keypair authentication, 'password' will be ignored and can be safely removed from your profile.
+04:55:45.725932 [debug]: Query executed on node unknown:
+show terse schemas in database ABACUS_ANALYTICS
+    limit 10000
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+04:55:45.728148 [info ]: Started rendering (1 nodes)
+04:55:45.728290 [info ]: Started model STAGING_staging.stg_competition_viewed
+04:55:45.728350 [debug]: Started rendering model STAGING_staging.stg_competition_viewed
+04:55:45.731592 [debug]: Compiled SQL for node model.abacus_analytics.stg_competition_viewed at target/compiled/abacus_analytics/models/staging/stg_competition_viewed.sql
+04:55:45.732181 [debug]: Finished rendering [  0.00s] model STAGING_staging.stg_competition_viewed [success]
+04:55:45.732220 [info ]: Finished rendering [  0.00s] (1 nodes, 0 skipped, 0 errors)
+04:55:45.732243 [info ]: Started running (1 nodes)
+04:55:45.732268 [info ]: Started running model STAGING_staging.stg_competition_viewed
+04:55:45.869269 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+SHOW OBJECTS IN SCHEMA "ABACUS_ANALYTICS"."STAGING_STAGING" LIMIT 10000
+04:55:45.870313 [debug]: Writing runtime sql for node "model.abacus_analytics.stg_competition_viewed"
+04:55:46.030859 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+create or replace   view ABACUS_ANALYTICS.STAGING_staging.stg_competition_viewed
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_competition_viewed.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+WITH source AS (
+    SELECT * 
+    FROM ABACUS_ANALYTICS.RAW.clickstream_events
+    WHERE EVENT_TYPE = 'competition_viewd'
+),
+
+flattened AS (
+    SELECT
+        SESSION_ID                          AS session_id,
+        USER_ID                             AS user_id,
+        METADATA:competition_id::STRING     AS competition_id,
+
+    -- timestamps
+    "TIMESTAMP"                        AS event_ts_utc,
+    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,
+
+    METADATA:action::STRING                 AS action,
+    METADATA:competition_id::STRING         AS competition_id,
+    METADATA:competition_name::STRING       AS competition_name,
+    METADATA:competition_name_en::STRING    AS competition_name_en,
+    METADATA:grade::STRING                  AS grade,
+    METADATA:program::STRING                AS program,
+    METADATA:language::STRING               AS language,
+    METADATA:source::STRING                 AS source,
+    METADATA:referer::STRING                AS referer,
+    METADATA:ip::STRING                     AS ip,
+    METADATA:user_agent::STRING             AS user_agent
+FROM source
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */
+04:55:47.037892 [error]: [DbSyntaxInvalid (dbt1302)]: Database Error in model stg_competition_viewed (target/run/abacus_analytics/models/staging/stg_competition_viewed.sql)
+  [Snowflake] 002025 (42S21): SQL compilation error:
+  duplicate column name 'COMPETITION_ID'
+  (in run/abacus_analytics/models/staging/stg_competition_viewed.sql)
+04:55:47.038032 [info ]: Finished running [  1.31s] model STAGING_staging.stg_competition_viewed [error]
+04:55:47.038076 [info ]: Finished running [  1.31s] (1 nodes, 0 skipped, 1 errors)
+04:55:47.038093 [info ]:     Failed [  1.31s] model STAGING_staging.stg_competition_viewed (view)
+04:55:47.268784 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 2 warnings and 1 error for target 'dev' [2.3s]
+Processed: 1 model
+Summary: 1 total | 1 error
+==================== 2026-09-09T05:01:18.453889Z | 01a0848a-b6df-74e1-b4a4-68212fb158b7 ====================
+05:01:18.453949 [info ]: dbt-core 2.0.0-alpha.5
+05:01:18.454078 [info ]: Started loading project
+05:01:18.457110 [info ]: Loading ~/.dbt/profiles.yml
+05:01:18.464742 [debug]:    Started loading packages
+05:01:18.466729 [debug]:     Loaded [  0.00s] packages
+05:01:18.467304 [info ]: Finished loading project [  0.01s]
+05:01:18.467518 [info ]: Started parsing
+05:01:18.488952 [debug]: Finished parsing models/staging/_models.yml [  0.00s]
+05:01:18.489164 [debug]: Finished parsing models/staging/_sources.yml [  0.00s]
+05:01:18.490076 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.00s]
+05:01:18.494868 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+05:01:18.495335 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+05:01:18.495803 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+05:01:18.496744 [warn ]: [UnusedResourceConfigPath (dbt1097)]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.abacus_analytics.marts
+- models.abacus_analytics.marts.recommendations
+- models.abacus_analytics.staging.clickstream
+05:01:18.497188 [info ]: Finished parsing [  0.03s]
+05:01:18.498072 [info ]: Started scheduling
+05:01:18.498174 [info ]: Finished scheduling [  0.00s]
+05:01:18.498302 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "ABACUS_ANALYTICS", schema: "RAW", table: "CLICKSTREAM_EVENTS" }) and interval: None
+05:01:18.498955 [info ]: Started building task graph
+05:01:18.499036 [info ]: Finished building task graph [  0.00s]
+05:01:18.499297 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake keypair authentication, 'password' will be ignored and can be safely removed from your profile.
+05:01:19.176888 [debug]: Query executed on node unknown:
+show terse schemas in database ABACUS_ANALYTICS
+    limit 10000
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+05:01:19.177169 [info ]: Started rendering (1 nodes)
+05:01:19.177234 [info ]: Started model STAGING_staging.stg_competition_viewed
+05:01:19.177252 [debug]: Started rendering model STAGING_staging.stg_competition_viewed
+05:01:19.178497 [debug]: Compiled SQL for node model.abacus_analytics.stg_competition_viewed at target/compiled/abacus_analytics/models/staging/stg_competition_viewed.sql
+05:01:19.178594 [debug]: Finished rendering [  0.00s] model STAGING_staging.stg_competition_viewed [success]
+05:01:19.178637 [info ]: Finished rendering [  0.00s] (1 nodes, 0 skipped, 0 errors)
+05:01:19.178661 [info ]: Started running (1 nodes)
+05:01:19.178680 [info ]: Started running model STAGING_staging.stg_competition_viewed
+05:01:19.287827 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+SHOW OBJECTS IN SCHEMA "ABACUS_ANALYTICS"."STAGING_STAGING" LIMIT 10000
+05:01:19.288805 [debug]: Writing runtime sql for node "model.abacus_analytics.stg_competition_viewed"
+05:01:19.595436 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+create or replace   view ABACUS_ANALYTICS.STAGING_staging.stg_competition_viewed
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_competition_viewed.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+WITH source AS (
+    SELECT * 
+    FROM ABACUS_ANALYTICS.RAW.clickstream_events
+    WHERE EVENT_TYPE = 'competition_viewed'
+),
+
+flattened AS (
+    SELECT
+        SESSION_ID                          AS session_id,
+        USER_ID                             AS user_id,
+
+    -- timestamps
+    "TIMESTAMP"                        AS event_ts_utc,
+    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,
+
+    METADATA:action::STRING                 AS action,
+    METADATA:competition_id::STRING         AS competition_id,
+    METADATA:competition_name::STRING       AS competition_name,
+    METADATA:competition_name_en::STRING    AS competition_name_en,
+    METADATA:grade::STRING                  AS grade,
+    METADATA:program::STRING                AS program,
+    METADATA:language::STRING               AS language,
+    METADATA:source::STRING                 AS source,
+    METADATA:referer::STRING                AS referer,
+    METADATA:ip::STRING                     AS ip,
+    METADATA:user_agent::STRING             AS user_agent
+FROM source
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */
+05:01:19.597280 [info ]: Finished running [  0.42s] model STAGING_staging.stg_competition_viewed [success]
+05:01:19.597325 [info ]: Finished running [  0.42s] (1 nodes, 0 skipped, 0 errors)
+05:01:19.597344 [info ]:  Succeeded [  0.42s] model STAGING_staging.stg_competition_viewed (view)
+05:01:19.833229 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 2 warnings for target 'dev' [1.4s]
+Processed: 1 model
+Summary: 1 total | 1 success
+==================== 2026-09-09T05:41:53.776627Z | 01a084af-dfdf-78f1-a5b4-8fa372bed4dc ====================
+05:41:53.778328 [info ]: dbt-core 2.0.0-alpha.5
+05:41:53.781459 [info ]: Started loading project
+05:41:53.793394 [info ]: Loading ~/.dbt/profiles.yml
+05:41:53.825901 [debug]:    Started loading packages
+05:41:53.837374 [debug]:     Loaded [  0.01s] packages
+05:41:53.840497 [info ]: Finished loading project [  0.06s]
+05:41:53.843019 [info ]: Started parsing
+05:41:53.875516 [debug]: Finished parsing models/staging/_models.yml [  0.00s]
+05:41:53.876579 [debug]: Finished parsing models/staging/_sources.yml [  0.00s]
+05:41:53.885902 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.00s]
+05:41:53.887357 [debug]: Finished parsing models/staging/stg_course_card_clicked.sql [  0.00s]
+05:41:53.891973 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+05:41:53.895859 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+05:41:53.896300 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+05:41:53.899687 [warn ]: [UnusedResourceConfigPath (dbt1097)]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.abacus_analytics.marts
+- models.abacus_analytics.marts.recommendations
+- models.abacus_analytics.staging.clickstream
+05:41:53.900567 [info ]: Finished parsing [  0.06s]
+05:41:53.902249 [info ]: Started scheduling
+05:41:53.903238 [info ]: Finished scheduling [  0.00s]
+05:41:53.905166 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "ABACUS_ANALYTICS", schema: "RAW", table: "CLICKSTREAM_EVENTS" }) and interval: None
+05:41:53.910098 [info ]: Started building task graph
+05:41:53.912190 [info ]: Finished building task graph [  0.00s]
+05:41:53.917610 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake keypair authentication, 'password' will be ignored and can be safely removed from your profile.
+05:41:54.680732 [debug]: Query executed on node unknown:
+show terse schemas in database ABACUS_ANALYTICS
+    limit 10000
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+05:41:54.682943 [info ]: Started rendering (1 nodes)
+05:41:54.683084 [info ]: Started model STAGING_staging.stg_course_card_clicked
+05:41:54.683132 [debug]: Started rendering model STAGING_staging.stg_course_card_clicked
+05:41:54.686163 [debug]: Compiled SQL for node model.abacus_analytics.stg_course_card_clicked at target/compiled/abacus_analytics/models/staging/stg_course_card_clicked.sql
+05:41:54.686719 [debug]: Finished rendering [  0.00s] model STAGING_staging.stg_course_card_clicked [success]
+05:41:54.686750 [info ]: Finished rendering [  0.00s] (1 nodes, 0 skipped, 0 errors)
+05:41:54.686764 [info ]: Started running (1 nodes)
+05:41:54.686781 [info ]: Started running model STAGING_staging.stg_course_card_clicked
+05:41:54.868589 [debug]: Query executed on node model.abacus_analytics.stg_course_card_clicked:
+SHOW OBJECTS IN SCHEMA "ABACUS_ANALYTICS"."STAGING_STAGING" LIMIT 10000
+05:41:54.869635 [debug]: Writing runtime sql for node "model.abacus_analytics.stg_course_card_clicked"
+05:41:55.482398 [debug]: Query executed on node model.abacus_analytics.stg_course_card_clicked:
+create or replace   view ABACUS_ANALYTICS.STAGING_staging.stg_course_card_clicked
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_course_card_clicked.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+
+WITH source AS (
+    SELECT *
+    FROM ABACUS_ANALYTICS.RAW.clickstream_events
+    WHERE EVENT_TYPE = 'course_card_clicked'
+),
+
+flattened AS (
+    SELECT
+        EVENT_TYPE                              AS event_type,
+        SESSION_ID                              AS session_id,
+        USER_ID                                 AS user_id,
+   
+        -- timestamps
+
+        "TIMESTAMP"                             AS event_ts_utc,
+        CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,
+        
+        METADATA:action::STRING                 AS action,
+        METADATA:course_id::STRING              AS course_id,
+        METADATA:course_name::STRING            AS course_name,
+        METADATA:course_name_en::STRING         AS course_name_en,
+        METADATA:ip::STRING                     AS ip,
+        METADATA:language::STRING               AS language,
+        METADATA:path_type::STRING              AS path_type,
+        METADATA:referer::STRING                AS referer,
+        METADATA:source::STRING                 AS source,
+        METADATA:user_agent::STRING             AS user_agent
+    FROM source
+
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */
+05:41:55.484105 [info ]: Finished running [  0.80s] model STAGING_staging.stg_course_card_clicked [success]
+05:41:55.484145 [info ]: Finished running [  0.80s] (1 nodes, 0 skipped, 0 errors)
+05:41:55.484162 [info ]:  Succeeded [  0.80s] model STAGING_staging.stg_course_card_clicked (view)
+05:41:55.766614 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 2 warnings for target 'dev' [2.0s]
+Processed: 1 model
+Summary: 1 total | 1 success
+==================== 2026-09-09T05:45:16.596779Z | 01a084b2-f832-7b72-950d-85f4b6c21bd9 ====================
+05:45:16.596838 [info ]: dbt-core 2.0.0-alpha.5
+05:45:16.596943 [info ]: Started loading project
+05:45:16.597632 [info ]: Loading ~/.dbt/profiles.yml
+05:45:16.604545 [debug]:    Started loading packages
+05:45:16.606046 [debug]:     Loaded [  0.00s] packages
+05:45:16.606775 [info ]: Finished loading project [  0.01s]
+05:45:16.606970 [info ]: Started parsing
+05:45:16.625799 [debug]: Finished parsing models/staging/_models.yml [  0.00s]
+05:45:16.626086 [debug]: Finished parsing models/staging/_sources.yml [  0.00s]
+05:45:16.626976 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.00s]
+05:45:16.627369 [debug]: Finished parsing models/staging/stg_course_card_clicked.sql [  0.00s]
+05:45:16.627722 [debug]: Finished parsing models/staging/stg_page_dwell.sql [  0.00s]
+05:45:16.631933 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+05:45:16.632357 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+05:45:16.632784 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+05:45:16.633708 [warn ]: [UnusedResourceConfigPath (dbt1097)]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.abacus_analytics.marts
+- models.abacus_analytics.marts.recommendations
+- models.abacus_analytics.staging.clickstream
+05:45:16.634054 [info ]: Finished parsing [  0.03s]
+05:45:16.637078 [info ]: Started scheduling
+05:45:16.637150 [info ]: Finished scheduling [  0.00s]
+05:45:16.637288 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "ABACUS_ANALYTICS", schema: "RAW", table: "CLICKSTREAM_EVENTS" }) and interval: None
+05:45:16.637833 [info ]: Started building task graph
+05:45:16.637900 [info ]: Finished building task graph [  0.00s]
+05:45:16.638126 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake keypair authentication, 'password' will be ignored and can be safely removed from your profile.
+05:45:17.160978 [debug]: Query executed on node unknown:
+show terse schemas in database ABACUS_ANALYTICS
+    limit 10000
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+05:45:17.161627 [info ]: Started rendering (1 nodes)
+05:45:17.161786 [info ]: Started model STAGING_staging.stg_page_dwell
+05:45:17.161819 [debug]: Started rendering model STAGING_staging.stg_page_dwell
+05:45:17.164637 [debug]: Compiled SQL for node model.abacus_analytics.stg_page_dwell at target/compiled/abacus_analytics/models/staging/stg_page_dwell.sql
+05:45:17.164849 [debug]: Finished rendering [  0.00s] model STAGING_staging.stg_page_dwell [success]
+05:45:17.164935 [info ]: Finished rendering [  0.00s] (1 nodes, 0 skipped, 0 errors)
+05:45:17.164990 [info ]: Started running (1 nodes)
+05:45:17.165023 [info ]: Started running model STAGING_staging.stg_page_dwell
+05:45:17.329926 [debug]: Query executed on node model.abacus_analytics.stg_page_dwell:
+SHOW OBJECTS IN SCHEMA "ABACUS_ANALYTICS"."STAGING_STAGING" LIMIT 10000
+05:45:17.332638 [debug]: Writing runtime sql for node "model.abacus_analytics.stg_page_dwell"
+05:45:17.460895 [debug]: Query executed on node model.abacus_analytics.stg_page_dwell:
+create or replace   view ABACUS_ANALYTICS.STAGING_staging.stg_page_dwell
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_course_card_clicked.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+
+WITH source AS (
+    SELECT *
+    FROM ABACUS_ANALYTICS.RAW.clickstream_events
+    WHERE EVENT_TYPE = 'page_dwell'
+),
+
+flattened AS (
+SELECT
+    EVENT_TYPE                        AS event_type,
+    SESSION_ID                        AS session_id,
+    USER_ID                           AS user_id,
+    "TIMESTAMP"                    AS event_ts_utc,
+    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,    METADATA:dwell_seconds::INT       AS dwell_seconds,
+    METADATA:scroll_depth_pct::INT    AS scroll_depth_pct,
+    METADATA:page::STRING             AS page,
+    METADATA:referer::STRING          AS referer,
+    METADATA:ip::STRING               AS ip,
+    METADATA:user_agent::STRING       AS user_agent
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */
+05:45:18.468294 [error]: [DbSyntaxInvalid (dbt1302)]: Database Error in model stg_page_dwell (target/run/abacus_analytics/models/staging/stg_page_dwell.sql)
+  [Snowflake] 000904 (42000): SQL compilation error: error line 19 at position 4
+  invalid identifier 'EVENT_TYPE'
+  (in run/abacus_analytics/models/staging/stg_page_dwell.sql)
+05:45:18.468920 [info ]: Finished running [  1.30s] model STAGING_staging.stg_page_dwell [error]
+05:45:18.469132 [info ]: Finished running [  1.30s] (1 nodes, 0 skipped, 1 errors)
+05:45:18.469219 [info ]:     Failed [  1.31s] model STAGING_staging.stg_page_dwell (view)
+05:45:18.727982 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 2 warnings and 1 error for target 'dev' [2.1s]
+Processed: 1 model
+Summary: 1 total | 1 error
+==================== 2026-09-09T05:45:51.131790Z | 01a084b3-7f19-7031-9cc9-20b64d84a331 ====================
+05:45:51.131844 [info ]: dbt-core 2.0.0-alpha.5
+05:45:51.131955 [info ]: Started loading project
+05:45:51.132847 [info ]: Loading ~/.dbt/profiles.yml
+05:45:51.140852 [debug]:    Started loading packages
+05:45:51.142955 [debug]:     Loaded [  0.00s] packages
+05:45:51.143564 [info ]: Finished loading project [  0.01s]
+05:45:51.143760 [info ]: Started parsing
+05:45:51.162881 [debug]: Finished parsing models/staging/_models.yml [  0.00s]
+05:45:51.163169 [debug]: Finished parsing models/staging/_sources.yml [  0.00s]
+05:45:51.164011 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.00s]
+05:45:51.164373 [debug]: Finished parsing models/staging/stg_course_card_clicked.sql [  0.00s]
+05:45:51.164717 [debug]: Finished parsing models/staging/stg_page_dwell.sql [  0.00s]
+05:45:51.167839 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+05:45:51.168235 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+05:45:51.168577 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+05:45:51.169474 [warn ]: [UnusedResourceConfigPath (dbt1097)]: Configuration paths exist in your dbt_project.yml file which do not apply to any resources.
+There are 3 unused configuration paths:
+- models.abacus_analytics.marts
+- models.abacus_analytics.marts.recommendations
+- models.abacus_analytics.staging.clickstream
+05:45:51.169889 [info ]: Finished parsing [  0.03s]
+05:45:51.170233 [info ]: Started scheduling
+05:45:51.170311 [info ]: Finished scheduling [  0.00s]
+05:45:51.170432 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "ABACUS_ANALYTICS", schema: "RAW", table: "CLICKSTREAM_EVENTS" }) and interval: None
+05:45:51.170987 [info ]: Started building task graph
+05:45:51.171053 [info ]: Finished building task graph [  0.00s]
+05:45:51.171277 [warn ]: [InvalidConfig (dbt1005)]: For Snowflake keypair authentication, 'password' will be ignored and can be safely removed from your profile.
+05:45:51.751200 [debug]: Query executed on node unknown:
+show terse schemas in database ABACUS_ANALYTICS
+    limit 10000
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+05:45:51.751920 [info ]: Started rendering (1 nodes)
+05:45:51.752086 [info ]: Started model STAGING_staging.stg_page_dwell
+05:45:51.752131 [debug]: Started rendering model STAGING_staging.stg_page_dwell
+05:45:51.754609 [debug]: Compiled SQL for node model.abacus_analytics.stg_page_dwell at target/compiled/abacus_analytics/models/staging/stg_page_dwell.sql
+05:45:51.754864 [debug]: Finished rendering [  0.00s] model STAGING_staging.stg_page_dwell [success]
+05:45:51.754978 [info ]: Finished rendering [  0.00s] (1 nodes, 0 skipped, 0 errors)
+05:45:51.755046 [info ]: Started running (1 nodes)
+05:45:51.755098 [info ]: Started running model STAGING_staging.stg_page_dwell
+05:45:51.892776 [debug]: Query executed on node model.abacus_analytics.stg_page_dwell:
+SHOW OBJECTS IN SCHEMA "ABACUS_ANALYTICS"."STAGING_STAGING" LIMIT 10000
+05:45:51.893800 [debug]: Writing runtime sql for node "model.abacus_analytics.stg_page_dwell"
+05:45:52.889385 [debug]: Query executed on node model.abacus_analytics.stg_page_dwell:
+create or replace   view ABACUS_ANALYTICS.STAGING_staging.stg_page_dwell
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_course_card_clicked.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+
+WITH source AS (
+    SELECT *
+    FROM ABACUS_ANALYTICS.RAW.clickstream_events
+    WHERE EVENT_TYPE = 'page_dwell'
+),
+
+flattened AS (
+SELECT
+    EVENT_TYPE                        AS event_type,
+    SESSION_ID                        AS session_id,
+    USER_ID                           AS user_id,
+    "TIMESTAMP"                    AS event_ts_utc,
+    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,   
+     METADATA:dwell_seconds::INT       AS dwell_seconds,
+    METADATA:scroll_depth_pct::INT    AS scroll_depth_pct,
+    METADATA:page::STRING             AS page,
+    METADATA:referer::STRING          AS referer,
+    METADATA:ip::STRING               AS ip,
+    METADATA:user_agent::STRING       AS user_agent
+    FROM source
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */
+05:45:52.891213 [info ]: Finished running [  1.14s] model STAGING_staging.stg_page_dwell [success]
+05:45:52.891301 [info ]: Finished running [  1.14s] (1 nodes, 0 skipped, 0 errors)
+05:45:52.891338 [info ]:  Succeeded [  1.14s] model STAGING_staging.stg_page_dwell (view)
+05:45:53.153761 [info ]: 
+==================== Execution Summary =====================
+Finished 'run' with 2 warnings for target 'dev' [2.0s]
+Processed: 1 model
+Summary: 1 total | 1 success

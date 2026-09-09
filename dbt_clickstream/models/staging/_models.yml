@@ -1,0 +1,16 @@
+# models/staging/_models.yml
+version: 2
+
+models:
+  - name: stg_competition_viewed
+    description: One row per competition_viewed event, metadata flattened.
+    columns:
+      - name: session_id
+        data_tests:
+          - not_null
+      - name: competition_id
+        data_tests:
+          - not_null
+      - name: event_ts_utc
+        data_tests:
+          - not_null
