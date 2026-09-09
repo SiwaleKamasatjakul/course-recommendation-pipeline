@@ -49,11 +49,11 @@ through the UI exercises the whole pipeline — no synthetic producer needed.
 
 **Learning Path**
 
-![alt text](image/learning_path.png)
+![alt text](image/app-activities-page.png)
 
 **Competition Activities**
 
-![alt text](image/competition_activities.png)
+![alt text](image/activities_competition.png)
 
 Clicking a competition here produces a `competition_viewed` event; scrolling and
 staying on the page produces `page_dwell` and `course_card_clicked`.
