@@ -81,7 +81,6 @@ staying on the page produces `page_dwell` and `course_card_clicked`.
 
 | Requirement | Notes |
 |---|---|
-| Snowflake account with `ACCOUNTADMIN` | Account identifier: `KNSMANR-BL10477` |
 | Kafka broker reachable from the Connect worker | Internal listener `kafka:9092` |
 | Docker with Compose | Kafka, Redpanda Console and Connect all run here |
 | `openssl`, `jq`, `curl` | Standard on macOS |
@@ -134,7 +133,6 @@ system performed which action in the audit trail.
 | Identity | Type | Key | Used by |
 |---|---|---|---|
 | `KAFKA_INGEST_SVC` | `SERVICE` | `connectors/secrets/sf_key.p8` | Kafka connector, writes `RAW` |
-| `BANASPIH` (human) | `PERSON` | `~/.snowflake/dbt_rsa_key.p8` | dbt, reads `RAW`, writes everything else |
 
 Phase 2 covers the connector's key. The dbt key is in
 [Phase 5](#phase-5--dbt-transformation-as-code).
