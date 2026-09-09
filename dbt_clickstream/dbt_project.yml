@@ -1,0 +1,18 @@
+name: 'abacus_analytics'        # project name (Python-identifier rules)
+version: '1.0.0'
+profile: 'abacus'               # ← the only link to the profiles file
+model-paths: ["models"]         # folder layout
+seed-paths: ["seeds"]
+vars:
+  start_date: '2026-01-01'
+models:
+  abacus_analytics:
+    +materialized: view          # project-wide default
+    staging:
+      +schema: staging           # applies to staging/ and everything under it
+      clickstream:
+        +tags: ['clickstream']   # only staging/clickstream/
+    marts:
+      +materialized: table       # overrides the project default for marts/
+      recommendations:
+        +materialized: incremental

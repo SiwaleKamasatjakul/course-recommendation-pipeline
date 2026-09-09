@@ -1,0 +1,10 @@
+abacus:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      database: ABACUS_ANALYTICS
+      schema: STAGING
+      warehouse: ABACUS_WH
+      role: DBT_ROLE
+      threads: 4

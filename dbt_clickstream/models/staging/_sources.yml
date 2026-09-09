@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: ABACUS_ANALYTICS
+    schema: RAW
+    tables:
+      - name: clickstream_events
+      
