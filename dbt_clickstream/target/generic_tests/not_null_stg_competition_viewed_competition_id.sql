@@ -1,0 +1,1 @@
+{{ test_not_null(column_name="competition_id", model=get_where_subquery(ref('stg_competition_viewed'))) }}
