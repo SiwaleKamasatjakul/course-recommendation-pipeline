@@ -1,0 +1,1 @@
+{{ test_relationships(column_name="course_key", field="course_key", model=get_where_subquery(ref('course_recommendations')), to=ref('int_course_catalog')) }}

@@ -1,0 +1,1 @@
+{{ test_not_null(column_name="generated_at", model=get_where_subquery(ref('course_recommendations_history'))) }}

@@ -1,0 +1,85 @@
+version: 2
+
+models:
+  - name: int_course_interactions
+    description: One row per course click, deduplicated, grouped by course_key, with action weight
+    columns:
+      - name: interaction_id
+        description: Unique id per click, built from session, offering action and time 
+        data_tests:
+          - not_null
+          - unique
+
+      - name: actor_id
+        description: user_id, or 'anon:' + session_id for anonymous visitor 
+        data_tests:
+          - not_null
+
+      - name: course_key
+        description: Lowercase course name; all time slots of a course share one key 
+        data_tests:
+          - not_null
+
+      - name: action_weight
+        data_tests:
+          - not_null
+      
+      - name: action
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('course_action_weights')
+                field: action
+              config:
+                severity: warn
+
+
+  - name: int_actor_course_affinity
+    description:  Interest score per parent and course, from weighted clicks with time decay.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns: [actor_id, course]
+
+    columns:
+      - name: actor_id
+        data_tests: [not_null]
+      - name: course
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: 
+                to: ref('int_course_catalog')  # ← the OTHER table
+                field: COURSE_KEY # ← column in the OTHER table
+      - name: affinity_score
+        data_tests:
+          - not_null
+
+
+  - name: int_course_coocurrence
+    description: Pairs of courses clicked by the same parents.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: 
+            combination_of_columns: [course_key, other_course_key]
+      - dbt_utils.expression_is_true:
+          arguments: 
+            expression: "course_key <> other_course_key"
+    columns:
+        - name: course_key
+          data_tests:
+            - not_null
+            - relationships:
+                arguments: 
+                  to: ref('int_course_catalog')
+                  field: course_key
+        - name: other_course_key
+          data_tests:
+            - not_null
+            - relationships:
+                arguments: 
+                  to: ref('int_course_catalog')
+                  field: course_key
+        - name: co_actor_count
+          data_tests: [not_null]
+

@@ -1,0 +1,1 @@
+{{ test_relationships(column_name="other_course_key", field="course_key", model=get_where_subquery(ref('int_course_coocurrence')), to=ref('int_course_catalog')) }}

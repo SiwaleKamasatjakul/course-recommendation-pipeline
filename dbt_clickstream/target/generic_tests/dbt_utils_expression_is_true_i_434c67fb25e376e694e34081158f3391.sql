@@ -1,0 +1,1 @@
+{{ dbt_utils.test_expression_is_true(expression="course_key <> other_course_key", model=get_where_subquery(ref('int_course_coocurrence'))) }}

@@ -1,18 +1,41 @@
-name: 'abacus_analytics'        # project name (Python-identifier rules)
+name: 'abacus_analytics'       # ① project name: matches the key under seeds:
 version: '1.0.0'
-profile: 'abacus'               # ← the only link to the profiles file
-model-paths: ["models"]         # folder layout
-seed-paths: ["seeds"]
+profile: 'abacus'              # ② which connection in ~/.dbt/profiles.yml
+
+model-paths: ["models"]
+macro-paths: ["macros"]        # needed for course_key and generate_schema_name
+test-paths: ["tests"]
+seed-paths: ["seeds"]          # ③ which folder holds the CSV files
+
 vars:
   start_date: '2026-01-01'
+  dwell_cap_seconds: 1800          # 30 min; longer = tab left open
+  dwell_min_seconds: 3             # shorter = bounce, not interest
+  attribution_window_seconds: 1800
+  affinity_lookback_days: 90
+  affinity_half_life_days: 14      # an interaction 14 days old counts half
+  popularity_lookback_days: 30
+  dwell_weight: 0.5
+  min_co_actors: 2
+  recommendations_per_actor: 5
+  
+
 models:
   abacus_analytics:
-    +materialized: view          # project-wide default
+    +query_tag: "dbt_abacus_{{ target.name }}_{{ env_var('GITHUB_RUN_ID', 'local') }}"
+    +materialized: view            # project-wide default
     staging:
-      +schema: staging           # applies to staging/ and everything under it
-      clickstream:
-        +tags: ['clickstream']   # only staging/clickstream/
+      +schema: staging
+      +materialized: view
+      +tags: ['clickstream']
+    intermediate:
+      +schema: intermediate
+      +materialized: table
+      +tags: ['course_reco']
     marts:
-      +materialized: table       # overrides the project default for marts/
-      recommendations:
-        +materialized: incremental
+      +schema: marts
+      +materialized: table
+
+seeds:
+  abacus_analytics:
+    +schema: seeds

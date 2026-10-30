@@ -1,0 +1,1 @@
+{{ test_relationships(column_name="action", field="action", model=get_where_subquery(ref('int_course_interactions')), to=ref('course_action_weights')) }}{{ config({"meta":{},"severity":"WARN","tags":[]}) }}

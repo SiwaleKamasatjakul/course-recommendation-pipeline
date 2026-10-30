@@ -1,0 +1,1 @@
+{{ test_not_null(column_name="reco_date", model=get_where_subquery(ref('reco_hit_rate_daily'))) }}

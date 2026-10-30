@@ -1,0 +1,1 @@
+{{ dbt_utils.test_accepted_range(column_name="recommendation_rank", max_value=5, min_value=1, model=get_where_subquery(ref('course_recommendations'))) }}
