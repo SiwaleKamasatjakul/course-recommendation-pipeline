@@ -20,7 +20,9 @@ SELECT
     METADATA:page::STRING             AS page,
     METADATA:referer::STRING          AS referer,
     METADATA:ip::STRING               AS ip,
-    METADATA:user_agent::STRING       AS user_agent
+    METADATA:user_agent::STRING       AS user_agent,
+    '2026-10-30 07:58:29.372184+00:00'::timestamp_tz    AS dbt_built_at
+
     FROM source
 )
 

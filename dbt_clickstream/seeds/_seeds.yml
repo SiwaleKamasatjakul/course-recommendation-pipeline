@@ -1,0 +1,13 @@
+version: 2
+
+seeds:
+  - name: course_action_weights          # must match the CSV file name
+    description: How much each click action counts toward course interest.
+    columns:
+      - name: action
+        data_tests:
+          - unique                        # no action listed twice
+          - not_null                      # no empty action
+      - name: weight
+        data_tests:
+          - not_null                      # every action has a weight

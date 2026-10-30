@@ -28,7 +28,9 @@ flattened AS (
         METADATA:path_type::STRING              AS path_type,
         METADATA:referer::STRING                AS referer,
         METADATA:source::STRING                 AS source,
-        METADATA:user_agent::STRING             AS user_agent
+        METADATA:user_agent::STRING             AS user_agent,
+        '{{ run_started_at }}'::timestamp_tz    AS dbt_built_at
+
     FROM source
 
 )

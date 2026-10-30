@@ -1,0 +1,1 @@
+{{ test_unique(column_name="run_at", model=get_where_subquery(ref('reco_run_metrics'))) }}

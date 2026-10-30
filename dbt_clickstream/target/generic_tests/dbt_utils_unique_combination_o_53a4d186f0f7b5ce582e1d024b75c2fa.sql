@@ -1,0 +1,1 @@
+{{ dbt_utils.test_unique_combination_of_columns(combination_of_columns=["actor_id","recommendation_rank"], model=get_where_subquery(ref('course_recommendations'))) }}

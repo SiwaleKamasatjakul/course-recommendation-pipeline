@@ -1,5 +1,5 @@
 
-  create or replace   view ABACUS_ANALYTICS.STAGING_staging.stg_course_card_clicked
+  create or replace   view ABACUS_DEV.STAGING.stg_course_card_clicked
   
   
   
@@ -35,7 +35,9 @@ flattened AS (
         METADATA:path_type::STRING              AS path_type,
         METADATA:referer::STRING                AS referer,
         METADATA:source::STRING                 AS source,
-        METADATA:user_agent::STRING             AS user_agent
+        METADATA:user_agent::STRING             AS user_agent,
+        '2026-10-30 07:58:29.372184+00:00'::timestamp_tz    AS dbt_built_at
+
     FROM source
 
 )
