@@ -4,7 +4,7 @@
 
 
 
-create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+create or replace transient  table ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_coocurrence
     
     
     
@@ -13,7 +13,7 @@ create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_coocurrenc
 
     select actor_id, 
             course as course_key
-    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_actor_course_affinity
 
 ),
 

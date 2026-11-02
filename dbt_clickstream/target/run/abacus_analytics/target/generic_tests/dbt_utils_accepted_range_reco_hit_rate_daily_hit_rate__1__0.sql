@@ -11,7 +11,7 @@
 
 with meet_condition as(
   select *
-  from ABACUS_DEV.MARTS.reco_hit_rate_daily
+  from ABACUS_DEV.PR_TEST_MARTS.reco_hit_rate_daily
 ),
 
 validation_errors as (
