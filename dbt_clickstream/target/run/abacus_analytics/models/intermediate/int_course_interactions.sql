@@ -4,7 +4,7 @@
 
 
 
-create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_interactions
+create or replace transient  table ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_interactions
     
     
     
@@ -23,7 +23,7 @@ with clicks as (
         COURSE_NAME                                             as course_name_th,
         PATH_TYPE                                               as path_type,
         SOURCE                                                  as source 
-    from ABACUS_DEV.STAGING.stg_course_card_clicked
+    from ABACUS_DEV.PR_TEST_STAGING.stg_course_card_clicked
     where COURSE_ID is not null 
 
     -- Remove duplicate 
@@ -39,7 +39,7 @@ select
     clicks.*,
     coalesce(course_weight.weight, 0.5) as action_weight
     from clicks
-    left join ABACUS_DEV.SEEDS.course_action_weights  as course_weight
+    left join ABACUS_DEV.PR_TEST_SEEDS.course_action_weights  as course_weight
     where clicks.action = course_weight.action
 
     

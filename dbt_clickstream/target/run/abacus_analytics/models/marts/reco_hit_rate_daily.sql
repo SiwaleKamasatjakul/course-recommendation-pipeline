@@ -4,7 +4,7 @@
 
 
 
-create or replace transient  table ABACUS_DEV.MARTS.reco_hit_rate_daily
+create or replace transient  table ABACUS_DEV.PR_TEST_MARTS.reco_hit_rate_daily
     
     
     
@@ -17,7 +17,7 @@ with last_run_per_day as (
     select
         generated_at::date as reco_date,
         max(generated_at)  as generated_at
-    from ABACUS_DEV.MARTS.course_recommendations_history
+    from ABACUS_DEV.PR_TEST_MARTS.course_recommendations_history
     group by 1
 
 ),
@@ -25,7 +25,7 @@ with last_run_per_day as (
 recs as (
 
     select h.actor_id, h.course_key, d.reco_date
-    from ABACUS_DEV.MARTS.course_recommendations_history as h
+    from ABACUS_DEV.PR_TEST_MARTS.course_recommendations_history as h
     join last_run_per_day as d
         on h.generated_at = d.generated_at
 
@@ -37,7 +37,7 @@ clicks as (
         actor_id,
         course_key,
         event_ts_utc::date as click_date
-    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_interactions
 
 ),
 

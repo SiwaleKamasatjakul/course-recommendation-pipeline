@@ -29,7 +29,7 @@ flattened AS (
         METADATA:referer::STRING                AS referer,
         METADATA:source::STRING                 AS source,
         METADATA:user_agent::STRING             AS user_agent,
-        '2026-10-30 07:58:29.372184+00:00'::timestamp_tz    AS dbt_built_at
+        '2026-11-01 07:48:06.137590+00:00'::timestamp_tz    AS dbt_built_at
 
     FROM source
 

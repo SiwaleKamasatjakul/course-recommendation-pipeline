@@ -1,0 +1,24 @@
+abacus:
+  target: ci
+  outputs:
+    ci:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      private_key: "{{ env_var('SNOWFLAKE_PRIVATE_KEY') }}"
+      role: DBT_ROLE
+      database: ABACUS_DEV            # ← PR builds go to the dev database
+      warehouse: ABACUS_WH
+      schema: "{{ env_var('DBT_SCHEMA', 'PR_LOCAL') }}"
+      threads: 4
+
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      private_key: "{{ env_var('SNOWFLAKE_PRIVATE_KEY') }}"
+      role: DBT_ROLE
+      database: ABACUS_ANALYTICS      # ← deploy goes to production
+      warehouse: ABACUS_WH
+      schema: STAGING
+      threads: 4
