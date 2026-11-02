@@ -10,3 +10,8 @@ connectors/secrets/
 *.p8
 *.pem
 .env
+# connector secrets – never commit
+connectors/snowflake-sink-v4.json
+connectors/snowflake.properties
+connectors/secrets/
+*.p8

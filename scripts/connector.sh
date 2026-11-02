@@ -25,7 +25,8 @@ case "${1:-status}" in
     # PUT /config takes the inner object only, not the {name, config} wrapper.
     jq .config "$CONFIG_FILE" | \
       curl -fsS -X PUT -H "Content-Type: application/json" \
-           --data @- "$CONNECT_URL/connectors/$NAME/config" | jq
+           --data @- "$CONNECT_URL/connectors/$NAME/config" \
+      | jq 'del(.config["snowflake.private.key"])'
     ;;
 
   validate)
