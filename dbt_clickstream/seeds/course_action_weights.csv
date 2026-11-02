@@ -1,0 +1,4 @@
+action,weight,description
+expand_details,1.0,Opened the course details card
+view_course_from_path,2.0,Went from the learning path to the course page
+   search_click,1.5,Clicked a course from search results

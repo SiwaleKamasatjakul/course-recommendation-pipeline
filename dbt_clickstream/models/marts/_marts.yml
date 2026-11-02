@@ -1,0 +1,28 @@
+version: 2 
+
+models:
+  - name: course_recommendations_history
+    description: Every run's recommendation list, appended.
+    columns:
+      - name: generated_at
+        data_tests: [not_null]
+
+  - name: reco_run_metrics
+    description: One row of health numbers per dbt run.
+    columns:
+      - name: run_at
+        data_tests: [not_null, unique]
+      - name: actors
+        data_tests: [not_null]
+
+  - name: reco_hit_rate_daily
+    description: Share of parents who clicked a recommended course the next day.
+    columns:
+      - name: reco_date
+        data_tests: [not_null, unique]
+      - name: hit_rate
+        data_tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1

@@ -2,3 +2,11 @@ connectors/secrets/*
 !connectors/secrets/*.example
 *.p8
 *.pub
+dbt_clickstream/target/
+dbt_clickstream/logs/
+dbt_clickstream/dbt_packages/
+connectors/snowflake.properties
+connectors/secrets/
+*.p8
+*.pem
+.env

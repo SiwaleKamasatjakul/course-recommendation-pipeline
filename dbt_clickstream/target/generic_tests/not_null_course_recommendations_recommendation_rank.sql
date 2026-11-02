@@ -1,0 +1,1 @@
+{{ test_not_null(column_name="recommendation_rank", model=get_where_subquery(ref('course_recommendations'))) }}

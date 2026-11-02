@@ -1,0 +1,1 @@
+{{ test_not_null(column_name="other_course_key", model=get_where_subquery(ref('int_course_coocurrence'))) }}
