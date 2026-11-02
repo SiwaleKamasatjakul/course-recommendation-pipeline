@@ -1,0 +1,1 @@
+{{ dbt_utils.test_unique_combination_of_columns(combination_of_columns=["course_key","other_course_key"], model=get_where_subquery(ref('int_course_coocurrence'))) }}

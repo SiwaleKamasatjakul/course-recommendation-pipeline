@@ -1,0 +1,1 @@
+{{ test_not_null(column_name="weight", model=get_where_subquery(ref('course_action_weights'))) }}

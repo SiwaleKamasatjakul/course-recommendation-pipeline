@@ -1,0 +1,82 @@
+name: dbt deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dbt_clickstream/**'
+  schedule:
+    - cron: '7 18 * * *'      # daily 01:07 Bangkok (18:07 UTC)
+  workflow_dispatch:
+
+concurrency:
+  group: dbt-prod
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: dbt_clickstream
+    env:
+      DBT_PROFILES_DIR: ${{ github.workspace }}/dbt_clickstream/ci
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_DBT_USER }}
+      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_DBT_PRIVATE_KEY }}
+
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dbt
+        run: pip install "dbt-core~=1.10.0" "dbt-snowflake~=1.10.0"
+
+      - name: Install dbt packages
+        run: dbt deps
+
+      - name: Check raw data is fresh
+        run: dbt source freshness --target prod
+        continue-on-error: true
+
+      - name: Build and test (production)
+        run: dbt build --target prod
+
+      - name: Summary
+        if: always()
+        run: |
+          python - <<'EOF' >> "$GITHUB_STEP_SUMMARY"
+          import json, os
+          path = "target/run_results.json"
+          if not os.path.exists(path):
+              print("No run_results.json (build did not start)")
+              raise SystemExit
+          r = json.load(open(path))
+          res = r["results"]
+          models = [x for x in res if x["unique_id"].startswith("model.")]
+          tests  = [x for x in res if x["unique_id"].startswith("test.")]
+          ok = lambda xs: sum(x["status"] in ("success", "pass") for x in xs)
+          print("### dbt production run\n")
+          print(f"- Total time: {r['elapsed_time']:.1f} s")
+          print(f"- Models: {ok(models)}/{len(models)} succeeded")
+          print(f"- Tests: {ok(tests)}/{len(tests)} passed")
+          print("\n| model | seconds |\n|---|---|")
+          for x in sorted(models, key=lambda x: -x["execution_time"])[:10]:
+              print(f"| {x['unique_id'].split('.')[-1]} | {x['execution_time']:.1f} |")
+          EOF
+
+      - name: Save dbt results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-results-${{ github.run_id }}
+          path: |
+            dbt_clickstream/target/run_results.json
+            dbt_clickstream/target/manifest.json
+          retention-days: 30
