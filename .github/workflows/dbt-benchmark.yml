@@ -1,0 +1,93 @@
+name: dbt benchmark
+
+on:
+  workflow_dispatch:
+    inputs:
+      label:
+        description: 'What you are measuring, e.g. "10k baseline"'
+        required: true
+      runs:
+        description: 'How many times to run dbt build (median is reported)'
+        default: '3'
+
+concurrency:
+  group: dbt-benchmark
+  cancel-in-progress: false
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: dbt_clickstream
+    env:
+      DBT_PROFILES_DIR: ${{ github.workspace }}/dbt_clickstream/ci
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_DBT_USER }}
+      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_DBT_PRIVATE_KEY }}
+      DBT_SCHEMA: PR_BENCH_${{ github.run_number }}
+      BENCH_LABEL: ${{ inputs.label }}
+
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dbt
+        run: pip install "dbt-core~=1.10.0" "dbt-snowflake~=1.10.0"
+
+      - name: Install dbt packages
+        run: dbt deps
+
+      - name: Benchmark dbt build on the bench table
+        run: |
+          mkdir -p bench
+          for i in $(seq 1 ${{ inputs.runs }}); do
+            echo "::group::run $i"
+            dbt build --target ci --full-refresh --vars '{raw_events_table: CLICKSTREAM_EVENTS_BENCH}'
+            cp target/run_results.json bench/run_$i.json
+            echo "::endgroup::"
+          done
+
+      - name: Summary
+        if: always()
+        run: |
+          python - <<'EOF' | tee bench/summary.md >> "$GITHUB_STEP_SUMMARY"
+          import json, glob, os, statistics as st
+          runs = [json.load(open(f)) for f in sorted(glob.glob("bench/run_*.json"))]
+          if not runs:
+              print("No completed runs."); raise SystemExit
+          totals = [r["elapsed_time"] for r in runs]
+          per_model = {}
+          for r in runs:
+              for x in r["results"]:
+                  if x["unique_id"].startswith("model."):
+                      per_model.setdefault(x["unique_id"].split(".")[-1], []).append(x["execution_time"])
+          tests = runs[-1]["results"]
+          ok = sum(x["status"] in ("success", "pass") for x in tests)
+          print(f"### dbt benchmark: {os.environ['BENCH_LABEL']}\n")
+          print(f"- Runs: {len(runs)} (full refresh each time)")
+          print(f"- Total build time, median: **{st.median(totals):.1f} s** (min {min(totals):.1f}, max {max(totals):.1f})")
+          print(f"- Models + tests succeeded (last run): {ok}/{len(tests)}\n")
+          print("| model | median s |\n|---|---|")
+          for m, t in sorted(per_model.items(), key=lambda kv: -st.median(kv[1]))[:10]:
+              print(f"| {m} | {st.median(t):.1f} |")
+          EOF
+
+      - name: Save results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-benchmark-${{ github.run_number }}
+          path: dbt_clickstream/bench/
+          retention-days: 90
+
+      - name: Drop benchmark schemas
+        if: always()
+        run: |
+          dbt run-operation drop_ci_schemas --args "{prefix: $DBT_SCHEMA}" --target ci

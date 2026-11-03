@@ -16,8 +16,15 @@ Usage:
     python scripts/generate_clickstream.py --dry-run          # summary + 5 events, send nothing
     python scripts/generate_clickstream.py                    # 40 parents, last 30 days
     python scripts/generate_clickstream.py --parents 100 --days 60 --seed 7
+
+Benchmark (exactly N events to the bench topic, timed):
+    python scripts/generate_clickstream.py --events 10000 --topic clickstream.bench --tag bench
+    python scripts/bench_ingest.py            # waits until Snowflake has all of them
 """
 import argparse
+import math
+import tempfile
+import time
 import csv
 import json
 import random
@@ -145,15 +152,15 @@ def pick(items, category, grade):
     return random.choices(pool, weights=[i["weight"] for i in pool])[0]
 
 
-def generate(courses, comps, parents, days, anonymous_share=0.3):
+def generate(courses, comps, parents, days, anonymous_share=0.3, id_prefix="synth"):
     now = datetime.now(timezone.utc)
     grades = sorted({c["grade"] for c in courses if c["grade"]})
     events = []
     for _ in range(parents):
-        uid = None if random.random() < anonymous_share else f"synth-{uuid.uuid4()}"   # share of parents who never log in
+        uid = None if random.random() < anonymous_share else f"{id_prefix}-{uuid.uuid4()}"   # share of parents who never log in
         category = random.choice(list(PATH_TYPE))
         grade = random.choice(grades) if category == "abacus" else None
-        sid = f"synth-{int(now.timestamp() * 1000)}-{uuid.uuid4().hex[:9]}"   # persists for days, like the app
+        sid = f"{id_prefix}-{int(now.timestamp() * 1000)}-{uuid.uuid4().hex[:9]}"   # persists for days, like the app
         for _ in range(random.randint(1, 4)):                                  # visits
             ts = now - timedelta(days=random.uniform(0, days), minutes=random.uniform(0, 600))
             for _ in range(random.randint(1, 5)):                              # courses per visit
@@ -184,6 +191,10 @@ def main():
     p.add_argument("--anonymous", type=float, default=0.3,
                    help="share of parents who never log in (user_id null), 0 to 1")
     p.add_argument("--dry-run", action="store_true", help="print a summary and 5 events, send nothing")
+    p.add_argument("--events", type=int, default=None,
+                   help="send exactly N events (overrides --parents); use for benchmarks")
+    p.add_argument("--topic", default=TOPIC, help=f"Kafka topic (default {TOPIC}; benchmarks: clickstream.bench)")
+    p.add_argument("--tag", default="synth", help="prefix for generated user/session ids (default synth)")
     args = p.parse_args()
 
     random.seed(args.seed)
@@ -193,8 +204,17 @@ def main():
           f"({comp_dupes} duplicate competition rows skipped)")
     for w in warnings:
         print("WARNING:", w)
-    events = generate(courses, comps, args.parents, args.days, args.anonymous)
-    print("events:", dict(Counter(e["event_type"] for e in events)))
+    t0 = time.perf_counter()
+    if args.events:
+        # about 18 events per parent: generate in batches until we have enough, then cut to exactly N
+        events, batch = [], max(10, math.ceil(args.events / 18))
+        while len(events) < args.events:
+            events += generate(courses, comps, batch, args.days, args.anonymous, args.tag)
+        events = sorted(events, key=lambda e: e["timestamp"])[:args.events]
+    else:
+        events = generate(courses, comps, args.parents, args.days, args.anonymous, args.tag)
+    gen_s = time.perf_counter() - t0
+    print("events:", dict(Counter(e["event_type"] for e in events)), f"(generated in {gen_s:.1f}s)")
 
     if args.dry_run:
         for e in events[:5]:
@@ -203,15 +223,36 @@ def main():
         return
 
     from confluent_kafka import Producer
-    producer = Producer({"bootstrap.servers": BOOTSTRAP, "acks": "all", "linger.ms": 10})
+    producer = Producer({"bootstrap.servers": BOOTSTRAP, "acks": "all", "linger.ms": 10,
+                         "queue.buffering.max.messages": 500000})
     failed = []
+    start_ms = int(time.time() * 1000)          # Kafka CreateTime of our messages will be >= this
+    t0 = time.perf_counter()
     for e in events:
-        key = e["user_id"] or e["session_id"]
-        producer.produce(TOPIC, key=key.encode(), value=json.dumps(e, ensure_ascii=False).encode(),
-                         on_delivery=lambda err, msg: failed.append(err) if err else None)
+        key = (e["user_id"] or e["session_id"]).encode()
+        value = json.dumps(e, ensure_ascii=False).encode()
+        while True:
+            try:
+                producer.produce(args.topic, key=key, value=value,
+                                 on_delivery=lambda err, msg: failed.append(err) if err else None)
+                break
+            except BufferError:                 # local queue full: let it drain, then retry
+                producer.poll(0.5)
         producer.poll(0)
     producer.flush()
-    print(f"sent {len(events) - len(failed)} events to {TOPIC} ({len(failed)} failed)")
+    send_s = time.perf_counter() - t0
+    end_ms = int(time.time() * 1000)
+    sent = len(events) - len(failed)
+    rate = sent / send_s if send_s else 0
+    print(f"sent {sent} events to {args.topic} ({len(failed)} failed) "
+          f"in {send_s:.2f}s = {rate:,.0f} events/s")
+
+    # remembered for scripts/bench_ingest.py
+    run = {"topic": args.topic, "tag": args.tag, "sent": sent, "failed": len(failed),
+           "start_ms": start_ms, "end_ms": end_ms, "produce_seconds": round(send_s, 3),
+           "produce_events_per_s": round(rate, 1)}
+    Path(tempfile.gettempdir(), "clickstream_last_run.json").write_text(json.dumps(run))
+    print("run info saved for bench_ingest.py:", json.dumps(run))
 
 
 if __name__ == "__main__":

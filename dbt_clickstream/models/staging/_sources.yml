@@ -6,4 +6,5 @@ sources:
     schema: RAW
     tables:
       - name: clickstream_events
+        identifier: "{{ var('raw_events_table', 'CLICKSTREAM_EVENTS') }}"
       
