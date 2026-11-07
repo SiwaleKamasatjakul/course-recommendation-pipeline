@@ -2,7 +2,7 @@
 
 with recent as (
     select * 
-    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_interactions
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
     where event_ts_utc >= dateadd('day', - 30, CURRENT_TIMESTAMP())
 ),
 

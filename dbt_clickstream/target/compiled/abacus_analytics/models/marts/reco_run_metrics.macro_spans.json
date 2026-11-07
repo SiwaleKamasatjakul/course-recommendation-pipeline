@@ -47,8 +47,8 @@
         },
         "stop": {
           "line": 6,
-          "col": 57,
-          "index": 114
+          "col": 49,
+          "index": 106
         }
       }
     },
@@ -69,12 +69,12 @@
         "start": {
           "line": 25,
           "col": 10,
-          "index": 514
+          "index": 506
         },
         "stop": {
           "line": 25,
-          "col": 60,
-          "index": 564
+          "col": 52,
+          "index": 548
         }
       }
     },
@@ -95,12 +95,12 @@
         "start": {
           "line": 34,
           "col": 10,
-          "index": 710
+          "index": 694
         },
         "stop": {
           "line": 34,
-          "col": 65,
-          "index": 765
+          "col": 57,
+          "index": 741
         }
       }
     },
@@ -121,12 +121,12 @@
         "start": {
           "line": 40,
           "col": 6,
-          "index": 783
+          "index": 759
         },
         "stop": {
           "line": 40,
           "col": 38,
-          "index": 815
+          "index": 791
         }
       }
     }

@@ -1,20 +1,24 @@
-# Clickstream Pipeline — Kafka → Snowflake → dbt
+# Course Recommendation Pipeline — Kafka → Snowflake → dbt
 
-Ingests `clickstream.events` from Kafka into Snowflake via the **Snowflake Connector
-for Kafka v4** (Snowpipe Streaming), landing raw JSON in `ABACUS_ANALYTICS.RAW`.
-Everything downstream of the landing table is transformed by **dbt** (dbt Core 2.0,
-Snowflake adapter): typed staging views, an intermediate layer of conformed events
-and interaction features, and recommendation marts.
+Clickstream events from an education web app are streamed through **Kafka** into
+**Snowflake** with the **Snowflake Connector for Kafka v4** (Snowpipe Streaming), then
+transformed by **dbt** into a daily table of personalised course recommendations.
+Everything around it is production-style: separate dev and prod databases, CI on
+every pull request, scheduled deploys with GitHub Actions, run-level monitoring, a
+recommendation hit-rate metric, and a repeatable **benchmark** from 1K to 1M events.
 
 ```
-producer → kafka → connect worker → snowflake ─── dbt ──────────────────────┐
-                                    │                                       │
-                                    └── RAW.CLICKSTREAM_EVENTS              │
-                                        (raw JSON, append-only)             │
-                                                                            ▼
-                                    STAGING.STG_*          typed views, deduped
-                                    INTERMEDIATE.INT_*     conformed events, affinity
-                                    MARTS.*                recommendations
+web app / generator ──► Kafka topic clickstream.events ──► Kafka Connect (Snowflake sink v4)
+                                                                  │  Snowpipe Streaming
+                                                                  ▼
+                                   ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS   append-only JSON
+                                                                  │  dbt
+                                   STAGING.STG_*        typed views, one per event type
+                                   INTERMEDIATE.INT_*   interactions, catalog, popularity,
+                                                        affinity (time-decayed), co-occurrence
+                                   MARTS                course_recommendations  ← the app reads this
+                                                        course_recommendations_history, reco_run_metrics,
+                                                        reco_hit_rate_daily     ← monitoring
 ```
 
 **Ingestion is configuration.** The connector writes what the producer sent, and
@@ -22,16 +26,25 @@ producer → kafka → connect worker → snowflake ─── dbt ────�
 data.
 
 **Transformation is code.** Every view and table downstream of `RAW` is a dbt model
-in this repo, built by `dbt run`, with dependencies declared through `source()` and
-`ref()` so dbt resolves build order itself.
+in this repo, with dependencies declared through `source()` and `ref()` so dbt
+resolves build order itself.
+
+**Three flows, three purposes.**
+
+| Flow | Trigger | Reads | Writes | Kept? |
+|---|---|---|---|---|
+| **Production** (`dbt deploy`) | merge to `main`, daily 01:07 Bangkok | real `RAW.CLICKSTREAM_EVENTS` | `ABACUS_ANALYTICS` STAGING / INTERMEDIATE / MARTS | yes, the app reads it |
+| **CI** (`dbt CI`) | every pull request | real `RAW.CLICKSTREAM_EVENTS` | `ABACUS_DEV.PR_<n>_*` | no, dropped after the run |
+| **Benchmark** (`dbt benchmark`) | manual | fake `RAW.CLICKSTREAM_EVENTS_BENCH` | `ABACUS_DEV.PR_BENCH_<n>_*` | no, only timings are kept |
 
 | Layer | Schema | Materialization | Owner |
 |---|---|---|---|
-| Landing | `RAW` | table | Kafka connector |
-| Postgres sync | `RAW_APP` | table | external sync, typed at source |
+| Landing | `RAW` | table, append-only | Kafka connector |
+| Postgres sync (planned) | `RAW_APP` | table | external sync, typed at source |
 | Staging | `STAGING` | view | dbt |
 | Intermediate | `INTERMEDIATE` | table | dbt |
-| Marts | `MARTS` | table | dbt |
+| Marts | `MARTS` | table (+ incremental history/metrics) | dbt |
+| Seeds | `SEEDS` | table from CSV | dbt |
 
 ## The source application
 
@@ -41,7 +54,9 @@ students use it to browse and register for courses, track learning progress, and
 find skills competitions.
 
 Every interaction emits a JSON event to the `clickstream.events` topic, so clicking
-through the UI exercises the whole pipeline — no synthetic producer needed.
+through the UI exercises the whole pipeline. For volume, `scripts/generate_clickstream.py`
+produces events with exactly the same shape from the app's real course and competition
+data (ids prefixed `synth-` or `bench-`, so they are easy to find and remove).
 
 **All course**
 
@@ -68,10 +83,14 @@ staying on the page produces `page_dwell` and `course_card_clicked`.
 - [Phase 3 — The connector](#phase-3--the-connector)
 - [Phase 4 — Confirm](#phase-4--confirm)
 - [Phase 5 — dbt: transformation as code](#phase-5--dbt-transformation-as-code)
+- [Phase 6 — Environments and CI/CD](#phase-6--environments-and-cicd)
+- [Phase 7 — Monitoring: run metrics and hit rate](#phase-7--monitoring-run-metrics-and-hit-rate)
+- [Phase 8 — Benchmark](#phase-8--benchmark)
+- [Security and key rotation](#security-and-key-rotation)
 - [Operating the connector](#operating-the-connector)
 - [Running dbt](#running-dbt)
 - [Troubleshooting — connector](#troubleshooting--connector)
-- [Troubleshooting — dbt](#troubleshooting--dbt)
+- [Troubleshooting — dbt and CI](#troubleshooting--dbt-and-ci)
 - [Repository layout](#repository-layout)
 - [Status](#status)
 
@@ -81,10 +100,12 @@ staying on the page produces `page_dwell` and `course_card_clicked`.
 
 | Requirement | Notes |
 |---|---|
-| Kafka broker reachable from the Connect worker | Internal listener `kafka:9092` |
+| Kafka broker reachable from the Connect worker | Internal listener `kafka:9092`, host `localhost:29092` |
 | Docker with Compose | Kafka, Redpanda Console and Connect all run here |
 | `openssl`, `jq`, `curl` | Standard on macOS |
-| Python 3.10+ with `dbt-core` and `dbt-snowflake` | dbt Core 2.0; runs on the host, not in Docker |
+| Python 3.10+ with dbt | dbt Fusion 2.0 locally; dbt-core 1.10 + dbt-snowflake in GitHub Actions |
+| Python packages for the scripts | `confluent-kafka` (generator), `snowflake-connector-python` + `cryptography` (`bench_ingest.py`) |
+| GitHub repository with Actions | Secrets: `SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_DBT_USER`, `SNOWFLAKE_DBT_PRIVATE_KEY` |
 
 ---
 
@@ -126,7 +147,7 @@ for non-human users.
 
 ## Phase 2 — Keys: the identity
 
-There are **two** identities in this pipeline, each with its own key pair. Do not
+There are **two** identities for ingestion and local dbt (a third, `DBT_CI_SVC` for GitHub Actions, is added in Phase 6), each with its own key pair. Do not
 share one key between them: rotating it would break both systems, and it blurs which
 system performed which action in the audit trail.
 
@@ -247,10 +268,10 @@ connector-created table — it is owned by a role outside that hierarchy.
     "connector.class": "com.snowflake.kafka.connector.SnowflakeStreamingSinkConnector",
     "tasks.max": "4",
 
-    "topics": "clickstream.events",
-    "snowflake.topic2table.map": "clickstream.events:CLICKSTREAM_EVENTS",
+    "topics": "clickstream.events,clickstream.bench",
+    "snowflake.topic2table.map": "clickstream.events:CLICKSTREAM_EVENTS,clickstream.bench:CLICKSTREAM_EVENTS_BENCH",
 
-    "snowflake.url.name": "https://KNSMANR-BL10477.snowflakecomputing.com",
+    "snowflake.url.name": "https://<ORG>-<ACCOUNT>.snowflakecomputing.com",
     "snowflake.user.name": "KAFKA_INGEST_SVC",
     "snowflake.role.name": "KAFKA_INGEST_ROLE",
     "snowflake.database.name": "ABACUS_ANALYTICS",
@@ -275,6 +296,13 @@ connector-created table — it is owned by a role outside that hierarchy.
 
 Every value must match Phase 1 exactly. That string matching, plus the key pair, is
 the entire link between Kafka and Snowflake.
+
+The second topic, `clickstream.bench`, feeds the benchmark table
+`CLICKSTREAM_EVENTS_BENCH` and nothing else (see [Phase 8](#phase-8--benchmark)).
+
+If the private key is pasted **inline** instead of the `${file:…}` reference above,
+the real JSON becomes a secret: gitignore it and commit
+`connectors/snowflake-sink-v4.example.json` with a `<PUT_KEY_HERE>` placeholder.
 
 Three settings that are easy to get wrong:
 
@@ -383,7 +411,7 @@ out of the SQL into configuration.
 | `FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS` | `{{ source('raw', 'clickstream_events') }}` |
 | `CREATE OR REPLACE VIEW` in each script | `+materialized: view` on the folder |
 | Run by hand in a worksheet | `dbt run --select staging` |
-| `sql/02_view_page_dwell.sql`, `sql/03_…` | `dbt/models/staging/` |
+| `sql/02_view_page_dwell.sql`, `sql/03_…` | `dbt_clickstream/models/staging/` |
 
 What this buys over the hand-run scripts:
 
@@ -399,7 +427,7 @@ What this buys over the hand-run scripts:
 
 ### 11. dbt's identity: key-pair auth
 
-dbt connects as the human user `BANASPIH`, not as `KAFKA_INGEST_SVC`. Two facts about
+dbt on the laptop connects as your human user, not as `KAFKA_INGEST_SVC`. Two facts about
 this account force key-pair auth:
 
 - Browser SSO fails with `390190` — a deprecated `SAML_IDENTITY_PROVIDER` account
@@ -429,7 +457,7 @@ openssl rsa -in ~/.snowflake/dbt_rsa_key.p8 -pubout -outform DER 2>/dev/null \
 
 Do **not** reuse `connectors/secrets/sf_key.p8`. That key is registered to
 `KAFKA_INGEST_SVC`; Snowflake builds the JWT subject from `ACCOUNT.USER`, so signing
-with it as `BANASPIH` fails with exactly the error above.
+with it as your user fails with exactly the error above.
 
 ### 12. Role and grants for dbt
 
@@ -437,7 +465,7 @@ with it as `BANASPIH` fails with exactly the error above.
 USE ROLE ACCOUNTADMIN;
 
 CREATE ROLE IF NOT EXISTS DBT_ROLE;
-GRANT ROLE DBT_ROLE TO USER BANASPIH;
+GRANT ROLE DBT_ROLE TO USER "<your_user_name>";   -- exact NAME from SHOW USERS, quoted
 GRANT ROLE DBT_ROLE TO ROLE SYSADMIN;
 
 GRANT USAGE ON WAREHOUSE ABACUS_WH       TO ROLE DBT_ROLE;
@@ -467,22 +495,40 @@ SELECT COUNT(*) FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS;
 
 ### 13. Project and profile
 
-`dbt/dbt_project.yml`
+`dbt_clickstream/dbt_project.yml`
 
 ```yaml
 name: abacus_analytics
 version: "1.0.0"
 profile: abacus
 model-paths: ["models"]
+macro-paths: ["macros"]
+seed-paths: ["seeds"]
+
+vars:
+  affinity_lookback_days: 90
+  affinity_half_life_days: 14      # a click 14 days old counts half
+  popularity_lookback_days: 30
+  min_co_actors: 2
+  recommendations_per_actor: 5
+  # … dwell_* and attribution_* reserved for the dwell model
 
 models:
   abacus_analytics:
+    +query_tag: "dbt_abacus_{{ target.name }}_{{ env_var('GITHUB_RUN_ID', 'local') }}"
     staging:
+      +schema: staging
       +materialized: view
     intermediate:
+      +schema: intermediate
       +materialized: table
     marts:
+      +schema: marts
       +materialized: table
+
+seeds:
+  abacus_analytics:
+    +schema: seeds
 ```
 
 Config keys under `models:` map to **directory names** under `model-paths`. A key
@@ -497,17 +543,19 @@ abacus:
   outputs:
     dev:
       type: snowflake
-      account: KNSMANR-BL10477
-      user: BANASPIH
-      private_key_path: ~/.snowflake/dbt_rsa_key.p8
+      account: <ORG>-<ACCOUNT>
+      user: <LOGIN_NAME>                                   # LOGIN_NAME from SHOW USERS
+      private_key_path: /Users/<you>/.snowflake/dbt_rsa_key.p8   # absolute path: dbt Fusion does not expand ~
       role: DBT_ROLE
-      database: ABACUS_ANALYTICS
+      database: ABACUS_DEV                                 # laptop builds never touch prod
       warehouse: ABACUS_WH
       schema: STAGING
       threads: 4
+    prod:                                                  # manual emergency use only; GitHub deploys prod
+      # same as dev, with database: ABACUS_ANALYTICS
 ```
 
-Four things that will waste an afternoon if wrong:
+Things that will waste an afternoon if wrong:
 
 - `account` is `<org>-<account_name>` with no `.snowflakecomputing.com` suffix.
   Confirm with
@@ -520,14 +568,20 @@ Four things that will waste an afternoon if wrong:
 - dbt only reads a file named exactly `profiles.yml`. `dbt_projects_profiles.yml` in
   the project directory is the Snowflake-native dbt Projects artifact and is ignored
   by dbt Core. Every `dbt debug` prints which file it loaded — read that line.
+- A user's `NAME` and `LOGIN_NAME` can differ. A sign-up user may be named
+  `banaspih` (lowercase, created quoted) with login `you@gmail.com`: SQL needs
+  `ALTER USER "banaspih"`, while the profile's `user:` takes the login name.
+- `warehouse` must name a warehouse that exists **and** that `DBT_ROLE` has `USAGE` on;
+  otherwise views build but every table, seed and test fails with
+  `No active warehouse selected`.
 
-The final schema is `target.schema` plus any custom schema, **concatenated**. With no
-custom schema, models land in `STAGING`; a stray `+schema: staging` produces
-`STAGING_staging`.
+dbt's default schema name is `target.schema` and the custom schema **concatenated**
+(`STAGING_staging`). This project overrides `generate_schema_name` so `+schema: marts`
+lands in `MARTS`, and only the `ci` target adds a `PR_<n>_` prefix (Phase 6).
 
 ### 14. Sources
 
-`dbt/models/staging/_sources.yml` is what makes `source()` resolve. Without it, any
+`dbt_clickstream/models/staging/_sources.yml` is what makes `source()` resolve. Without it, any
 model referencing the landing table fails at parse time with `DependencyNotFound`.
 
 ```yaml
@@ -535,14 +589,16 @@ version: 2
 
 sources:
   - name: raw
-    database: ABACUS_ANALYTICS
+    database: ABACUS_ANALYTICS          # pinned: dev and CI read prod RAW
     schema: RAW
     tables:
       - name: clickstream_events
-        loaded_at_field: '"TIMESTAMP"'
-        freshness:
-          warn_after:  {count: 1,  period: hour}
-          error_after: {count: 12, period: hour}
+        identifier: "{{ var('raw_events_table', 'CLICKSTREAM_EVENTS') }}"
+        config:
+          loaded_at_field: "to_timestamp_ltz(record_metadata:CreateTime::number, 3)"
+          freshness:
+            warn_after:  {count: 6,  period: hour}
+            error_after: {count: 24, period: hour}
 ```
 
 The two arguments to `source('raw', 'clickstream_events')` match the `name:` keys
@@ -553,6 +609,9 @@ only — they are independent of the actual schema name. The fact that the sourc
 `abacus_analytics.raw.clickstream_events`.
 
 ### 15. Staging models
+
+> In this project, course-click deduplication currently happens in
+> `int_course_interactions`; a shared base model, as described below, is a planned refactor.
 
 One model per event type. Rename, cast, flatten `METADATA` — nothing else. No joins,
 no aggregation, no business logic.
@@ -715,145 +774,425 @@ model and let dbt take ownership of that object.
 
 ### 16. Intermediate layer
 
-Staging says *what happened*. Intermediate says *what does this actor like, and which
-items go together*. Marts say *what to show actor X*.
+Staging says *what happened*. Intermediate says *what does this parent like, and which
+courses go together*. Marts say *what to show parent X*.
 
 Rules for this layer:
 
-1. **Never use `source()`** — only `ref()`. If a raw column is missing, add it to
+1. **Never use `source()`**, only `ref()`. If a raw column is missing, add it to
    staging.
-2. **Declare the grain in a comment at the top** of every model:
-   `-- grain: one row per actor_id + item_id`. Every bug in this layer is a grain
-   bug — a join that fanned out and silently doubled the counts.
-3. **Name models `int_<entity>_<verb past tense>.sql`** — `int_events_unioned`,
-   `int_dwell_attributed`. The verb says what the model did.
-4. **Materialize as tables.** This layer does real work; compute once per run.
-5. **Conform before aggregating.** Competitions and courses use different column
-   names for the same concept. Normalize to `(item_type, item_id)` once and every
-   model after that serves both without being written twice.
-6. **Dedupe belongs in staging**, so anything reading staging directly is also
-   correct.
-7. **Nothing outside dbt reads this layer.** It is scaffolding and must stay free to
-   be restructured. Marts are the contract.
+2. **Declare the grain** of every model. Every bug in this layer is a grain bug: a
+   join that fanned out and silently doubled the counts. Tests make the grain
+   executable (`unique`, `dbt_utils.unique_combination_of_columns`).
+3. **Materialize as tables.** This layer does real work; compute once per run.
+4. **Nothing outside dbt reads this layer.** Marts are the contract.
 
-Two design decisions specific to this data:
+Two identities in one column. `user_id` is null for anonymous visitors, so every model
+uses `actor_id = coalesce(user_id, 'anon' || session_id)`. Session-scoped identity is
+weaker than a real user id, but it is most of the signal.
 
-**Anonymous traffic.** `user_id` is null for most events. Use
-`coalesce(user_id, 'anon:' || session_id) as actor_id` rather than discarding them —
-session-scoped identity is weaker than a real user id, but it is most of the signal.
-
-**Dwell attribution.** `page_dwell` identifies its page by URL, not by
-`competition_id` or `course_id`, so dwell has to be attached to an item before it can
-weight anything. Prefer parsing the id out of `page`:
+One course, many offerings. The app has one `course_id` per time slot
+(`Abacus Grade 3 (Sat 10:00)`, `(Sun 14:00)`, …). The `course_key` macro normalises
+the name so all slots of a course share one key:
 
 ```sql
-regexp_substr(page, 'competitions/([A-Za-z0-9_-]+)', 1, 1, 'e', 1) as item_id
+-- macros/course_key.sql
+lower(trim(regexp_replace(<name>, '\\s*\\(.*\\)\\s*$', '')))   -- 'Abacus Grade 3 (Sat 10:00)' → 'abacus grade 3'
 ```
 
-Where the URL does not carry the id, attribute by session sequence — the dwell event
-belongs to the last item touched in that session. Snowflake's `ASOF JOIN` does this
-without a window function and without fanning out:
-
-```sql
--- models/intermediate/int_dwell_attributed.sql
--- grain: one row per dwell event, with the item it most likely refers to
-
-with dwell as (
-    select
-        coalesce(user_id, 'anon:' || session_id) as actor_id,
-        session_id,
-        event_ts_utc,
-        dwell_seconds_capped,
-        scroll_depth_pct,
-        page
-    from {{ ref('stg_page_dwell') }}
-),
-
-items as (
-    select actor_id, session_id, item_type, item_id, event_ts_utc
-    from {{ ref('int_events_unioned') }}
-)
-
-select
-    d.actor_id,
-    d.session_id,
-    i.item_type,
-    i.item_id,
-    d.event_ts_utc,
-    d.dwell_seconds_capped,
-    d.scroll_depth_pct,
-    d.page,
-    datediff('second', i.event_ts_utc, d.event_ts_utc) as seconds_after_item_view
-from dwell d
-asof join items i
-    match_condition (d.event_ts_utc >= i.event_ts_utc)
-    on d.session_id = i.session_id
-where datediff('second', i.event_ts_utc, d.event_ts_utc) <= 1800
-```
-
-The 1800-second guard stops a dwell event being attributed to something looked at an
-hour earlier. Attribution by proximity is a heuristic — label it as one, because
-heuristics become facts once they are three models deep.
-
-The models in this layer:
-
-| Model | Grain | Purpose |
+| Model | Grain | What it does |
 |---|---|---|
-| `int_events_unioned` | one interaction event | conforms competitions + courses to `(item_type, item_id)` |
-| `int_dwell_attributed` | one dwell event | attaches dwell to the item it refers to |
-| `int_actor_item_affinity` | actor + item | weighted affinity score per actor/item pair |
+| `int_course_interactions` | one course click (exact duplicates removed) | `actor_id`, `course_key`, `offering_id`; dedupes Kafka re-deliveries with `qualify row_number()`; `interaction_id` surrogate key; joins the seed `course_action_weights` (unknown actions default to 0.5) |
+| `int_course_catalog` | one `course_key` | latest English/Thai name (`max_by(…, event_ts_utc)`), `program`, `grade`, `offering_count` |
+| `int_course_popularity` | one `course_key` | distinct parents and weighted clicks in the last `popularity_lookback_days` (30); `rank()` → `popularity_rank` |
+| `int_actor_course_affinity` | one `actor_id` + `course_key` | `affinity_score = sum(action_weight × decay)` over the last `affinity_lookback_days` (90) |
+| `int_course_coocurrence` | one `course_key` + `other_course_key` | self-join on the same parent; keep pairs with at least `min_co_actors` (2) parents |
 
-Tests are the grain assertion made executable:
+**Time decay.** A click loses half its weight every `affinity_half_life_days` (14):
 
-```yaml
-# models/intermediate/_int_models.yml
-version: 2
-
-models:
-  - name: int_actor_item_affinity
-    description: One row per actor and item, with weighted affinity.
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns: [actor_id, item_type, item_id]
-    columns:
-      - name: affinity_score
-        tests:
-          - not_null
+```sql
+power(0.5, datediff('hour', event_ts_utc, current_timestamp()) / 24.0 / {{ var('affinity_half_life_days') }}) as decay
 ```
 
-That test fails the run the moment a join starts fanning out, instead of you noticing
-skewed recommendations three weeks later. Needs `dbt_utils` in `packages.yml`.
+| Age | 0 d | 7 d | 14 d | 28 d | 56 d |
+|---|---|---|---|---|---|
+| decay | 1.00 | 0.71 | 0.50 | 0.25 | 0.06 |
+
+All tunables live in `dbt_project.yml` → `vars` and can be overridden per run, e.g.
+`dbt build --vars '{affinity_half_life_days: 7}'`.
 
 ### 17. Marts
 
-Business-facing, stable column names, materialized as tables. The only layer an
-application, BI tool, or teammate should query.
+Business-facing, stable column names. The only layer an application, BI tool or
+teammate should query.
 
-Item–item co-occurrence with a popularity fallback for cold-start actors:
+**`course_recommendations`**: top `recommendations_per_actor` (5) courses per parent.
 
-| Model | Purpose |
-|---|---|
-| `int_competition_cooccurrence` | "actors who viewed this also viewed that" |
-| `int_competition_popularity` | 30-day popularity, the cold-start answer |
-| `competition_recommendations` | top 10 per actor, excluding already-seen items |
-
-A read role gets access through an `on-run-end` hook, once one exists:
-
-```yaml
-# on-run-end:
-#   - "GRANT SELECT ON ALL VIEWS  IN SCHEMA {{ target.schema }} TO ROLE ANALYST"
-#   - "GRANT SELECT ON ALL TABLES IN SCHEMA {{ target.schema }} TO ROLE ANALYST"
+```
+affinity ─┬─► similar  (priority 1): affinity_score × co_actor_count, via int_course_coocurrence
+          └─► popular  (priority 2): 1 / popularity_rank, offered to every parent (cold-start fallback)
+                   │ union all
+                   ▼
+             not_seen        drop courses the parent already clicked (left join … is null)
+             one_per_course  same course from both sources → keep the better one (qualify row_number)
+             ranked          row_number() over (partition by actor_id order by priority, score desc)
+             final           join int_course_catalog for names/program; keep rank ≤ 5
 ```
 
-Commented out until the role is created — a hook referencing a nonexistent role fails
-every run. Note both lines: staging models are views but marts are tables, and a
-views-only grant silently misses them. Grants on `ALL` are point-in-time;
-`GRANT … ON FUTURE` configured once in Snowsight is generally better than re-granting
-on every run.
+`priority` is a constant chosen per source (1 = personal, 2 = popular), so personal
+recommendations always outrank the popular fallback; `score` only orders rows within
+the same source.
+
+**Monitoring marts** (details in [Phase 7](#phase-7--monitoring-run-metrics-and-hit-rate)):
+
+| Model | Materialization | Purpose |
+|---|---|---|
+| `course_recommendations_history` | incremental, `append`, `full_refresh=false` | a copy of every run's list |
+| `reco_run_metrics` | incremental, `append`, `full_refresh=false` | one health row per run |
+| `reco_hit_rate_daily` | table | did parents click yesterday's recommendations? |
+
+**Incremental vs full rebuild.** Most models are full rebuilds on purpose: affinity
+decay and the popularity window depend on *today's date*, so yesterday's numbers are
+already wrong today. Only history-keeping models append.
+
+| Type | Models |
+|---|---|
+| append-only | `RAW` (connector), `course_recommendations_history`, `reco_run_metrics` |
+| full rebuild (must stay) | catalog, popularity, affinity, co-occurrence, recommendations, hit rate |
+| full rebuild → incremental next | `int_course_interactions` (immutable events, biggest table) |
+| view | staging |
+
+No dbt **snapshot** is needed today: events never change after they land, and the
+history table already keeps every recommendation list. A snapshot becomes useful when
+a mutable table (e.g. Supabase `courses`: names, status) is loaded as a source.
+
+**Tests** (31 in total) assert grain and integrity: `unique` / `not_null` on keys,
+`unique_combination_of_columns` on `(actor_id, course_key)` and
+`(course_key, other_course_key)`, `relationships` to `int_course_catalog`,
+`expression_is_true: course_key <> other_course_key`, and `accepted_range` on
+`hit_rate`. dbt Fusion requires generic-test parameters under `arguments:`.
+
+---
+
+## Phase 6 — Environments and CI/CD
+
+### 18. Three environments
+
+| Target | Who runs it | Database | Schemas | Profile |
+|---|---|---|---|---|
+| `dev` | you, on the laptop | `ABACUS_DEV` | `STAGING`, `INTERMEDIATE`, `MARTS`, `SEEDS` | `~/.dbt/profiles.yml` |
+| `ci` | GitHub Actions (PRs, benchmark) | `ABACUS_DEV` | `PR_<n>_STAGING`, `PR_<n>_MARTS`, … | `dbt_clickstream/ci/profiles.yml` |
+| `prod` | GitHub Actions (deploy) | `ABACUS_ANALYTICS` | `STAGING`, `INTERMEDIATE`, `MARTS`, `SEEDS` | `dbt_clickstream/ci/profiles.yml` |
+
+All three read the same `ABACUS_ANALYTICS.RAW` (the source pins `database:`), but only
+`prod` writes to `ABACUS_ANALYTICS`. A half-finished model on the laptop can never
+reach the app.
+
+```sql
+USE ROLE SYSADMIN;
+CREATE DATABASE IF NOT EXISTS ABACUS_DEV;
+GRANT OWNERSHIP ON DATABASE ABACUS_DEV TO ROLE DBT_ROLE COPY CURRENT GRANTS;
+GRANT USAGE, OPERATE ON WAREHOUSE ABACUS_WH TO ROLE DBT_ROLE;
+```
+
+### 19. Schema naming
+
+`macros/generate_schema_name.sql` replaces dbt's default (`<target.schema>_<custom>`,
+which produced `STAGING_staging`). `dev` and `prod` use the folder schema as-is; only
+`ci` adds the PR prefix:
+
+```sql
+{% macro generate_schema_name(custom_schema_name, node) -%}
+    {%- set base = (custom_schema_name or target.schema) | trim | upper -%}
+    {%- if target.name == 'ci' -%}
+        {{ target.schema | trim | upper }}_{{ base }}      {#- PR_12 + MARTS → PR_12_MARTS -#}
+    {%- else -%}
+        {{ base }}
+    {%- endif -%}
+{%- endmacro %}
+```
+
+`macros/drop_ci_schemas.sql` removes a PR's schemas after the run and refuses any
+prefix that does not start with `PR_`, so it can never drop `STAGING` or `MARTS`:
+
+```bash
+dbt run-operation drop_ci_schemas --args "{prefix: PR_12}" --target ci
+```
+
+### 20. CI identity and GitHub secrets
+
+GitHub logs in as a dedicated service user with its own key pair:
+
+```sql
+USE ROLE SECURITYADMIN;
+CREATE USER IF NOT EXISTS DBT_CI_SVC
+    TYPE = SERVICE DEFAULT_ROLE = DBT_ROLE DEFAULT_WAREHOUSE = ABACUS_WH
+    RSA_PUBLIC_KEY = '<contents of ~/.snowflake/dbt_ci_key.pub, one line>';
+GRANT ROLE DBT_ROLE TO USER DBT_CI_SVC;
+```
+
+| GitHub secret | Value |
+|---|---|
+| `SNOWFLAKE_ACCOUNT` | `<ORG>-<ACCOUNT>` (no `https://`, no domain) |
+| `SNOWFLAKE_DBT_USER` | `DBT_CI_SVC` |
+| `SNOWFLAKE_DBT_PRIVATE_KEY` | full contents of `~/.snowflake/dbt_ci_key.p8` (`pbcopy < ~/.snowflake/dbt_ci_key.p8`) |
+
+`ci/profiles.yml` contains no secrets, only `env_var()` lookups, so it is committed:
+
+```yaml
+abacus:
+  target: ci
+  outputs:
+    ci:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      private_key: "{{ env_var('SNOWFLAKE_PRIVATE_KEY') }}"
+      role: DBT_ROLE
+      database: ABACUS_DEV
+      warehouse: ABACUS_WH
+      schema: "{{ env_var('DBT_SCHEMA', 'PR_LOCAL') }}"
+      threads: 4
+    prod:
+      # same, with database: ABACUS_ANALYTICS and schema: STAGING
+```
+
+### 21. Workflows
+
+| Workflow | Trigger | What it does |
+|---|---|---|
+| `.github/workflows/dbt-ci.yml` | pull request touching `dbt_clickstream/**`, manual | `dbt build --target ci` into `ABACUS_DEV.PR_<n>_*`, step summary, drop schemas (`if: always()`) |
+| `.github/workflows/dbt-deploy.yml` | push to `main`, cron `7 18 * * *` (01:07 Bangkok), manual | `dbt source freshness` (warn only), `dbt build --target prod`, summary with the 10 slowest models, `run_results.json` artifact |
+| `.github/workflows/dbt-benchmark.yml` | manual, with a label | `dbt build` ×N with `--full-refresh` on the bench table, median timings — see [Phase 8](#phase-8--benchmark) |
+
+The CI run is a rehearsal: its tables are deleted and nothing is copied to prod. A
+merge triggers a **fresh** prod build from `main`. Protect `main` (require a PR and the
+`build` check) so a red CI blocks the merge.
+
+Every query carries a tag, so Snowflake's query history separates the flows:
+
+```yaml
++query_tag: "dbt_abacus_{{ target.name }}_{{ env_var('GITHUB_RUN_ID', 'local') }}"
+```
+
+`dbt_abacus_prod_41407393949` is deploy run 41407393949; `dbt_abacus_dev_local` is the
+laptop.
+
+**Test CI locally** before pushing (same env vars GitHub sets):
+
+```bash
+cd dbt_clickstream
+export DBT_PROFILES_DIR=ci SNOWFLAKE_ACCOUNT=<ORG>-<ACCOUNT> SNOWFLAKE_USER=DBT_CI_SVC \
+       SNOWFLAKE_PRIVATE_KEY="$(cat ~/.snowflake/dbt_ci_key.p8)" DBT_SCHEMA=PR_TEST
+dbt build --target ci                          # log shows PR_TEST_STAGING, PR_TEST_MARTS, …
+dbt run-operation drop_ci_schemas --args '{prefix: PR_TEST}' --target ci
+unset DBT_PROFILES_DIR SNOWFLAKE_ACCOUNT SNOWFLAKE_USER SNOWFLAKE_PRIVATE_KEY DBT_SCHEMA
+```
+
+---
+
+## Phase 7 — Monitoring: run metrics and hit rate
+
+Tests check **rules** (no nulls, no duplicates). Some failures pass every rule: an
+empty mart, a stopped connector, every parent getting the same five popular courses.
+Two marts watch for those.
+
+### 22. `reco_run_metrics`: one health row per run
+
+| Column | Meaning | Healthy |
+|---|---|---|
+| `run_at` | dbt start time (`run_started_at`) | one row per run |
+| `actors` | parents with recommendations | grows with traffic, never a sudden 0 |
+| `avg_recs_per_actor` | rows ÷ parents | close to 5 |
+| `pct_personal` | share of `similar_parents` rows | rises as data grows |
+| `catalog_coverage` | distinct recommended courses ÷ catalog size | moderate; very low = everyone gets the same list |
+| `data_lag_minutes` | minutes since the newest click | small; hours = ingestion stopped |
+
+```sql
+SELECT run_at, actors, avg_recs_per_actor, pct_personal, catalog_coverage, data_lag_minutes
+FROM ABACUS_ANALYTICS.MARTS.RECO_RUN_METRICS
+ORDER BY run_at DESC;
+```
+
+### 23. `reco_hit_rate_daily`: are the recommendations useful?
+
+"Of the parents we recommended to on day D, how many clicked one of their recommended
+courses on day D+1?" It uses the last list of each day from
+`course_recommendations_history`, so the value for day D appears after the deploy on
+D+1.
+
+```sql
+SELECT * FROM ABACUS_ANALYTICS.MARTS.RECO_HIT_RATE_DAILY ORDER BY reco_date;
+```
+
+With generator data the hit rate is chance, because synthetic parents never look at
+their recommendations. Treat it as a **pipeline validation** (inject a known
+click-through on recommended courses and check the metric recovers it), not as a
+quality claim, until real users drive it.
+
+---
+
+## Phase 8 — Benchmark
+
+The benchmark answers **"how fast, and how big?"**: the same pipeline, the same dbt
+models, at 1K → 10K → 100K → 1M events, measured the same way each time. Quality is
+measured separately by the hit rate on real data.
+
+### 24. Isolation: fake events never reach production
+
+```
+generate_clickstream.py --topic clickstream.bench
+        │
+        ▼
+Kafka clickstream.bench ──► connector ──► RAW.CLICKSTREAM_EVENTS_BENCH      (bench_ingest.py times this)
+                                                   │
+                         dbt benchmark workflow ───┘  dbt build ×3 --full-refresh
+                                                      → ABACUS_DEV.PR_BENCH_<n>_*  (timed, then dropped)
+```
+
+| Piece | How |
+|---|---|
+| Topic | `clickstream.bench`, 3 partitions, replication 1 (created in Redpanda Console or `kafka-topics.sh`) |
+| Table | connector maps `clickstream.bench:CLICKSTREAM_EVENTS_BENCH` in `snowflake.topic2table.map`; created on first write |
+| dbt switch | the source's `identifier: "{{ var('raw_events_table', 'CLICKSTREAM_EVENTS') }}"` defaults to the real table; benchmarks pass `--vars '{raw_events_table: CLICKSTREAM_EVENTS_BENCH}'` |
+| Output | `ci` target → `ABACUS_DEV.PR_BENCH_<run>_*`, dropped after timing |
+
+One-time setup:
+
+```sql
+GRANT SELECT ON FUTURE TABLES IN SCHEMA ABACUS_ANALYTICS.RAW TO ROLE DBT_ROLE;  -- bench table is created later
+ALTER USER DBT_CI_SVC SET USE_CACHED_RESULT = FALSE;   -- honest timings; set back to TRUE afterwards
+```
+
+### 25. Tools
+
+**`scripts/generate_clickstream.py`** produces events with the same shape as the app,
+from the real course and competition exports in `course_data/`:
+
+| Option | Meaning |
+|---|---|
+| `--events N` | exactly N events (benchmarks) |
+| `--topic clickstream.bench` | send to the bench topic |
+| `--tag bench` | id prefix (`bench-…` instead of `synth-…`) |
+| `--parents`, `--days`, `--seed`, `--anonymous`, `--dry-run` | normal traffic simulation |
+
+It prints the produce rate and saves the run (start time, count) for the next script.
+
+**`scripts/bench_ingest.py`** polls Snowflake until every event has landed and prints
+end-to-end time, lag after the last send, and ingest events/s. Each run is appended to
+`bench_results/ingest_results.csv`. Connection defaults can be overridden with
+`SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_PRIVATE_KEY_PATH`, `SNOWFLAKE_ROLE`,
+`SNOWFLAKE_WAREHOUSE`.
+
+**`.github/workflows/dbt-benchmark.yml`** runs `dbt build` N times (default 3) with
+`--full-refresh` on the bench table and writes the median total time and the 10
+slowest models to the run summary; raw `run_results.json` files are kept as artifacts
+for 90 days.
+
+### 26. Procedure (per size)
+
+```sql
+TRUNCATE TABLE ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS_BENCH;   -- clean start
+```
+
+```bash
+caffeinate -i &                                   # sleep breaks the connector's sessions
+python scripts/generate_clickstream.py --events 10000 --topic clickstream.bench --tag bench
+python scripts/bench_ingest.py --label "10k baseline"
+```
+
+Then **Actions → dbt benchmark → Run workflow** (label `10k baseline`, runs `3`). Wait
+for it to finish before truncating for the next size; dbt reads the bench table during
+all runs. For 1M, pass `--timeout 3600` to `bench_ingest.py`.
+
+### 27. Results
+
+Environment: Kafka + Connect in Docker on a MacBook (Apple Silicon), connector v4 with
+4 tasks, Snowflake XS warehouse.
+
+| Events | Produce (events/s) | Ingest end-to-end (s) | Ingest (events/s) | dbt build, median (s) | Slowest model |
+|---|---|---|---|---|---|
+| 1,000 | 67,602 | 36.4 | 27 | | |
+| 10,000 | 89,140 | 26.1 | 383 | | |
+| 100,000 | | | | | |
+| 1,000,000 | | | | | |
+
+The 1K run includes first-write overhead (the connector creating the bench table and
+opening its Snowpipe Streaming channels), which is why it is slower end-to-end than
+10K. Ingest time is dominated by the connector's flush interval, not by volume, so
+events/s rises with batch size until the connector or warehouse becomes the limit.
+
+**Next:** run the 100K and 1M baselines, make `int_course_interactions` incremental
+(`unique_key='interaction_id'`, `merge`, 6-hour late-event lookback, `cluster_by` on
+the event date), and re-run 1M to record the before/after build time.
+
+**Reliability checks to run with the same tools:**
+
+| Test | Pass when |
+|---|---|
+| Stop the connector halfway through a 100K send, restart | `bench_ingest.py` reports all 100K (0 lost) |
+| Send the same 10K events twice | `int_course_interactions` row count unchanged (dedupe) |
+| Send malformed messages | they land in `clickstream.events.dlq`; ingestion continues |
+| Break a model, deploy, fix, re-run | only failed and downstream models re-run |
+
+---
+
+## Security and key rotation
+
+| Identity | Snowflake user | Key file (never in the repo) | Used by |
+|---|---|---|---|
+| Kafka connector | `KAFKA_INGEST_SVC` | `~/.snowflake/kafka_ingest_key_v3.p8` | Kafka Connect |
+| dbt, laptop | your user (`login_name`) | `~/.snowflake/dbt_rsa_key.p8` | `dbt` dev, `bench_ingest.py` |
+| dbt, GitHub | `DBT_CI_SVC` | `~/.snowflake/dbt_ci_key.p8` + GitHub secret | CI, deploy, benchmark |
+
+Rules learned the hard way:
+
+- `connectors/snowflake-sink-v4.json` holds the connector's private key inline, so it
+  is **gitignored**; commit `connectors/snowflake-sink-v4.example.json` with a
+  `<PUT_KEY_HERE>` placeholder instead. Keep a backup outside the repo.
+- `scripts/connector.sh update` strips the key from its output, so the config can be
+  pasted safely.
+- A key that was ever committed or shown anywhere is rotated, not just deleted.
+
+**Zero-downtime rotation** uses Snowflake's two key slots:
+
+```sql
+ALTER USER KAFKA_INGEST_SVC SET RSA_PUBLIC_KEY_2 = '<new public key>';   -- 1. both keys valid
+-- 2. put the new private key in the connector, ./scripts/connector.sh update, verify rows land
+ALTER USER KAFKA_INGEST_SVC UNSET RSA_PUBLIC_KEY;                        -- 3. old key dead
+```
+
+Check which key is which by fingerprint:
+
+```bash
+openssl rsa -pubin -in ~/.snowflake/<key>.pub -outform DER 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64
+# compare with RSA_PUBLIC_KEY_FP / RSA_PUBLIC_KEY_2_FP from DESC USER
+```
+
+Snowflake's login history names the exact reason a key login failed:
+
+```sql
+SELECT event_timestamp, user_name, is_success, error_message
+FROM TABLE(ABACUS_DEV.INFORMATION_SCHEMA.LOGIN_HISTORY(RESULT_LIMIT => 20))
+ORDER BY event_timestamp DESC;
+```
 
 ---
 
 ## Operating the connector
+
+`scripts/connector.sh` wraps the REST calls below and reads `connectors/snowflake-sink-v4.json`:
+
+| Command | Does |
+|---|---|
+| `./scripts/connector.sh validate` | check the config without applying it (`errors: 0`) |
+| `./scripts/connector.sh deploy` | create the connector |
+| `./scripts/connector.sh update` | apply config changes (output hides the private key) |
+| `./scripts/connector.sh status` | connector and task state, with the stack trace of a failed task |
+| `./scripts/connector.sh restart` | restart failed tasks only |
+| `./scripts/connector.sh logs` | follow the worker log |
+
+The raw calls:
 
 ```bash
 # list connectors
@@ -901,7 +1240,7 @@ Redpanda Console at `http://localhost:8080` is faster for browsing topics.
 ## Running dbt
 
 ```bash
-cd dbt
+cd dbt_clickstream
 
 dbt deps                                   # install packages (dbt_utils)
 dbt debug                                  # profile + connection
@@ -914,6 +1253,13 @@ dbt test                                   # data quality assertions
 dbt source freshness                       # is Kafka still landing rows?
 dbt docs generate && dbt docs serve         # lineage graph
 ```
+
+| Command | Builds into |
+|---|---|
+| `dbt build` | `ABACUS_DEV` (your playground) |
+| `dbt build --select int_course_catalog+` | one model and everything downstream |
+| `dbt build --vars '{raw_events_table: CLICKSTREAM_EVENTS_BENCH}'` | `ABACUS_DEV`, from the benchmark table |
+| `dbt build --target prod` | **production**; normally only GitHub deploy does this |
 
 Run from the project root, where `dbt_project.yml` lives. Running from
 `models/staging/` is why `dbt debug --profiles-dir .` fails with
@@ -959,8 +1305,12 @@ macro or `source()` expanded to.
 | Bare `error: 500` with no detail | `curl -f` discarded the body | Use `-s`, add `-w '\nHTTP %{http_code}\n'` |
 | `Insufficient privileges … CLICKSTREAM_EVENTS` | Table owned by the ingest role | `GRANT ROLE KAFKA_INGEST_ROLE TO ROLE SYSADMIN` |
 | `Found orphan containers` | Second Compose project | `docker compose ls -a`, remove duplicates |
+| Task `FAILED`: `Authentication token has expired` | Cached Snowflake session died (often after Mac sleep) | `docker restart connect`; task restarts reuse the cached session. Check `date -u; docker exec connect date -u` match |
+| `Name or service not known` | Docker lost DNS | Restart Docker Desktop, `docker compose up -d`, `connector.sh restart` |
+| `update` → `curl: (22) … 400`, `validate` → `Cannot connect to Snowflake` | Login failed during validation | Login history: `JWT_TOKEN_INVALID_PUBLIC_KEY_FINGERPRINT_MISMATCH` = key in the file is not registered on the user |
+| No new rows, connector `RUNNING` | Running tasks still hold old sessions; new config never applied | `validate`, then `update`; compare `max(record_metadata:CreateTime)` with now |
 
-## Troubleshooting — dbt
+## Troubleshooting — dbt and CI
 
 | Symptom | Cause | Fix |
 |---|---|---|
@@ -978,13 +1328,23 @@ macro or `source()` expanded to.
 | Model lands in `STAGING_staging` | `target.schema` concatenated with a custom schema | Remove `+schema:` / `config(schema=…)`, or override `generate_schema_name` |
 | `UnusedResourceConfigPath` warning | Config keys reference directories that do not exist | Align the config tree with the folder tree |
 | `dbt debug --config-dir` → unexpected argument | Removed in dbt 2.0 | Read the `Loading …/profiles.yml` line dbt already prints |
+| `Private key file not found: '~/.snowflake/…'` | dbt Fusion does not expand `~` | Absolute path in `private_key_path` |
+| `No active warehouse selected` (views succeed, tables fail) | Warehouse missing, or `DBT_ROLE` lacks `USAGE` | `SHOW WAREHOUSES`; `GRANT USAGE, OPERATE ON WAREHOUSE ABACUS_WH TO ROLE DBT_ROLE` |
+| `User 'X' does not exist or not authorized` on `ALTER USER` | Name stored lowercase, or worksheet not on `ACCOUNTADMIN` | `SHOW USERS`, then `ALTER USER "exact_name"`; set the worksheet role |
+| CI: `JWT_TOKEN_INVALID_PUBLIC_KEY_FINGERPRINT_MISMATCH` | GitHub secret ≠ key registered on `DBT_CI_SVC` | Re-register `dbt_ci_key.pub`, re-paste the secret with `pbcopy < dbt_ci_key.p8` |
+| `Schema 'ABACUS_ANALYTICS.MARTS' does not exist` | Prod has not been deployed yet | Run **dbt deploy**; the laptop builds into `ABACUS_DEV` |
+| CI models build into `STAGING`, not `PR_<n>_STAGING` | Old `generate_schema_name` still in use | Check the macro file was saved; only one definition |
+| `Nested mappings are not allowed in compact mappings` | `: ` inside a one-line `run:` value | Use `run: |` and put the command on the next line |
+| `Deprecated test arguments [...]` | dbt Fusion syntax | Move test parameters under `arguments:` |
+| `Ignored unexpected key "incremental_stratrgy"` | Typo in `config()` | `incremental_strategy` |
+| Benchmark looks too fast on repeat runs | Snowflake result cache | `ALTER USER DBT_CI_SVC SET USE_CACHED_RESULT = FALSE` |
 
 Useful Snowflake checks:
 
 ```sql
 SELECT CURRENT_USER(), CURRENT_ROLE(), CURRENT_WAREHOUSE(), CURRENT_DATABASE();
 SELECT CURRENT_ORGANIZATION_NAME() || '-' || CURRENT_ACCOUNT_NAME() AS account_identifier;
-DESC USER BANASPIH;
+DESC USER "<exact_name>";
 DESC TABLE ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS;
 SHOW GRANTS TO ROLE DBT_ROLE;
 ```
@@ -1016,97 +1376,116 @@ do not put it in the `account` field.
 ```
 course-recommendation-pipeline/
 ├── README.md
+├── .github/workflows/
+│   ├── dbt-ci.yml                  # PRs → ABACUS_DEV.PR_<n>_*
+│   ├── dbt-deploy.yml              # main + daily → ABACUS_ANALYTICS
+│   └── dbt-benchmark.yml           # manual, timed builds on the bench table
+├── bench_results/
+│   └── ingest_results.csv          # one row per bench_ingest.py run
 ├── connectors/
-│   ├── snowflake-sink-v4.json      # connector config (safe to commit)
-│   ├── snowflake.properties        # GITIGNORED — private key
-│   └── secrets/
-│       ├── sf_key.p8               # GITIGNORED — KAFKA_INGEST_SVC
-│       └── sf_key.pub              # GITIGNORED
+│   ├── snowflake-sink-v4.json          # GITIGNORED — real config with the private key
+│   ├── snowflake-sink-v4.example.json  # committed — <PUT_KEY_HERE> placeholder
+│   └── secrets/                        # GITIGNORED
+├── course_data/                    # Supabase exports used by the generator
 ├── docker/
 │   ├── docker-compose.yml          # kafka + console
 │   └── docker-compose.connect.yml  # connect worker overlay
 ├── scripts/
+│   ├── connector.sh                # deploy | update | status | validate | restart | delete | logs
+│   ├── generate_clickstream.py     # synthetic app events; --events/--topic/--tag for benchmarks
+│   ├── bench_ingest.py             # Kafka → Snowflake ingest timing
 │   ├── produce_kafka.py
 │   └── consumer_kafka.py
-├── sql/
-│   └── 01_setup.sql                # db, schemas, roles, users, grants
-└── dbt/
-    ├── dbt_project.yml
+├── sql/                            # one-off account setup (roles, users, grants)
+└── dbt_clickstream/
+    ├── dbt_project.yml             # vars, schemas, query_tag
     ├── packages.yml                # dbt_utils
+    ├── ci/profiles.yml             # ci + prod targets, env_var() only
+    ├── macros/
+    │   ├── course_key.sql
+    │   ├── generate_schema_name.sql
+    │   └── drop_ci_schemas.sql
+    ├── seeds/
+    │   ├── course_action_weights.csv
+    │   └── _seeds.yml
     └── models/
         ├── staging/
-        │   ├── _sources.yml
+        │   ├── _sources.yml        # raw.clickstream_events, switchable identifier
         │   ├── _models.yml
-        │   ├── base_clickstream_events.sql
         │   ├── stg_competition_viewed.sql
         │   ├── stg_course_card_clicked.sql
         │   └── stg_page_dwell.sql
         ├── intermediate/
         │   ├── _int_models.yml
-        │   ├── int_events_unioned.sql
-        │   ├── int_dwell_attributed.sql
-        │   └── int_actor_item_affinity.sql
+        │   ├── int_course_interactions.sql
+        │   ├── int_course_catalog.sql
+        │   ├── int_course_popularity.sql
+        │   ├── int_actor_course_affinity.sql
+        │   └── int_course_coocurrence.sql
         └── marts/
-            └── recommendations/
-                ├── int_competition_cooccurrence.sql
-                ├── int_competition_popularity.sql
-                └── competition_recommendations.sql
+            ├── _marts.yml
+            ├── course_recommendations.sql
+            ├── course_recommendations_history.sql
+            ├── reco_run_metrics.sql
+            └── reco_hit_rate_daily.sql
 ```
 
-`sql/02_view_page_dwell.sql` and `sql/03_view_competition_viewed.sql` are superseded
-by the dbt staging models. `sql/` now holds only one-off account setup — anything
-that creates a schema, role, user or grant, which dbt does not manage.
-
-The dbt private key lives in `~/.snowflake/`, outside the repo, so there is no chance
-of committing it.
-
-Add to `.gitignore`:
+`.gitignore` must cover:
 
 ```
+connectors/snowflake-sink-v4.json
 connectors/snowflake.properties
-connectors/**/*.p8
-connectors/**/*.pub
-dbt/target/
-dbt/dbt_packages/
-dbt/logs/
+connectors/secrets/
+*.p8
+*.pem
+.env
+dbt_clickstream/target/
+dbt_clickstream/logs/
+dbt_clickstream/dbt_packages/
 ```
 
-Verify:
+Files that were committed before they were ignored stay tracked until removed from the
+index (the files stay on disk):
 
 ```bash
-git check-ignore -v connectors/snowflake.properties connectors/secrets/sf_key.p8
+git rm --cached connectors/snowflake-sink-v4.json connectors/snowflake.properties
+git rm -r --cached dbt_clickstream/target dbt_clickstream/logs
+git check-ignore -v connectors/snowflake-sink-v4.json     # silence = NOT ignored
 ```
-
-Silence means they are **not** ignored — fix before committing.
 
 ---
 
 ## Status
 
-Ingestion is live: connector `RUNNING` with 4/4 tasks, rows landing in
-`ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS`.
+**Working end to end**
 
-dbt is connected via key-pair auth as `BANASPIH` / `DBT_ROLE`, with staging models
-building over the landing table.
+- Ingestion: connector v4 `RUNNING`, 4/4 tasks, events landing in
+  `RAW.CLICKSTREAM_EVENTS`; DLQ `clickstream.events.dlq` for malformed messages.
+- dbt: 3 staging views, 5 intermediate tables, 4 marts, 1 seed, 31 tests.
+- Environments: `ABACUS_DEV` (laptop, CI) and `ABACUS_ANALYTICS` (prod only).
+- CI/CD: PR checks in isolated schemas, deploy on merge and daily, query tags per run.
+- Monitoring: `reco_run_metrics`, `course_recommendations_history`,
+  `reco_hit_rate_daily`, source freshness.
+- Benchmark: isolated bench topic/table, ingest timing script, timed dbt workflow;
+  1K and 10K ingest baselines recorded.
+- Security: connector key rotated after an accidental commit; dedicated users and keys
+  per system.
 
-Next work, in priority order:
+**Next work, in priority order**
 
-1. **Conversion events** — `registration_started`, `registration_completed`. Without
-   a conversion signal there is no target variable, so no recommendation model can be
-   trained or evaluated.
-2. **Impression events** — what was shown and ignored, with position in the list.
-   Needed to distinguish "not interested" from "never seen", and to debias training
-   data.
-3. **Item catalog in `RAW_APP`** — competition attributes and, critically,
-   `registration_closes`. Recommending an expired competition is worse than
-   recommending nothing.
-4. **Intermediate and mart models** — conform events, build affinity, co-occurrence
-   and the recommendation table.
-5. **Tests and freshness in CI** — `dbt test` and `dbt source freshness` on a
-   schedule, so a stalled connector surfaces as a failing check rather than an empty
-   dashboard.
-6. **Incremental materialization** for the co-occurrence model as event volume grows;
-   the self-join is the first thing that will get slow.
+1. **Benchmark** 100K and 1M (ingest + dbt), then make `int_course_interactions`
+   incremental and record the before/after.
+2. **Hit-rate validation**: generator mode where returning parents click a
+   recommended course with a known probability; the metric should recover it.
+3. **Kafka off the laptop**: managed Kafka or a cloud VM so ingestion runs 24/7.
+4. **App integration**: the web app sends events to the production topic and reads
+   `MARTS.COURSE_RECOMMENDATIONS` (read-only role), with the popularity list as the
+   fallback for new visitors.
+5. **Course catalog from Supabase** as a source (`program`, `status`, fixes the G10
+   courses named "Abacus Grade 1"), with a dbt snapshot to track changes.
+6. **Conversion and impression events** (`registration_completed`,
+   `recommendation_shown`) to measure true click-through instead of next-day hit rate.
+7. **Ops**: failure alerts, `dbt retry` in deploy, resource monitor on `ABACUS_WH`.
 
-Events not logged today are permanently lost. A model can be backfilled; a behavioral
-log cannot.
+Events not logged today are permanently lost. A model can be backfilled; behaviour
+that was never captured cannot.
