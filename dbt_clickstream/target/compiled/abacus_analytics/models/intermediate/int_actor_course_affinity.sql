@@ -11,7 +11,7 @@ with recent_clicks as (
         datediff('hour', event_ts_utc, CURRENT_TIMESTAMP()) / 24.0 / 
         14    
         ) as decay
-    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_interactions
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
     where event_ts_utc >= dateadd('day', -90, CURRENT_TIMESTAMP  )
 
 

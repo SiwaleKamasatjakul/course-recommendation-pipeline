@@ -15,7 +15,7 @@ with course_catalog as (
     min(EVENT_TS_UTC)                                   as min_event_ts_utc,
     max(EVENT_TS_UTC)                                   as max_event_ts_utc,
     try_to_number(regexp_substr(COURSE_KEY, 'grade\\s*(\\d+)', 1, 1, 'e', 1)) as grade,
-    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_interactions
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
     group by course_key
 
 

@@ -5,7 +5,7 @@
     "tasks.max": "4",
     "topics": "clickstream.events,clickstream.bench",
     "snowflake.topic2table.map": "clickstream.events:CLICKSTREAM_EVENTS,clickstream.bench:CLICKSTREAM_EVENTS_BENCH",
-    "snowflake.url.name": "https://KNSMANR-BL10477.snowflakecomputing.com",
+    "snowflake.url.name": "https://WUMMBRQ-LB67529.snowflakecomputing.com",
     "snowflake.user.name": "KAFKA_INGEST_SVC",
     "snowflake.role.name": "KAFKA_INGEST_ROLE",
     "snowflake.database.name": "ABACUS_ANALYTICS",

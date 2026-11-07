@@ -28953,3 +28953,2111 @@ drop schema if exists ABACUS_DEV.PR_TEST_SEEDS
 04:36:35.171772 [info ]: 
 ==================== Execution Summary =====================
 Finished 'run-operation' successfully for target 'ci' [3.2s]
+==================== 2026-11-06T02:59:15.322547Z | 01a1aecb-d0f7-7d81-8b50-78adbfa45d10 ====================
+02:59:15.322864 [info ]: dbt-core 2.0.0-alpha.5
+02:59:15.323425 [info ]: Started loading project
+02:59:15.325712 [info ]: Loading ~/.dbt/profiles.yml
+02:59:15.327145 [info ]: Finished loading project [  0.00s]
+02:59:15.327272 [info ]: Started debugging
+02:59:15.327339 [info ]: Debugging profile: dev
+02:59:15.327355 [info ]: Debugging dbt version: 2.0.0-alpha.5
+02:59:15.327378 [info ]: Debugging platform: macos aarch64 (unix)
+02:59:15.327424 [info ]: Debugging adapter type: snowflake (remote)
+02:59:15.347744 [info ]: Debugging dependencies:
+  git: OK
+02:59:15.348058 [info ]: Debugging connection:
+  "account": "WUMMBRQ-LB67529",
+  "user": "BANASPIH7",
+  "database": "ABACUS_DEV",
+  "warehouse": "ABACUS_WH",
+  "schema": "STAGING",
+  "role": "DBT_ROLE"
+02:59:16.542892 [info ]: Finished debugging [  1.22s]
+02:59:16.543065 [error]: [AuthenticationFailed (dbt1011)]: dbt was unable to connect to the specified database.
+The following error was returned:
+
+[Snowflake] 390144 (08004): JWT token is invalid.  [99e74c55-f880-4f6f-b074-b08faf459d5c]
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles
+02:59:16.726386 [info ]: 
+==================== Execution Summary =====================
+Finished 'debug' with 1 error for target 'dev' [1.4s]
+==================== 2026-11-06T04:17:47.796972Z | 01a1af13-b906-7be0-88a0-6123718eb330 ====================
+04:17:47.798608 [info ]: dbt-core 2.0.0-alpha.5
+04:17:47.800994 [info ]: Started loading project
+04:17:47.815217 [info ]: Loading ~/.dbt/profiles.yml
+04:17:47.829454 [info ]: Finished loading project [  0.03s]
+04:17:47.830010 [info ]: Started debugging
+04:17:47.830267 [info ]: Debugging profile: dev
+04:17:47.830299 [info ]: Debugging dbt version: 2.0.0-alpha.5
+04:17:47.830322 [info ]: Debugging platform: macos aarch64 (unix)
+04:17:47.830646 [info ]: Debugging adapter type: snowflake (remote)
+04:17:47.859296 [info ]: Debugging dependencies:
+  git: OK
+04:17:47.862072 [info ]: Debugging connection:
+  "account": "WUMMBRQ-LB67529",
+  "user": "BANASPIH7@GMAIL.COM",
+  "database": "ABACUS_DEV",
+  "warehouse": "ABACUS_WH",
+  "schema": "STAGING",
+  "role": "DBT_ROLE"
+04:17:48.366271 [debug]: Query executed on node unknown:
+select 1 as id
+04:17:48.368084 [info ]: Debugging connection test: OK
+04:17:48.368393 [info ]: Debugged All checks passed!
+04:17:48.369039 [info ]: Finished debugging [  0.54s]
+04:17:48.897054 [info ]: 
+==================== Execution Summary =====================
+Finished 'debug' successfully for target 'dev' [1.1s]
+==================== 2026-11-07T04:53:12.146601Z | 01a1b45a-7f47-7223-90a8-2dad604a1823 ====================
+04:53:12.148228 [info ]: dbt-core 2.0.0-alpha.5
+04:53:12.150632 [info ]: Started loading project
+04:53:12.163061 [info ]: Loading ~/.dbt/profiles.yml
+04:53:12.188439 [info ]: Loading packages.yml
+04:53:12.189857 [debug]:    Started loading packages
+04:53:12.210321 [debug]:     Loaded [  0.02s] packages
+04:53:12.213080 [info ]: Finished loading project [  0.06s]
+04:53:12.216328 [info ]: Started parsing
+04:53:12.278143 [debug]: Finished parsing models/intermediate/_int_models.yml [  0.00s]
+04:53:12.278904 [debug]: Finished parsing models/marts/_marts.yml [  0.00s]
+04:53:12.279609 [debug]: Finished parsing models/staging/_models.yml [  0.00s]
+04:53:12.280563 [debug]: Finished parsing models/staging/_sources.yml [  0.00s]
+04:53:12.281369 [debug]: Finished parsing seeds/_seeds.yml [  0.00s]
+04:53:12.294052 [debug]: Finished parsing models/intermediate/int_actor_course_affinity.sql [  0.00s]
+04:53:12.294849 [debug]: Finished parsing models/intermediate/int_course_catalog.sql [  0.00s]
+04:53:12.295672 [debug]: Finished parsing models/intermediate/int_course_coocurrence.sql [  0.00s]
+04:53:12.297220 [debug]: Finished parsing models/intermediate/int_course_interactions.sql [  0.00s]
+04:53:12.297830 [debug]: Finished parsing models/intermediate/int_course_popularity.sql [  0.00s]
+04:53:12.298941 [debug]: Finished parsing models/marts/course_recommendations.sql [  0.00s]
+04:53:12.300445 [debug]: Finished parsing models/marts/course_recommendations_history.sql [  0.00s]
+04:53:12.301231 [debug]: Finished parsing models/marts/reco_hit_rate_daily.sql [  0.00s]
+04:53:12.302180 [debug]: Finished parsing models/marts/reco_run_metrics.sql [  0.00s]
+04:53:12.303074 [debug]: Finished parsing models/staging/stg_competition_viewed.sql [  0.00s]
+04:53:12.303830 [debug]: Finished parsing models/staging/stg_course_card_clicked.sql [  0.00s]
+04:53:12.304626 [debug]: Finished parsing models/staging/stg_page_dwell.sql [  0.00s]
+04:53:12.333656 [debug]: Finished parsing target/generic_tests/unique_course_action_weights_action.sql [  0.00s]
+04:53:12.334212 [debug]: Finished parsing target/generic_tests/not_null_course_action_weights_action.sql [  0.00s]
+04:53:12.334651 [debug]: Finished parsing target/generic_tests/not_null_course_action_weights_weight.sql [  0.00s]
+04:53:12.335146 [debug]: Finished parsing target/generic_tests/not_null_course_recommendations_history_generated_at.sql [  0.00s]
+04:53:12.335646 [debug]: Finished parsing target/generic_tests/dbt_utils_unique_combination_o_5821bda8c81bd257caaf74e511a55dee.sql [  0.00s]
+04:53:12.336454 [debug]: Finished parsing target/generic_tests/not_null_int_actor_course_affinity_actor_id.sql [  0.00s]
+04:53:12.336887 [debug]: Finished parsing target/generic_tests/not_null_int_actor_course_affinity_affinity_score.sql [  0.00s]
+04:53:12.337293 [debug]: Finished parsing target/generic_tests/not_null_int_actor_course_affinity_course.sql [  0.00s]
+04:53:12.337780 [debug]: Finished parsing target/generic_tests/relationships_int_actor_course_3ead5df38a4937fb64bc5f05d472349b.sql [  0.00s]
+04:53:12.338332 [debug]: Finished parsing target/generic_tests/dbt_utils_unique_combination_o_ef4406531d2eedbabd66bf9c1d1a0504.sql [  0.00s]
+04:53:12.338826 [debug]: Finished parsing target/generic_tests/dbt_utils_expression_is_true_i_434c67fb25e376e694e34081158f3391.sql [  0.00s]
+04:53:12.339303 [debug]: Finished parsing target/generic_tests/not_null_int_course_coocurrence_co_actor_count.sql [  0.00s]
+04:53:12.340023 [debug]: Finished parsing target/generic_tests/not_null_int_course_coocurrence_course_key.sql [  0.00s]
+04:53:12.340576 [debug]: Finished parsing target/generic_tests/relationships_int_course_coocu_6694ae81b923ffbdee5e8aa6151a7c0f.sql [  0.00s]
+04:53:12.341061 [debug]: Finished parsing target/generic_tests/not_null_int_course_coocurrence_other_course_key.sql [  0.00s]
+04:53:12.341485 [debug]: Finished parsing target/generic_tests/relationships_int_course_coocu_4cbdd52e8f2632393580d308b44c1cab.sql [  0.00s]
+04:53:12.342702 [debug]: Finished parsing target/generic_tests/relationships_int_course_inter_99f0212569d4d6fb75b2588f65d165e9.sql [  0.00s]
+04:53:12.343190 [debug]: Finished parsing target/generic_tests/not_null_int_course_interactions_action_weight.sql [  0.00s]
+04:53:12.343591 [debug]: Finished parsing target/generic_tests/not_null_int_course_interactions_actor_id.sql [  0.00s]
+04:53:12.344302 [debug]: Finished parsing target/generic_tests/not_null_int_course_interactions_course_key.sql [  0.00s]
+04:53:12.344704 [debug]: Finished parsing target/generic_tests/not_null_int_course_interactions_interaction_id.sql [  0.00s]
+04:53:12.345106 [debug]: Finished parsing target/generic_tests/unique_int_course_interactions_interaction_id.sql [  0.00s]
+04:53:12.345535 [debug]: Finished parsing target/generic_tests/dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0.sql [  0.00s]
+04:53:12.345934 [debug]: Finished parsing target/generic_tests/not_null_reco_hit_rate_daily_reco_date.sql [  0.00s]
+04:53:12.346314 [debug]: Finished parsing target/generic_tests/unique_reco_hit_rate_daily_reco_date.sql [  0.00s]
+04:53:12.346700 [debug]: Finished parsing target/generic_tests/not_null_reco_run_metrics_actors.sql [  0.00s]
+04:53:12.347088 [debug]: Finished parsing target/generic_tests/not_null_reco_run_metrics_run_at.sql [  0.00s]
+04:53:12.347465 [debug]: Finished parsing target/generic_tests/unique_reco_run_metrics_run_at.sql [  0.00s]
+04:53:12.347848 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_competition_id.sql [  0.00s]
+04:53:12.348260 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql [  0.00s]
+04:53:12.348642 [debug]: Finished parsing target/generic_tests/not_null_stg_competition_viewed_session_id.sql [  0.00s]
+04:53:12.355105 [info ]: Finished parsing [  0.14s]
+04:53:12.356668 [info ]: Started scheduling
+04:53:12.357799 [info ]: Finished scheduling [  0.00s]
+04:53:12.359803 [debug]: Initializing schema store with entry: Frontier(CanonicalFqn { catalog: "ABACUS_ANALYTICS", schema: "RAW", table: "CLICKSTREAM_EVENTS" }) and interval: None
+04:53:12.383817 [info ]: Started building task graph
+04:53:12.385888 [info ]: Finished building task graph [  0.00s]
+04:53:14.210287 [debug]: Query executed on node unknown:
+show terse schemas in database ABACUS_DEV
+    limit 10000
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+04:53:14.359223 [debug]: Query executed on node unknown:
+create schema if not exists ABACUS_DEV.INTERMEDIATE
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+04:53:14.451318 [debug]: Query executed on node unknown:
+create schema if not exists ABACUS_DEV.MARTS
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+04:53:14.575998 [debug]: Query executed on node unknown:
+create schema if not exists ABACUS_DEV.SEEDS
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+04:53:14.667256 [debug]: Query executed on node unknown:
+create schema if not exists ABACUS_DEV.STAGING
+/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */
+04:53:14.667796 [info ]: Started rendering (44 nodes)
+04:53:14.667917 [info ]: Started model STAGING.stg_page_dwell
+04:53:14.667950 [debug]: Started rendering model STAGING.stg_page_dwell
+04:53:14.667982 [info ]: Started model STAGING.stg_competition_viewed
+04:53:14.667985 [debug]: Started rendering model STAGING.stg_competition_viewed
+04:53:14.667992 [info ]: Started seed SEEDS.course_action_weights
+04:53:14.667996 [debug]: Started rendering seed SEEDS.course_action_weights
+04:53:14.668002 [info ]: Started model STAGING.stg_course_card_clicked
+04:53:14.668006 [debug]: Started rendering model STAGING.stg_course_card_clicked
+04:53:14.668885 [debug]: Finished rendering [  0.00s] seed SEEDS.course_action_weights [success]
+04:53:14.669178 [info ]: Started running (44 nodes)
+04:53:14.669199 [info ]: Started running seed SEEDS.course_action_weights
+04:53:14.671397 [debug]: Compiled SQL for node model.abacus_analytics.stg_course_card_clicked at target/compiled/abacus_analytics/models/staging/stg_course_card_clicked.sql
+04:53:14.671437 [debug]: Compiled SQL for node model.abacus_analytics.stg_page_dwell at target/compiled/abacus_analytics/models/staging/stg_page_dwell.sql
+04:53:14.671435 [debug]: Compiled SQL for node model.abacus_analytics.stg_competition_viewed at target/compiled/abacus_analytics/models/staging/stg_competition_viewed.sql
+04:53:14.671512 [debug]: Finished rendering [  0.00s] model STAGING.stg_page_dwell [success]
+04:53:14.671548 [info ]: Started running model STAGING.stg_page_dwell
+04:53:14.671558 [debug]: Finished rendering [  0.00s] model STAGING.stg_course_card_clicked [success]
+04:53:14.671578 [info ]: Started running model STAGING.stg_course_card_clicked
+04:53:14.671587 [debug]: Finished rendering [  0.00s] model STAGING.stg_competition_viewed [success]
+04:53:14.671603 [info ]: Started running model STAGING.stg_competition_viewed
+04:53:14.771961 [debug]: Query executed on node model.abacus_analytics.stg_page_dwell:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */
+04:53:14.772608 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:14.850474 [debug]: Query executed on node model.abacus_analytics.stg_page_dwell:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.123158 [debug]: Query executed on node model.abacus_analytics.stg_page_dwell:
+SHOW OBJECTS IN SCHEMA "ABACUS_DEV"."STAGING" LIMIT 10000
+04:53:15.127150 [debug]: Writing runtime sql for node "model.abacus_analytics.stg_page_dwell"
+04:53:15.193662 [debug]: Query executed on node model.abacus_analytics.stg_course_card_clicked:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.193974 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:15.379669 [debug]: Query executed on node seed.abacus_analytics.course_action_weights:
+SHOW OBJECTS IN SCHEMA "ABACUS_DEV"."SEEDS" LIMIT 10000
+04:53:15.379669 [debug]: Query executed on node model.abacus_analytics.stg_course_card_clicked:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.380848 [debug]: Query executed on node model.abacus_analytics.stg_page_dwell:
+create or replace   view ABACUS_DEV.STAGING.stg_page_dwell
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_course_card_clicked.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+
+WITH source AS (
+    SELECT *
+    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
+    WHERE EVENT_TYPE = 'page_dwell'
+),
+
+flattened AS (
+SELECT
+    EVENT_TYPE                        AS event_type,
+    SESSION_ID                        AS session_id,
+    USER_ID                           AS user_id,
+    "TIMESTAMP"                    AS event_ts_utc,
+    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,   
+     METADATA:dwell_seconds::INT       AS dwell_seconds,
+    METADATA:scroll_depth_pct::INT    AS scroll_depth_pct,
+    METADATA:page::STRING             AS page,
+    METADATA:referer::STRING          AS referer,
+    METADATA:ip::STRING               AS ip,
+    METADATA:user_agent::STRING       AS user_agent,
+    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz    AS dbt_built_at
+
+    FROM source
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.381254 [debug]: Writing runtime sql for node "model.abacus_analytics.stg_course_card_clicked"
+04:53:15.381730 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.381885 [debug]: No original query_tag, unsetting parameter.
+04:53:15.382115 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:15.469689 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.471665 [debug]: Writing runtime sql for node "model.abacus_analytics.stg_competition_viewed"
+04:53:15.486000 [debug]: Query executed on node model.abacus_analytics.stg_page_dwell:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.487708 [info ]: Finished running [  0.82s] model STAGING.stg_page_dwell [success]
+04:53:15.487805 [info ]:  Succeeded [  0.82s] model STAGING.stg_page_dwell (view)
+04:53:15.555200 [debug]: Query executed on node seed.abacus_analytics.course_action_weights:
+create table ABACUS_DEV.SEEDS.course_action_weights (ACTION text,WEIGHT float8,DESCRIPTION text)
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "seed.abacus_analytics.course_action_weights", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.590725 [debug]: Query executed on node model.abacus_analytics.stg_course_card_clicked:
+create or replace   view ABACUS_DEV.STAGING.stg_course_card_clicked
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_course_card_clicked.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+
+WITH source AS (
+    SELECT *
+    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
+    WHERE EVENT_TYPE = 'course_card_clicked'
+),
+
+flattened AS (
+    SELECT
+        EVENT_TYPE                              AS event_type,
+        SESSION_ID                              AS session_id,
+        USER_ID                                 AS user_id,
+   
+        -- timestamps
+
+        "TIMESTAMP"                             AS event_ts_utc,
+        CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,
+        
+        METADATA:action::STRING                 AS action,
+        METADATA:course_id::STRING              AS course_id,
+        METADATA:course_name::STRING            AS course_name,
+        METADATA:course_name_en::STRING         AS course_name_en,
+        METADATA:ip::STRING                     AS ip,
+        METADATA:language::STRING               AS language,
+        METADATA:path_type::STRING              AS path_type,
+        METADATA:referer::STRING                AS referer,
+        METADATA:source::STRING                 AS source,
+        METADATA:user_agent::STRING             AS user_agent,
+        '2026-11-07 04:53:12.168497+00:00'::timestamp_tz    AS dbt_built_at
+
+    FROM source
+
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.591709 [debug]: No original query_tag, unsetting parameter.
+04:53:15.640023 [debug]: Query executed on node seed.abacus_analytics.course_action_weights:
+BEGIN
+04:53:15.661546 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+create or replace   view ABACUS_DEV.STAGING.stg_competition_viewed
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_competition_viewed.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+WITH source AS (
+    SELECT * 
+    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
+    WHERE EVENT_TYPE = 'competition_viewed'
+),
+
+flattened AS (
+    SELECT
+        SESSION_ID                          AS session_id,
+        USER_ID                             AS user_id,
+
+    -- timestamps
+    "TIMESTAMP"                        AS event_ts_utc,
+    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,
+
+    METADATA:action::STRING                 AS action,
+    METADATA:competition_id::STRING         AS competition_id,
+    METADATA:competition_name::STRING       AS competition_name,
+    METADATA:competition_name_en::STRING    AS competition_name_en,
+    METADATA:grade::STRING                  AS grade,
+    METADATA:program::STRING                AS program,
+    METADATA:language::STRING               AS language,
+    METADATA:source::STRING                 AS source,
+    METADATA:referer::STRING                AS referer,
+    METADATA:ip::STRING                     AS ip,
+    METADATA:user_agent::STRING             AS user_agent,
+    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz    AS dbt_built_at
+
+FROM source
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.662480 [debug]: No original query_tag, unsetting parameter.
+04:53:15.670110 [debug]: Query executed on node model.abacus_analytics.stg_course_card_clicked:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.670584 [info ]: Finished running [  1.00s] model STAGING.stg_course_card_clicked [success]
+04:53:15.670627 [info ]:  Succeeded [  1.00s] model STAGING.stg_course_card_clicked (view)
+04:53:15.740651 [debug]: Query executed on node model.abacus_analytics.stg_competition_viewed:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */
+04:53:15.741639 [info ]: Finished running [  1.07s] model STAGING.stg_competition_viewed [success]
+04:53:15.741780 [info ]:  Succeeded [  1.07s] model STAGING.stg_competition_viewed (view)
+04:53:15.741887 [info ]: Started test DBT_TEST__AUDIT.not_null_stg_competition_viewed_session_id
+04:53:15.741904 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_stg_competition_viewed_session_id
+04:53:15.741934 [info ]: Started test DBT_TEST__AUDIT.not_null_stg_competition_viewed_event_ts_utc
+04:53:15.741944 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_stg_competition_viewed_event_ts_utc
+04:53:15.742000 [info ]: Started test DBT_TEST__AUDIT.not_null_stg_competition_viewed_competition_id
+04:53:15.742015 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_stg_competition_viewed_competition_id
+04:53:15.745764 [debug]: Compiled SQL for node test.abacus_analytics.not_null_stg_competition_viewed_session_id.25044d0714 at target/compiled/abacus_analytics/target/generic_tests/not_null_stg_competition_viewed_session_id.sql
+04:53:15.745804 [debug]: Compiled SQL for node test.abacus_analytics.not_null_stg_competition_viewed_competition_id.aa85bbb0b9 at target/compiled/abacus_analytics/target/generic_tests/not_null_stg_competition_viewed_competition_id.sql
+04:53:15.745837 [debug]: Compiled SQL for node test.abacus_analytics.not_null_stg_competition_viewed_event_ts_utc.9b1def047c at target/compiled/abacus_analytics/target/generic_tests/not_null_stg_competition_viewed_event_ts_utc.sql
+04:53:15.745838 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_stg_competition_viewed_session_id [success]
+04:53:15.745909 [info ]: Started running test DBT_TEST__AUDIT.not_null_stg_competition_viewed_session_id
+04:53:15.745922 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_stg_competition_viewed_competition_id [success]
+04:53:15.745941 [info ]: Started running test DBT_TEST__AUDIT.not_null_stg_competition_viewed_competition_id
+04:53:15.745951 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_stg_competition_viewed_event_ts_utc [success]
+04:53:15.745971 [info ]: Started running test DBT_TEST__AUDIT.not_null_stg_competition_viewed_event_ts_utc
+04:53:15.747495 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_stg_competition_viewed_session_id.25044d0714"
+04:53:15.747633 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_stg_competition_viewed_event_ts_utc.9b1def047c"
+04:53:15.747725 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_stg_competition_viewed_competition_id.aa85bbb0b9"
+04:53:16.012786 [debug]: Query executed on node test.abacus_analytics.not_null_stg_competition_viewed_event_ts_utc.9b1def047c:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select event_ts_utc
+from ABACUS_DEV.STAGING.stg_competition_viewed
+where event_ts_utc is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_stg_competition_viewed_event_ts_utc.9b1def047c", "profile_name": "abacus", "target_name": "dev"} */
+04:53:16.013265 [debug]: Query executed on node test.abacus_analytics.not_null_stg_competition_viewed_session_id.25044d0714:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select session_id
+from ABACUS_DEV.STAGING.stg_competition_viewed
+where session_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_stg_competition_viewed_session_id.25044d0714", "profile_name": "abacus", "target_name": "dev"} */
+04:53:16.013432 [info ]: Finished running [  0.27s] test DBT_TEST__AUDIT.not_null_stg_competition_viewed_event_ts_utc [pass]
+04:53:16.013466 [info ]:     Passed [  0.27s] test  not_null_stg_competition_viewed_event_ts_utc
+04:53:16.013698 [info ]: Finished running [  0.27s] test DBT_TEST__AUDIT.not_null_stg_competition_viewed_session_id [pass]
+04:53:16.013719 [info ]:     Passed [  0.27s] test  not_null_stg_competition_viewed_session_id
+04:53:16.039528 [debug]: Query executed on node test.abacus_analytics.not_null_stg_competition_viewed_competition_id.aa85bbb0b9:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select competition_id
+from ABACUS_DEV.STAGING.stg_competition_viewed
+where competition_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_stg_competition_viewed_competition_id.aa85bbb0b9", "profile_name": "abacus", "target_name": "dev"} */
+04:53:16.040102 [info ]: Finished running [  0.29s] test DBT_TEST__AUDIT.not_null_stg_competition_viewed_competition_id [pass]
+04:53:16.040159 [info ]:     Passed [  0.30s] test  not_null_stg_competition_viewed_competition_id
+04:53:16.159032 [debug]: Query executed on node seed.abacus_analytics.course_action_weights:
+insert overwrite into ABACUS_DEV.SEEDS.course_action_weights (ACTION, WEIGHT, DESCRIPTION) values
+            ('expand_details',1.0,'Opened the course details card'),('view_course_from_path',2.0,'Went from the learning path to the course page'),('   search_click',1.5,'Clicked a course from search results')
+04:53:16.359279 [debug]: Query executed on node seed.abacus_analytics.course_action_weights:
+COMMIT
+04:53:16.360545 [debug]: Writing runtime SQL for node "seed.abacus_analytics.course_action_weights"
+04:53:16.364330 [info ]: Finished running [  1.70s] seed SEEDS.course_action_weights [success]
+04:53:16.364376 [info ]:  Succeeded [  1.69s] seed  SEEDS.course_action_weights (table)
+04:53:16.364455 [info ]: Started model INTERMEDIATE.int_course_interactions
+04:53:16.364466 [debug]: Started rendering model INTERMEDIATE.int_course_interactions
+04:53:16.364499 [info ]: Started test DBT_TEST__AUDIT.not_null_course_action_weights_action
+04:53:16.364509 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_course_action_weights_action
+04:53:16.364522 [info ]: Started test DBT_TEST__AUDIT.not_null_course_action_weights_weight
+04:53:16.364527 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_course_action_weights_weight
+04:53:16.364541 [info ]: Started test DBT_TEST__AUDIT.unique_course_action_weights_action
+04:53:16.364545 [debug]: Started rendering test DBT_TEST__AUDIT.unique_course_action_weights_action
+04:53:16.367157 [debug]: Compiled SQL for node test.abacus_analytics.not_null_course_action_weights_weight.c6d2a82126 at target/compiled/abacus_analytics/target/generic_tests/not_null_course_action_weights_weight.sql
+04:53:16.367175 [debug]: Compiled SQL for node test.abacus_analytics.unique_course_action_weights_action.4b4d8b2df1 at target/compiled/abacus_analytics/target/generic_tests/unique_course_action_weights_action.sql
+04:53:16.367297 [debug]: Compiled SQL for node test.abacus_analytics.not_null_course_action_weights_action.1375e990e8 at target/compiled/abacus_analytics/target/generic_tests/not_null_course_action_weights_action.sql
+04:53:16.367290 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_course_action_weights_weight [success]
+04:53:16.367350 [info ]: Started running test DBT_TEST__AUDIT.not_null_course_action_weights_weight
+04:53:16.367369 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.unique_course_action_weights_action [success]
+04:53:16.367414 [info ]: Started running test DBT_TEST__AUDIT.unique_course_action_weights_action
+04:53:16.367449 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_course_action_weights_action [success]
+04:53:16.367497 [info ]: Started running test DBT_TEST__AUDIT.not_null_course_action_weights_action
+04:53:16.367626 [debug]: Compiled SQL for node model.abacus_analytics.int_course_interactions at target/compiled/abacus_analytics/models/intermediate/int_course_interactions.sql
+04:53:16.367702 [debug]: Finished rendering [  0.00s] model INTERMEDIATE.int_course_interactions [success]
+04:53:16.368987 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_course_action_weights_weight.c6d2a82126"
+04:53:16.369338 [debug]: Writing runtime sql for node "test.abacus_analytics.unique_course_action_weights_action.4b4d8b2df1"
+04:53:16.369388 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_course_action_weights_action.1375e990e8"
+04:53:16.553249 [debug]: Query executed on node test.abacus_analytics.not_null_course_action_weights_weight.c6d2a82126:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select weight
+from ABACUS_DEV.SEEDS.course_action_weights
+where weight is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_course_action_weights_weight.c6d2a82126", "profile_name": "abacus", "target_name": "dev"} */
+04:53:16.553942 [debug]: Query executed on node test.abacus_analytics.not_null_course_action_weights_action.1375e990e8:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select action
+from ABACUS_DEV.SEEDS.course_action_weights
+where action is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_course_action_weights_action.1375e990e8", "profile_name": "abacus", "target_name": "dev"} */
+04:53:16.554342 [info ]: Finished running [  0.19s] test DBT_TEST__AUDIT.not_null_course_action_weights_weight [pass]
+04:53:16.554398 [info ]:     Passed [  0.19s] test  not_null_course_action_weights_weight
+04:53:16.554507 [info ]: Finished running [  0.19s] test DBT_TEST__AUDIT.not_null_course_action_weights_action [pass]
+04:53:16.554527 [info ]:     Passed [  0.19s] test  not_null_course_action_weights_action
+04:53:16.563639 [debug]: Query executed on node test.abacus_analytics.unique_course_action_weights_action.4b4d8b2df1:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    action as unique_field,
+    count(*) as n_records
+
+from ABACUS_DEV.SEEDS.course_action_weights
+where action is not null
+group by action
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_course_action_weights_action.4b4d8b2df1", "profile_name": "abacus", "target_name": "dev"} */
+04:53:16.564250 [info ]: Finished running [  0.20s] test DBT_TEST__AUDIT.unique_course_action_weights_action [pass]
+04:53:16.564286 [info ]:     Passed [  0.20s] test  unique_course_action_weights_action
+04:53:16.564350 [info ]: Started running model INTERMEDIATE.int_course_interactions
+04:53:16.643253 [debug]: Query executed on node model.abacus_analytics.int_course_interactions:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_interactions", "profile_name": "abacus", "target_name": "dev"} */
+04:53:16.643582 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:16.763149 [debug]: Query executed on node model.abacus_analytics.int_course_interactions:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_interactions", "profile_name": "abacus", "target_name": "dev"} */
+04:53:16.854042 [debug]: Query executed on node model.abacus_analytics.int_course_interactions:
+SHOW OBJECTS IN SCHEMA "ABACUS_DEV"."INTERMEDIATE" LIMIT 10000
+04:53:16.857139 [debug]: Writing runtime sql for node "model.abacus_analytics.int_course_interactions"
+04:53:17.545325 [debug]: Query executed on node model.abacus_analytics.int_course_interactions:
+create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_interactions
+    
+    
+    
+    
+    as (-- grain: one row per course_card_clicked event (exact duplicates removed)
+
+with clicks as (
+    select 
+        coalesce(USER_ID, 'anon' || SESSION_ID)                 as actor_id,
+        EVENT_TS_UTC                                            as event_ts_utc,                                                                 -- copy
+        ACTION                                                  as action,                                                                       -- copy
+        COURSE_ID                                               as offering_id,     
+        SESSION_ID                                              as session_id,
+        lower(trim(regexp_replace(coalesce(COURSE_NAME_EN,COURSE_NAME), '\\s*\\(.*\\)\\s*$', '')))  as course_key,
+        COURSE_NAME_EN                                          as course_name_en,
+        COURSE_NAME                                             as course_name_th,
+        PATH_TYPE                                               as path_type,
+        SOURCE                                                  as source 
+    from ABACUS_DEV.STAGING.stg_course_card_clicked
+    where COURSE_ID is not null 
+
+    -- Remove duplicate 
+    qualify row_number() over (
+        partition by COURSE_ID,SESSION_ID,EVENT_TS_UTC,ACTION
+        ORDER BY EVENT_TS_UTC ) = 1 
+)
+
+-- rule 3: look up the weight, and build the unique id
+select 
+
+    md5(cast(coalesce(cast(clicks.session_id as TEXT), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(clicks.offering_id as TEXT), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(clicks.action as TEXT), '_dbt_utils_surrogate_key_null_') || '-' || coalesce(cast(clicks.event_ts_utc as TEXT), '_dbt_utils_surrogate_key_null_') as TEXT)) as interaction_id,   
+    clicks.*,
+    coalesce(course_weight.weight, 0.5) as action_weight
+    from clicks
+    left join ABACUS_DEV.SEEDS.course_action_weights  as course_weight
+    where clicks.action = course_weight.action
+
+    
+
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_interactions", "profile_name": "abacus", "target_name": "dev"} */
+04:53:17.548893 [debug]: No original query_tag, unsetting parameter.
+04:53:17.659374 [debug]: Query executed on node model.abacus_analytics.int_course_interactions:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_interactions", "profile_name": "abacus", "target_name": "dev"} */
+04:53:17.659821 [info ]: Finished running [  1.10s] model INTERMEDIATE.int_course_interactions [success]
+04:53:17.659875 [info ]:  Succeeded [  1.10s] model INTERMEDIATE.int_course_interactions (table)
+04:53:17.660007 [info ]: Started model INTERMEDIATE.int_course_popularity
+04:53:17.660018 [debug]: Started rendering model INTERMEDIATE.int_course_popularity
+04:53:17.660054 [info ]: Started test DBT_TEST__AUDIT.unique_int_course_interactions_interaction_id
+04:53:17.660060 [debug]: Started rendering test DBT_TEST__AUDIT.unique_int_course_interactions_interaction_id
+04:53:17.660072 [info ]: Started test DBT_TEST__AUDIT.relationships_int_course_interactions_action__action__ref_course_action_weights_
+04:53:17.660078 [debug]: Started rendering test DBT_TEST__AUDIT.relationships_int_course_interactions_action__action__ref_course_action_weights_
+04:53:17.660092 [info ]: Started test DBT_TEST__AUDIT.not_null_int_course_interactions_interaction_id
+04:53:17.660102 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_course_interactions_interaction_id
+04:53:17.660115 [info ]: Started model INTERMEDIATE.int_actor_course_affinity
+04:53:17.660120 [debug]: Started rendering model INTERMEDIATE.int_actor_course_affinity
+04:53:17.660127 [info ]: Started model INTERMEDIATE.int_course_catalog
+04:53:17.660132 [debug]: Started rendering model INTERMEDIATE.int_course_catalog
+04:53:17.660139 [info ]: Started test DBT_TEST__AUDIT.not_null_int_course_interactions_course_key
+04:53:17.660143 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_course_interactions_course_key
+04:53:17.660149 [info ]: Started test DBT_TEST__AUDIT.not_null_int_course_interactions_action_weight
+04:53:17.660154 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_course_interactions_action_weight
+04:53:17.660163 [info ]: Started test DBT_TEST__AUDIT.not_null_int_course_interactions_actor_id
+04:53:17.660166 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_course_interactions_actor_id
+04:53:17.682188 [debug]: Compiled SQL for node test.abacus_analytics.unique_int_course_interactions_interaction_id.c39047826c at target/compiled/abacus_analytics/target/generic_tests/unique_int_course_interactions_interaction_id.sql
+04:53:17.682315 [debug]: Compiled SQL for node model.abacus_analytics.int_course_catalog at target/compiled/abacus_analytics/models/intermediate/int_course_catalog.sql
+04:53:17.682397 [debug]: Compiled SQL for node model.abacus_analytics.int_actor_course_affinity at target/compiled/abacus_analytics/models/intermediate/int_actor_course_affinity.sql
+04:53:17.682476 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_course_interactions_actor_id.8d54c7258e at target/compiled/abacus_analytics/target/generic_tests/not_null_int_course_interactions_actor_id.sql
+04:53:17.682513 [debug]: Compiled SQL for node model.abacus_analytics.int_course_popularity at target/compiled/abacus_analytics/models/intermediate/int_course_popularity.sql
+04:53:17.682552 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_course_interactions_interaction_id.8b507b5973 at target/compiled/abacus_analytics/target/generic_tests/not_null_int_course_interactions_interaction_id.sql
+04:53:17.682544 [debug]: Compiled SQL for node test.abacus_analytics.relationships_int_course_interactions_action__action__ref_course_action_weights_.969abd2555 at target/compiled/abacus_analytics/target/generic_tests/relationships_int_course_inter_99f0212569d4d6fb75b2588f65d165e9.sql
+04:53:17.682552 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_course_interactions_course_key.7354ea13c7 at target/compiled/abacus_analytics/target/generic_tests/not_null_int_course_interactions_course_key.sql
+04:53:17.682582 [debug]: Finished rendering [  0.02s] model INTERMEDIATE.int_course_catalog [success]
+04:53:17.682628 [debug]: Finished rendering [  0.02s] model INTERMEDIATE.int_actor_course_affinity [success]
+04:53:17.682635 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_course_interactions_action_weight.e82ac37955 at target/compiled/abacus_analytics/target/generic_tests/not_null_int_course_interactions_action_weight.sql
+04:53:17.682640 [debug]: Finished rendering [  0.02s] test DBT_TEST__AUDIT.not_null_int_course_interactions_actor_id [success]
+04:53:17.682664 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_course_interactions_actor_id
+04:53:17.682676 [debug]: Finished rendering [  0.02s] test DBT_TEST__AUDIT.unique_int_course_interactions_interaction_id [success]
+04:53:17.682692 [info ]: Started running test DBT_TEST__AUDIT.unique_int_course_interactions_interaction_id
+04:53:17.682703 [debug]: Finished rendering [  0.02s] model INTERMEDIATE.int_course_popularity [success]
+04:53:17.682713 [debug]: Finished rendering [  0.02s] test DBT_TEST__AUDIT.not_null_int_course_interactions_interaction_id [success]
+04:53:17.682731 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_course_interactions_interaction_id
+04:53:17.682741 [debug]: Finished rendering [  0.02s] test DBT_TEST__AUDIT.relationships_int_course_interactions_action__action__ref_course_action_weights_ [success]
+04:53:17.682754 [info ]: Started running test DBT_TEST__AUDIT.relationships_int_course_interactions_action__action__ref_course_action_weights_
+04:53:17.682760 [debug]: Finished rendering [  0.02s] test DBT_TEST__AUDIT.not_null_int_course_interactions_course_key [success]
+04:53:17.682771 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_course_interactions_course_key
+04:53:17.682777 [debug]: Finished rendering [  0.02s] test DBT_TEST__AUDIT.not_null_int_course_interactions_action_weight [success]
+04:53:17.682788 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_course_interactions_action_weight
+04:53:17.684782 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_course_interactions_actor_id.8d54c7258e"
+04:53:17.685106 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_course_interactions_interaction_id.8b507b5973"
+04:53:17.685127 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_course_interactions_action_weight.e82ac37955"
+04:53:17.685157 [debug]: Writing runtime sql for node "test.abacus_analytics.relationships_int_course_interactions_action__action__ref_course_action_weights_.969abd2555"
+04:53:17.685193 [debug]: Writing runtime sql for node "test.abacus_analytics.unique_int_course_interactions_interaction_id.c39047826c"
+04:53:17.685403 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_course_interactions_course_key.7354ea13c7"
+04:53:17.861986 [debug]: Query executed on node test.abacus_analytics.not_null_int_course_interactions_interaction_id.8b507b5973:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select interaction_id
+from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+where interaction_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_interaction_id.8b507b5973", "profile_name": "abacus", "target_name": "dev"} */
+04:53:17.862655 [info ]: Finished running [  0.18s] test DBT_TEST__AUDIT.not_null_int_course_interactions_interaction_id [pass]
+04:53:17.862692 [info ]:     Passed [  0.20s] test  not_null_int_course_interactions_interaction_id
+04:53:17.891226 [debug]: Query executed on node test.abacus_analytics.not_null_int_course_interactions_actor_id.8d54c7258e:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select actor_id
+from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+where actor_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_actor_id.8d54c7258e", "profile_name": "abacus", "target_name": "dev"} */
+04:53:17.891865 [info ]: Finished running [  0.21s] test DBT_TEST__AUDIT.not_null_int_course_interactions_actor_id [pass]
+04:53:17.891930 [info ]:     Passed [  0.23s] test  not_null_int_course_interactions_actor_id
+04:53:17.898923 [debug]: Query executed on node test.abacus_analytics.unique_int_course_interactions_interaction_id.c39047826c:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    interaction_id as unique_field,
+    count(*) as n_records
+
+from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+where interaction_id is not null
+group by interaction_id
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_int_course_interactions_interaction_id.c39047826c", "profile_name": "abacus", "target_name": "dev"} */
+04:53:17.899515 [info ]: Finished running [  0.22s] test DBT_TEST__AUDIT.unique_int_course_interactions_interaction_id [pass]
+04:53:17.899554 [info ]:     Passed [  0.24s] test  unique_int_course_interactions_interaction_id
+04:53:17.953360 [debug]: Query executed on node test.abacus_analytics.relationships_int_course_interactions_action__action__ref_course_action_weights_.969abd2555:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select action as from_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+    where action is not null
+),
+
+parent as (
+    select action as to_field
+    from ABACUS_DEV.SEEDS.course_action_weights
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_course_interactions_action__action__ref_course_action_weights_.969abd2555", "profile_name": "abacus", "target_name": "dev"} */
+04:53:17.954030 [info ]: Finished running [  0.27s] test DBT_TEST__AUDIT.relationships_int_course_interactions_action__action__ref_course_action_weights_ [pass]
+04:53:17.954067 [info ]:     Passed [  0.29s] test  relationships_int_course_interactions_action__action__ref_course_action_weights_
+04:53:18.101703 [debug]: Query executed on node test.abacus_analytics.not_null_int_course_interactions_course_key.7354ea13c7:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select course_key
+from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+where course_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_course_key.7354ea13c7", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.102370 [info ]: Finished running [  0.42s] test DBT_TEST__AUDIT.not_null_int_course_interactions_course_key [pass]
+04:53:18.102436 [info ]:     Passed [  0.44s] test  not_null_int_course_interactions_course_key
+04:53:18.110491 [debug]: Query executed on node test.abacus_analytics.not_null_int_course_interactions_action_weight.e82ac37955:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select action_weight
+from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+where action_weight is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_action_weight.e82ac37955", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.111283 [info ]: Finished running [  0.43s] test DBT_TEST__AUDIT.not_null_int_course_interactions_action_weight [pass]
+04:53:18.111341 [info ]:     Passed [  0.45s] test  not_null_int_course_interactions_action_weight
+04:53:18.111477 [info ]: Started running model INTERMEDIATE.int_actor_course_affinity
+04:53:18.111504 [info ]: Started running model INTERMEDIATE.int_course_catalog
+04:53:18.111513 [info ]: Started running model INTERMEDIATE.int_course_popularity
+04:53:18.187395 [debug]: Query executed on node model.abacus_analytics.int_course_catalog:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_catalog", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.187818 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:18.188715 [debug]: Query executed on node model.abacus_analytics.int_actor_course_affinity:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_actor_course_affinity", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.189311 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:18.202502 [debug]: Query executed on node model.abacus_analytics.int_course_popularity:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_popularity", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.202888 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:18.275514 [debug]: Query executed on node model.abacus_analytics.int_course_catalog:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_catalog", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.277613 [debug]: Writing runtime sql for node "model.abacus_analytics.int_course_catalog"
+04:53:18.277911 [debug]: Query executed on node model.abacus_analytics.int_actor_course_affinity:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_actor_course_affinity", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.279655 [debug]: Writing runtime sql for node "model.abacus_analytics.int_actor_course_affinity"
+04:53:18.285906 [debug]: Query executed on node model.abacus_analytics.int_course_popularity:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_popularity", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.287778 [debug]: Writing runtime sql for node "model.abacus_analytics.int_course_popularity"
+04:53:18.694185 [debug]: Query executed on node model.abacus_analytics.int_actor_course_affinity:
+create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+    
+    
+    
+    
+    as (with recent_clicks as (
+
+    select 
+    ACTOR_ID                        as actor_id,
+    COURSE_KEY                      as course,
+    ACTION                          as action,
+    ACTION_WEIGHT                   as action_weight,
+    EVENT_TS_UTC                    as event_ts_utc,
+    power(
+        0.5,
+        datediff('hour', event_ts_utc, CURRENT_TIMESTAMP()) / 24.0 / 
+        14    
+        ) as decay
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+    where event_ts_utc >= dateadd('day', -90, CURRENT_TIMESTAMP  )
+
+
+)
+
+
+SELECT
+    actor_id,
+    course,
+    count(*)                                            as clicks,
+    count_if(action = 'view_course_from_path')          as path_views,
+    count_if(action = 'expand_details')                 as detail_expand,
+    sum(action_weight * decay)                          as affinity_score,
+    min(event_ts_utc)                                   as first_click_at,
+    max(event_ts_utc)                                   as last_click_at
+    from recent_clicks
+    group by actor_id,course
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_actor_course_affinity", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.695269 [debug]: No original query_tag, unsetting parameter.
+04:53:18.715781 [debug]: Query executed on node model.abacus_analytics.int_course_catalog:
+create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_catalog
+    
+    
+    
+    
+    as (
+
+with course_catalog as (
+    
+    select 
+    COURSE_KEY                                          as course_key,
+    COUNT(DISTINCT OFFERING_ID)                         as offering_count,
+    COUNT(*)                                            as clicks,
+    MAX_BY(COURSE_NAME_EN, EVENT_TS_UTC)                as course_name_en,
+    MAX_BY(COURSE_NAME_TH, EVENT_TS_UTC)                as course_name_th,
+    coalesce(
+        max(path_type),
+        case when course_key like 'abacus%' then 'abacus' end 
+    )                                                   as program,
+    min(EVENT_TS_UTC)                                   as min_event_ts_utc,
+    max(EVENT_TS_UTC)                                   as max_event_ts_utc,
+    try_to_number(regexp_substr(COURSE_KEY, 'grade\\s*(\\d+)', 1, 1, 'e', 1)) as grade,
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+    group by course_key
+
+
+
+
+)
+
+select * from course_catalog
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_catalog", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.717035 [debug]: No original query_tag, unsetting parameter.
+04:53:18.748950 [debug]: Query executed on node model.abacus_analytics.int_course_popularity:
+create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_popularity
+    
+    
+    
+    
+    as (
+
+with recent as (
+    select * 
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+    where event_ts_utc >= dateadd('day', - 30, CURRENT_TIMESTAMP())
+),
+
+
+
+per_course as (
+    select 
+        course_key                      as course_key,
+        COUNT(DISTINCT ACTOR_ID)        as parent_count,
+        COUNT(*)                        as clicks,
+        SUM(ACTION_WEIGHT)              as weighted_clicks,
+        MAX(EVENT_TS_UTC)               as last_click_at
+    
+    from recent
+    group by course_key
+
+
+)
+
+
+
+select
+    *,
+    rank() over (order by parent_count desc, weighted_clicks desc) as popularity_rank
+from per_course
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_popularity", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.749968 [debug]: No original query_tag, unsetting parameter.
+04:53:18.769182 [debug]: Query executed on node model.abacus_analytics.int_actor_course_affinity:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_actor_course_affinity", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.769705 [info ]: Finished running [  0.66s] model INTERMEDIATE.int_actor_course_affinity [success]
+04:53:18.769782 [info ]:  Succeeded [  0.68s] model INTERMEDIATE.int_actor_course_affinity (table)
+04:53:18.769853 [info ]: Started test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_course
+04:53:18.769868 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_course
+04:53:18.769888 [info ]: Started test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_affinity_score
+04:53:18.769898 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_affinity_score
+04:53:18.769909 [info ]: Started test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course
+04:53:18.769914 [debug]: Started rendering test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course
+04:53:18.769939 [info ]: Started test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_actor_id
+04:53:18.769946 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_actor_id
+04:53:18.769957 [info ]: Started model INTERMEDIATE.int_course_coocurrence
+04:53:18.769962 [debug]: Started rendering model INTERMEDIATE.int_course_coocurrence
+04:53:18.772026 [debug]: Compiled SQL for node model.abacus_analytics.int_course_coocurrence at target/compiled/abacus_analytics/models/intermediate/int_course_coocurrence.sql
+04:53:18.772169 [debug]: Finished rendering [  0.00s] model INTERMEDIATE.int_course_coocurrence [success]
+04:53:18.772390 [debug]: Compiled SQL for node test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course.ab32ed82c2 at target/compiled/abacus_analytics/target/generic_tests/dbt_utils_unique_combination_o_5821bda8c81bd257caaf74e511a55dee.sql
+04:53:18.772459 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course [success]
+04:53:18.772511 [info ]: Started running test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course
+04:53:18.772876 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_actor_course_affinity_course.e2ac6559e0 at target/compiled/abacus_analytics/target/generic_tests/not_null_int_actor_course_affinity_course.sql
+04:53:18.772937 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_course [success]
+04:53:18.772973 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_course
+04:53:18.773037 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_actor_course_affinity_actor_id.5e3a9e26ef at target/compiled/abacus_analytics/target/generic_tests/not_null_int_actor_course_affinity_actor_id.sql
+04:53:18.773125 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_actor_id [success]
+04:53:18.773174 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_actor_id
+04:53:18.773169 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_actor_course_affinity_affinity_score.4754ad9c06 at target/compiled/abacus_analytics/target/generic_tests/not_null_int_actor_course_affinity_affinity_score.sql
+04:53:18.773274 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_affinity_score [success]
+04:53:18.773334 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_affinity_score
+04:53:18.775181 [debug]: Writing runtime sql for node "test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course.ab32ed82c2"
+04:53:18.775238 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_actor_course_affinity_course.e2ac6559e0"
+04:53:18.775439 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_actor_course_affinity_affinity_score.4754ad9c06"
+04:53:18.775666 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_actor_course_affinity_actor_id.5e3a9e26ef"
+04:53:18.793373 [debug]: Query executed on node model.abacus_analytics.int_course_catalog:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_catalog", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.793897 [info ]: Finished running [  0.68s] model INTERMEDIATE.int_course_catalog [success]
+04:53:18.793985 [info ]:  Succeeded [  0.70s] model INTERMEDIATE.int_course_catalog (table)
+04:53:18.794111 [info ]: Started test DBT_TEST__AUDIT.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_
+04:53:18.794123 [debug]: Started rendering test DBT_TEST__AUDIT.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_
+04:53:18.796609 [debug]: Compiled SQL for node test.abacus_analytics.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_.d6cf4f8052 at target/compiled/abacus_analytics/target/generic_tests/relationships_int_actor_course_3ead5df38a4937fb64bc5f05d472349b.sql
+04:53:18.796711 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_ [success]
+04:53:18.796756 [info ]: Started running test DBT_TEST__AUDIT.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_
+04:53:18.798358 [debug]: Writing runtime sql for node "test.abacus_analytics.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_.d6cf4f8052"
+04:53:18.852025 [debug]: Query executed on node model.abacus_analytics.int_course_popularity:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_popularity", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.852452 [info ]: Finished running [  0.74s] model INTERMEDIATE.int_course_popularity [success]
+04:53:18.852519 [info ]:  Succeeded [  0.76s] model INTERMEDIATE.int_course_popularity (table)
+04:53:18.921161 [debug]: Query executed on node test.abacus_analytics.not_null_int_actor_course_affinity_course.e2ac6559e0:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select course
+from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+where course is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_actor_course_affinity_course.e2ac6559e0", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.921880 [info ]: Finished running [  0.15s] test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_course [pass]
+04:53:18.921954 [info ]:     Passed [  0.15s] test  not_null_int_actor_course_affinity_course
+04:53:18.922590 [debug]: Query executed on node test.abacus_analytics.not_null_int_actor_course_affinity_affinity_score.4754ad9c06:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select affinity_score
+from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+where affinity_score is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_actor_course_affinity_affinity_score.4754ad9c06", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.923093 [info ]: Finished running [  0.15s] test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_affinity_score [pass]
+04:53:18.923128 [info ]:     Passed [  0.15s] test  not_null_int_actor_course_affinity_affinity_score
+04:53:18.927502 [debug]: Query executed on node test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course.ab32ed82c2:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+
+
+
+
+
+with validation_errors as (
+
+    select
+        actor_id, course
+    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+    group by actor_id, course
+    having count(*) > 1
+
+)
+
+select *
+from validation_errors
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course.ab32ed82c2", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.927977 [info ]: Finished running [  0.16s] test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course [pass]
+04:53:18.928010 [info ]:     Passed [  0.16s] test  dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course
+04:53:18.946976 [debug]: Query executed on node test.abacus_analytics.not_null_int_actor_course_affinity_actor_id.5e3a9e26ef:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select actor_id
+from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+where actor_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_actor_course_affinity_actor_id.5e3a9e26ef", "profile_name": "abacus", "target_name": "dev"} */
+04:53:18.947666 [info ]: Finished running [  0.17s] test DBT_TEST__AUDIT.not_null_int_actor_course_affinity_actor_id [pass]
+04:53:18.947709 [info ]:     Passed [  0.18s] test  not_null_int_actor_course_affinity_actor_id
+04:53:18.947805 [info ]: Started running model INTERMEDIATE.int_course_coocurrence
+04:53:27.284765 [debug]: Query executed on node model.abacus_analytics.int_course_coocurrence:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */
+04:53:27.285347 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:27.371460 [debug]: Query executed on node model.abacus_analytics.int_course_coocurrence:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */
+04:53:27.377593 [debug]: Writing runtime sql for node "model.abacus_analytics.int_course_coocurrence"
+04:53:27.904577 [debug]: Query executed on node model.abacus_analytics.int_course_coocurrence:
+create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+    
+    
+    
+    
+    as (with actor_courses as (
+
+    select actor_id, 
+            course as course_key
+    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+
+),
+
+pairs as (
+
+    select 
+     a.actor_id,
+     a.course_key,
+     b.course_key as other_course_key
+     from actor_courses as a 
+     join actor_courses as b 
+        on a.actor_id = b.actor_id
+        and a.course_key <> b.course_key
+
+
+)
+
+select 
+    course_key,
+    other_course_key,
+    count(DISTINCT actor_id) as co_actor_count
+from pairs
+group by course_key,other_course_key
+HAVING count(DISTINCT actor_id) >= 2
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */
+04:53:27.905543 [debug]: No original query_tag, unsetting parameter.
+04:53:27.999141 [debug]: Query executed on node model.abacus_analytics.int_course_coocurrence:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */
+04:53:28.000117 [info ]: Finished running [  9.05s] model INTERMEDIATE.int_course_coocurrence [success]
+04:53:28.000235 [info ]:  Succeeded [  9.05s] model INTERMEDIATE.int_course_coocurrence (table)
+04:53:28.000431 [info ]: Started test DBT_TEST__AUDIT.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_
+04:53:28.000457 [debug]: Started rendering test DBT_TEST__AUDIT.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_
+04:53:28.000500 [info ]: Started test DBT_TEST__AUDIT.not_null_int_course_coocurrence_other_course_key
+04:53:28.000512 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_course_coocurrence_other_course_key
+04:53:28.000533 [info ]: Started test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key
+04:53:28.000561 [debug]: Started rendering test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key
+04:53:28.000591 [info ]: Started test DBT_TEST__AUDIT.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_
+04:53:28.000602 [debug]: Started rendering test DBT_TEST__AUDIT.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_
+04:53:28.000624 [info ]: Started test DBT_TEST__AUDIT.not_null_int_course_coocurrence_course_key
+04:53:28.000634 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_course_coocurrence_course_key
+04:53:28.000656 [info ]: Started test DBT_TEST__AUDIT.not_null_int_course_coocurrence_co_actor_count
+04:53:28.000666 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_int_course_coocurrence_co_actor_count
+04:53:28.000684 [info ]: Started test DBT_TEST__AUDIT.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key
+04:53:28.000694 [debug]: Started rendering test DBT_TEST__AUDIT.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key
+04:53:28.000710 [info ]: Started model MARTS.course_recommendations
+04:53:28.000717 [debug]: Started rendering model MARTS.course_recommendations
+04:53:28.004625 [debug]: Compiled SQL for node model.abacus_analytics.course_recommendations at target/compiled/abacus_analytics/models/marts/course_recommendations.sql
+04:53:28.004718 [debug]: Finished rendering [  0.00s] model MARTS.course_recommendations [success]
+04:53:28.007133 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_course_coocurrence_other_course_key.992158ab8e at target/compiled/abacus_analytics/target/generic_tests/not_null_int_course_coocurrence_other_course_key.sql
+04:53:28.007237 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.not_null_int_course_coocurrence_other_course_key [success]
+04:53:28.007335 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_course_coocurrence_other_course_key
+04:53:28.007357 [debug]: Compiled SQL for node test.abacus_analytics.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_.2012314292 at target/compiled/abacus_analytics/target/generic_tests/relationships_int_course_coocu_6694ae81b923ffbdee5e8aa6151a7c0f.sql
+04:53:28.007442 [debug]: Compiled SQL for node test.abacus_analytics.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_.a490c6181d at target/compiled/abacus_analytics/target/generic_tests/relationships_int_course_coocu_4cbdd52e8f2632393580d308b44c1cab.sql
+04:53:28.007464 [debug]: Compiled SQL for node test.abacus_analytics.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key.21c6673769 at target/compiled/abacus_analytics/target/generic_tests/dbt_utils_expression_is_true_i_434c67fb25e376e694e34081158f3391.sql
+04:53:28.007453 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_ [success]
+04:53:28.007487 [info ]: Started running test DBT_TEST__AUDIT.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_
+04:53:28.007507 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_course_coocurrence_course_key.2eec6f118c at target/compiled/abacus_analytics/target/generic_tests/not_null_int_course_coocurrence_course_key.sql
+04:53:28.007532 [debug]: Compiled SQL for node test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key.81d740470b at target/compiled/abacus_analytics/target/generic_tests/dbt_utils_unique_combination_o_ef4406531d2eedbabd66bf9c1d1a0504.sql
+04:53:28.007563 [debug]: Compiled SQL for node test.abacus_analytics.not_null_int_course_coocurrence_co_actor_count.12188e68ce at target/compiled/abacus_analytics/target/generic_tests/not_null_int_course_coocurrence_co_actor_count.sql
+04:53:28.007556 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_ [success]
+04:53:28.007628 [info ]: Started running test DBT_TEST__AUDIT.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_
+04:53:28.007646 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key [success]
+04:53:28.007671 [info ]: Started running test DBT_TEST__AUDIT.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key
+04:53:28.007685 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key [success]
+04:53:28.007712 [info ]: Started running test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key
+04:53:28.007726 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.not_null_int_course_coocurrence_course_key [success]
+04:53:28.007754 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_course_coocurrence_course_key
+04:53:28.007775 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.not_null_int_course_coocurrence_co_actor_count [success]
+04:53:28.007805 [info ]: Started running test DBT_TEST__AUDIT.not_null_int_course_coocurrence_co_actor_count
+04:53:28.009894 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_course_coocurrence_other_course_key.992158ab8e"
+04:53:28.010466 [debug]: Writing runtime sql for node "test.abacus_analytics.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key.21c6673769"
+04:53:28.010501 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_course_coocurrence_co_actor_count.12188e68ce"
+04:53:28.010666 [debug]: Writing runtime sql for node "test.abacus_analytics.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_.2012314292"
+04:53:28.010744 [debug]: Writing runtime sql for node "test.abacus_analytics.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_.a490c6181d"
+04:53:28.010770 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_int_course_coocurrence_course_key.2eec6f118c"
+04:53:28.010780 [debug]: Writing runtime sql for node "test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key.81d740470b"
+04:53:28.159045 [debug]: Query executed on node test.abacus_analytics.not_null_int_course_coocurrence_other_course_key.992158ab8e:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select other_course_key
+from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+where other_course_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_coocurrence_other_course_key.992158ab8e", "profile_name": "abacus", "target_name": "dev"} */
+04:53:28.160007 [info ]: Finished running [  0.15s] test DBT_TEST__AUDIT.not_null_int_course_coocurrence_other_course_key [pass]
+04:53:28.160115 [info ]:     Passed [  0.16s] test  not_null_int_course_coocurrence_other_course_key
+04:53:28.169281 [debug]: Query executed on node test.abacus_analytics.not_null_int_course_coocurrence_co_actor_count.12188e68ce:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select co_actor_count
+from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+where co_actor_count is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_coocurrence_co_actor_count.12188e68ce", "profile_name": "abacus", "target_name": "dev"} */
+04:53:28.170467 [info ]: Finished running [  0.16s] test DBT_TEST__AUDIT.not_null_int_course_coocurrence_co_actor_count [pass]
+04:53:28.170525 [info ]:     Passed [  0.17s] test  not_null_int_course_coocurrence_co_actor_count
+04:53:28.170660 [debug]: Query executed on node test.abacus_analytics.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key.21c6673769:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+
+
+
+select
+    1
+from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+
+where not(course_key <> other_course_key)
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key.21c6673769", "profile_name": "abacus", "target_name": "dev"} */
+04:53:28.171410 [info ]: Finished running [  0.16s] test DBT_TEST__AUDIT.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key [pass]
+04:53:28.171453 [info ]:     Passed [  0.17s] test  dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key
+04:53:28.181773 [debug]: Query executed on node test.abacus_analytics.not_null_int_course_coocurrence_course_key.2eec6f118c:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select course_key
+from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+where course_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_coocurrence_course_key.2eec6f118c", "profile_name": "abacus", "target_name": "dev"} */
+04:53:28.182478 [info ]: Finished running [  0.17s] test DBT_TEST__AUDIT.not_null_int_course_coocurrence_course_key [pass]
+04:53:28.182519 [info ]:     Passed [  0.18s] test  not_null_int_course_coocurrence_course_key
+04:53:28.256483 [debug]: Query executed on node test.abacus_analytics.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_.2012314292:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select course_key as from_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+    where course_key is not null
+),
+
+parent as (
+    select course_key as to_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_.2012314292", "profile_name": "abacus", "target_name": "dev"} */
+04:53:28.257135 [info ]: Finished running [  0.25s] test DBT_TEST__AUDIT.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_ [pass]
+04:53:28.257202 [info ]:     Passed [  0.26s] test  relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_
+04:53:28.563270 [debug]: Query executed on node test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key.81d740470b:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+
+
+
+
+
+with validation_errors as (
+
+    select
+        course_key, other_course_key
+    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+    group by course_key, other_course_key
+    having count(*) > 1
+
+)
+
+select *
+from validation_errors
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key.81d740470b", "profile_name": "abacus", "target_name": "dev"} */
+04:53:28.564609 [info ]: Finished running [  0.56s] test DBT_TEST__AUDIT.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key [pass]
+04:53:28.564763 [info ]:     Passed [  0.56s] test  dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key
+04:53:28.584568 [debug]: Query executed on node test.abacus_analytics.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_.a490c6181d:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select other_course_key as from_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+    where other_course_key is not null
+),
+
+parent as (
+    select course_key as to_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_.a490c6181d", "profile_name": "abacus", "target_name": "dev"} */
+04:53:28.585272 [info ]: Finished running [  0.58s] test DBT_TEST__AUDIT.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_ [pass]
+04:53:28.585336 [info ]:     Passed [  0.58s] test  relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_
+04:53:35.090166 [debug]: Query executed on node test.abacus_analytics.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_.d6cf4f8052:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select course as from_field
+    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+    where course is not null
+),
+
+parent as (
+    select COURSE_KEY as to_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_.d6cf4f8052", "profile_name": "abacus", "target_name": "dev"} */
+04:53:35.091464 [info ]: Finished running [ 16.29s] test DBT_TEST__AUDIT.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_ [pass]
+04:53:35.091582 [info ]:     Passed [ 16.30s] test  relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_
+04:53:35.091715 [info ]: Started running model MARTS.course_recommendations
+04:53:35.236546 [debug]: Query executed on node model.abacus_analytics.course_recommendations:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations", "profile_name": "abacus", "target_name": "dev"} */
+04:53:35.237028 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:35.359527 [debug]: Query executed on node model.abacus_analytics.course_recommendations:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations", "profile_name": "abacus", "target_name": "dev"} */
+04:53:35.467111 [debug]: Query executed on node model.abacus_analytics.course_recommendations:
+SHOW OBJECTS IN SCHEMA "ABACUS_DEV"."MARTS" LIMIT 10000
+04:53:35.469519 [debug]: Writing runtime sql for node "model.abacus_analytics.course_recommendations"
+04:53:36.188623 [debug]: Query executed on node model.abacus_analytics.course_recommendations:
+create or replace transient  table ABACUS_DEV.MARTS.course_recommendations
+    
+    
+    
+    
+    as (
+
+with affinity as (
+
+    select 
+        actor_id, 
+        course as course_key, 
+        affinity_score
+    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+
+),
+
+
+-- 1. "parents who liked what you like also clicked..."
+similar as (
+
+    select 
+        a.actor_id,
+        c.other_course_key                              as course_key,
+        sum(a.affinity_score * c.co_actor_count)        as score,
+        'similar_parents'                               as reason,
+        1                                               as priority
+    
+    from affinity as a 
+    join ABACUS_DEV.INTERMEDIATE.int_course_coocurrence as c 
+        on a.course_key = c.course_key
+        group by a.actor_id, c.other_course_key
+
+
+),
+
+-- 2. popular courses as backup, offered to every parent
+popular as (
+
+    select 
+        actors.actor_id,
+        p.course_key,
+        1.0 / p.popularity_rank             as score,
+        'popular'                           as reason,
+        2                                   as priority
+    from (select distinct actor_id from affinity) as actors
+    cross join ABACUS_DEV.INTERMEDIATE.int_course_popularity as p
+),
+
+candidates as (
+
+    select * from similar
+    union all 
+    select * from popular
+
+
+),
+
+-- 3. Remove courses the parent already clicked 
+
+not_seen as (
+
+    select cand.*
+    from candidates as cand 
+    left join affinity as seen
+         on cand.actor_id = seen.actor_id
+         and cand.course_key = seen.course_key
+    where seen.course_key is null
+
+
+),
+
+-- a course can come from both sources → keep the better one
+one_per_course as (
+
+    select *
+    from not_seen
+    qualify row_number() over (
+        partition by actor_id, course_key
+        order by priority, score desc
+    ) = 1 
+
+),
+
+-- 4. rank per parent 
+ranked as (
+
+    select 
+        *,
+        row_number() over (
+            partition by actor_id
+            order by priority, score desc 
+
+        ) as recommendation_rank
+    from one_per_course 
+
+)
+
+
+select 
+    r.actor_id,
+    r.recommendation_rank,
+    r.course_key,
+    cat.course_name_en,
+    cat.course_name_th,
+    cat.program,
+    r.score,
+    r.reason,
+    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz as generated_at
+from ranked as r 
+left join ABACUS_DEV.INTERMEDIATE.int_course_catalog as cat 
+    on r.course_key = cat.course_key
+where r.recommendation_rank <= 5
+    
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations", "profile_name": "abacus", "target_name": "dev"} */
+04:53:36.189529 [debug]: No original query_tag, unsetting parameter.
+04:53:36.279992 [debug]: Query executed on node model.abacus_analytics.course_recommendations:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations", "profile_name": "abacus", "target_name": "dev"} */
+04:53:36.280397 [info ]: Finished running [  1.19s] model MARTS.course_recommendations [success]
+04:53:36.280451 [info ]:  Succeeded [  1.19s] model MARTS.course_recommendations (table)
+04:53:36.280497 [info ]: Started model MARTS.reco_run_metrics
+04:53:36.280506 [debug]: Started rendering model MARTS.reco_run_metrics
+04:53:36.280518 [info ]: Started model MARTS.course_recommendations_history
+04:53:36.280522 [debug]: Started rendering model MARTS.course_recommendations_history
+04:53:36.283909 [debug]: Compiled SQL for node model.abacus_analytics.reco_run_metrics at target/compiled/abacus_analytics/models/marts/reco_run_metrics.sql
+04:53:36.283985 [debug]: Finished rendering [  0.00s] model MARTS.reco_run_metrics [success]
+04:53:36.284016 [info ]: Started running model MARTS.reco_run_metrics
+04:53:36.284015 [debug]: Compiled SQL for node model.abacus_analytics.course_recommendations_history at target/compiled/abacus_analytics/models/marts/course_recommendations_history.sql
+04:53:36.284052 [debug]: Finished rendering [  0.00s] model MARTS.course_recommendations_history [success]
+04:53:36.284067 [info ]: Started running model MARTS.course_recommendations_history
+04:53:36.357434 [debug]: Query executed on node model.abacus_analytics.course_recommendations_history:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */
+04:53:36.357833 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:36.368927 [debug]: Query executed on node model.abacus_analytics.reco_run_metrics:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */
+04:53:36.369159 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:36.505315 [debug]: Query executed on node model.abacus_analytics.course_recommendations_history:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */
+04:53:36.506863 [debug]: Writing runtime sql for node "model.abacus_analytics.course_recommendations_history"
+04:53:36.509328 [debug]: Query executed on node model.abacus_analytics.reco_run_metrics:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */
+04:53:36.510907 [debug]: Writing runtime sql for node "model.abacus_analytics.reco_run_metrics"
+04:53:36.939120 [debug]: Query executed on node model.abacus_analytics.course_recommendations_history:
+create or replace transient  table ABACUS_DEV.MARTS.course_recommendations_history
+    
+    
+    
+    
+    as (
+
+
+select * from ABACUS_DEV.MARTS.course_recommendations
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */
+04:53:36.939925 [debug]: Applying DROP to: ABACUS_DEV.MARTS.course_recommendations_history__dbt_tmp
+04:53:37.008645 [debug]: Query executed on node model.abacus_analytics.reco_run_metrics:
+create or replace transient  table ABACUS_DEV.MARTS.reco_run_metrics
+    
+    
+    
+    
+    as (
+
+with recs as (
+
+    select actor_id, course_key, reason
+    from ABACUS_DEV.MARTS.course_recommendations
+
+),
+
+summary as (
+
+    select 
+        count(distinct actor_id)                        as actors,
+        count(*)                                        as rec_rows,
+        count_if(reason = 'similar_parents')            as personal_rows,
+        count(distinct course_key)                      as courses_recommended
+    from recs
+
+
+),
+
+catalog as (
+
+    select count(*) as catalog_size
+    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
+
+),
+
+clicks as (
+
+    select 
+        count(*)                as interactions_total,
+        max(event_ts_utc)       as newest_click_at
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+
+
+)
+
+select
+    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz                         as run_at,
+    s.actors,
+    s.rec_rows,
+    round(s.rec_rows / nullif(s.actors, 0), 2)                   as avg_recs_per_actor,
+    round(s.personal_rows / nullif(s.rec_rows, 0), 3)            as pct_personal,
+    s.courses_recommended,
+    cat.catalog_size,
+    round(s.courses_recommended / nullif(cat.catalog_size, 0), 3) as catalog_coverage,
+    c.interactions_total,
+    c.newest_click_at,
+    datediff('minute', c.newest_click_at, sysdate())             as data_lag_minutes
+from summary as s
+cross join catalog as cat
+cross join clicks as c
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */
+04:53:37.009311 [debug]: Applying DROP to: ABACUS_DEV.MARTS.reco_run_metrics__dbt_tmp
+04:53:37.015705 [debug]: Query executed on node model.abacus_analytics.course_recommendations_history:
+drop view if exists ABACUS_DEV.MARTS.course_recommendations_history__dbt_tmp cascade
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */
+04:53:37.016643 [debug]: No original query_tag, unsetting parameter.
+04:53:37.213304 [debug]: Query executed on node model.abacus_analytics.course_recommendations_history:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */
+04:53:37.214892 [info ]: Finished running [  0.93s] model MARTS.course_recommendations_history [success]
+04:53:37.214978 [info ]:  Succeeded [  0.93s] model MARTS.course_recommendations_history (incremental)
+04:53:37.215033 [info ]: Started model MARTS.reco_hit_rate_daily
+04:53:37.215040 [debug]: Started rendering model MARTS.reco_hit_rate_daily
+04:53:37.215059 [info ]: Started test DBT_TEST__AUDIT.not_null_course_recommendations_history_generated_at
+04:53:37.215063 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_course_recommendations_history_generated_at
+04:53:37.215135 [debug]: Query executed on node model.abacus_analytics.reco_run_metrics:
+drop view if exists ABACUS_DEV.MARTS.reco_run_metrics__dbt_tmp cascade
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */
+04:53:37.216338 [debug]: No original query_tag, unsetting parameter.
+04:53:37.217126 [debug]: Compiled SQL for node model.abacus_analytics.reco_hit_rate_daily at target/compiled/abacus_analytics/models/marts/reco_hit_rate_daily.sql
+04:53:37.217152 [debug]: Compiled SQL for node test.abacus_analytics.not_null_course_recommendations_history_generated_at.7494d185fc at target/compiled/abacus_analytics/target/generic_tests/not_null_course_recommendations_history_generated_at.sql
+04:53:37.217208 [debug]: Finished rendering [  0.00s] model MARTS.reco_hit_rate_daily [success]
+04:53:37.217237 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_course_recommendations_history_generated_at [success]
+04:53:37.217256 [info ]: Started running test DBT_TEST__AUDIT.not_null_course_recommendations_history_generated_at
+04:53:37.218285 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_course_recommendations_history_generated_at.7494d185fc"
+04:53:37.377597 [debug]: Query executed on node test.abacus_analytics.not_null_course_recommendations_history_generated_at.7494d185fc:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select generated_at
+from ABACUS_DEV.MARTS.course_recommendations_history
+where generated_at is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_course_recommendations_history_generated_at.7494d185fc", "profile_name": "abacus", "target_name": "dev"} */
+04:53:37.378175 [info ]: Finished running [  0.16s] test DBT_TEST__AUDIT.not_null_course_recommendations_history_generated_at [pass]
+04:53:37.378257 [info ]:     Passed [  0.16s] test  not_null_course_recommendations_history_generated_at
+04:53:37.378312 [info ]: Started running model MARTS.reco_hit_rate_daily
+04:53:37.467479 [debug]: Query executed on node model.abacus_analytics.reco_hit_rate_daily:
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_hit_rate_daily", "profile_name": "abacus", "target_name": "dev"} */
+04:53:37.469583 [debug]: Setting query_tag to 'dbt_abacus_dev_local'. Will reset to '' after materialization.
+04:53:37.566411 [debug]: Query executed on node model.abacus_analytics.reco_hit_rate_daily:
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_hit_rate_daily", "profile_name": "abacus", "target_name": "dev"} */
+04:53:37.567759 [debug]: Writing runtime sql for node "model.abacus_analytics.reco_hit_rate_daily"
+04:53:37.622945 [debug]: Query executed on node model.abacus_analytics.reco_run_metrics:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */
+04:53:37.623508 [info ]: Finished running [  1.34s] model MARTS.reco_run_metrics [success]
+04:53:37.623581 [info ]:  Succeeded [  1.34s] model MARTS.reco_run_metrics (incremental)
+04:53:37.623650 [info ]: Started test DBT_TEST__AUDIT.unique_reco_run_metrics_run_at
+04:53:37.623662 [debug]: Started rendering test DBT_TEST__AUDIT.unique_reco_run_metrics_run_at
+04:53:37.623678 [info ]: Started test DBT_TEST__AUDIT.not_null_reco_run_metrics_run_at
+04:53:37.623682 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_reco_run_metrics_run_at
+04:53:37.623689 [info ]: Started test DBT_TEST__AUDIT.not_null_reco_run_metrics_actors
+04:53:37.623693 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_reco_run_metrics_actors
+04:53:37.628875 [debug]: Compiled SQL for node test.abacus_analytics.unique_reco_run_metrics_run_at.231c895403 at target/compiled/abacus_analytics/target/generic_tests/unique_reco_run_metrics_run_at.sql
+04:53:37.628955 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.unique_reco_run_metrics_run_at [success]
+04:53:37.628998 [info ]: Started running test DBT_TEST__AUDIT.unique_reco_run_metrics_run_at
+04:53:37.630352 [debug]: Writing runtime sql for node "test.abacus_analytics.unique_reco_run_metrics_run_at.231c895403"
+04:53:37.630363 [debug]: Compiled SQL for node test.abacus_analytics.not_null_reco_run_metrics_run_at.9ee7cf559a at target/compiled/abacus_analytics/target/generic_tests/not_null_reco_run_metrics_run_at.sql
+04:53:37.630469 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.not_null_reco_run_metrics_run_at [success]
+04:53:37.630502 [info ]: Started running test DBT_TEST__AUDIT.not_null_reco_run_metrics_run_at
+04:53:37.633086 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_reco_run_metrics_run_at.9ee7cf559a"
+04:53:37.633523 [debug]: Compiled SQL for node test.abacus_analytics.not_null_reco_run_metrics_actors.a432589070 at target/compiled/abacus_analytics/target/generic_tests/not_null_reco_run_metrics_actors.sql
+04:53:37.633620 [debug]: Finished rendering [  0.01s] test DBT_TEST__AUDIT.not_null_reco_run_metrics_actors [success]
+04:53:37.633670 [info ]: Started running test DBT_TEST__AUDIT.not_null_reco_run_metrics_actors
+04:53:37.634911 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_reco_run_metrics_actors.a432589070"
+04:53:37.917514 [debug]: Query executed on node model.abacus_analytics.reco_hit_rate_daily:
+create or replace transient  table ABACUS_DEV.MARTS.reco_hit_rate_daily
+    
+    
+    
+    
+    as (-- "Of the parents we recommended to on day D,
+--  how many clicked one of their recommended courses on day D+1?"
+
+with last_run_per_day as (
+
+    select
+        generated_at::date as reco_date,
+        max(generated_at)  as generated_at
+    from ABACUS_DEV.MARTS.course_recommendations_history
+    group by 1
+
+),
+
+recs as (
+
+    select h.actor_id, h.course_key, d.reco_date
+    from ABACUS_DEV.MARTS.course_recommendations_history as h
+    join last_run_per_day as d
+        on h.generated_at = d.generated_at
+
+),
+
+clicks as (
+
+    select distinct
+        actor_id,
+        course_key,
+        event_ts_utc::date as click_date
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
+
+),
+
+per_actor as (
+
+    select
+        r.reco_date,
+        r.actor_id,
+        max(iff(c.actor_id is not null, 1, 0)) as clicked_a_rec
+    from recs as r
+    left join clicks as c
+        on  r.actor_id   = c.actor_id
+        and r.course_key = c.course_key
+        and c.click_date = dateadd('day', 1, r.reco_date)
+    group by r.reco_date, r.actor_id
+
+)
+
+select
+    reco_date,
+    count(*)                                         as actors_with_recs,
+    sum(clicked_a_rec)                               as actors_who_clicked_a_rec,
+    round(sum(clicked_a_rec) / nullif(count(*), 0), 3) as hit_rate
+from per_actor
+where reco_date < sysdate()::date      -- today's "next day" hasn't happened yet
+group by reco_date
+
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_hit_rate_daily", "profile_name": "abacus", "target_name": "dev"} */
+04:53:37.918455 [debug]: No original query_tag, unsetting parameter.
+04:53:38.066085 [debug]: Query executed on node model.abacus_analytics.reco_hit_rate_daily:
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_hit_rate_daily", "profile_name": "abacus", "target_name": "dev"} */
+04:53:38.066489 [info ]: Finished running [  0.69s] model MARTS.reco_hit_rate_daily [success]
+04:53:38.066544 [info ]:  Succeeded [  0.69s] model MARTS.reco_hit_rate_daily (table)
+04:53:38.066595 [info ]: Started test DBT_TEST__AUDIT.unique_reco_hit_rate_daily_reco_date
+04:53:38.066603 [debug]: Started rendering test DBT_TEST__AUDIT.unique_reco_hit_rate_daily_reco_date
+04:53:38.066617 [info ]: Started test DBT_TEST__AUDIT.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0
+04:53:38.066624 [debug]: Started rendering test DBT_TEST__AUDIT.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0
+04:53:38.066632 [info ]: Started test DBT_TEST__AUDIT.not_null_reco_hit_rate_daily_reco_date
+04:53:38.066636 [debug]: Started rendering test DBT_TEST__AUDIT.not_null_reco_hit_rate_daily_reco_date
+04:53:38.068729 [debug]: Compiled SQL for node test.abacus_analytics.unique_reco_hit_rate_daily_reco_date.c7b671dbc1 at target/compiled/abacus_analytics/target/generic_tests/unique_reco_hit_rate_daily_reco_date.sql
+04:53:38.068729 [debug]: Compiled SQL for node test.abacus_analytics.not_null_reco_hit_rate_daily_reco_date.177c9445d3 at target/compiled/abacus_analytics/target/generic_tests/not_null_reco_hit_rate_daily_reco_date.sql
+04:53:38.068796 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.unique_reco_hit_rate_daily_reco_date [success]
+04:53:38.068852 [info ]: Started running test DBT_TEST__AUDIT.unique_reco_hit_rate_daily_reco_date
+04:53:38.068864 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.not_null_reco_hit_rate_daily_reco_date [success]
+04:53:38.068880 [info ]: Started running test DBT_TEST__AUDIT.not_null_reco_hit_rate_daily_reco_date
+04:53:38.068971 [debug]: Compiled SQL for node test.abacus_analytics.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0.aa7d8e5ab2 at target/compiled/abacus_analytics/target/generic_tests/dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0.sql
+04:53:38.069020 [debug]: Finished rendering [  0.00s] test DBT_TEST__AUDIT.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0 [success]
+04:53:38.069036 [info ]: Finished rendering [ 23.40s] (44 nodes, 0 skipped, 0 errors)
+04:53:38.069079 [info ]: Started running test DBT_TEST__AUDIT.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0
+04:53:38.070173 [debug]: Writing runtime sql for node "test.abacus_analytics.unique_reco_hit_rate_daily_reco_date.c7b671dbc1"
+04:53:38.071439 [debug]: Writing runtime sql for node "test.abacus_analytics.not_null_reco_hit_rate_daily_reco_date.177c9445d3"
+04:53:38.071541 [debug]: Writing runtime sql for node "test.abacus_analytics.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0.aa7d8e5ab2"
+04:53:38.102179 [debug]: Query executed on node test.abacus_analytics.unique_reco_run_metrics_run_at.231c895403:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    run_at as unique_field,
+    count(*) as n_records
+
+from ABACUS_DEV.MARTS.reco_run_metrics
+where run_at is not null
+group by run_at
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_reco_run_metrics_run_at.231c895403", "profile_name": "abacus", "target_name": "dev"} */
+04:53:38.102757 [info ]: Finished running [  0.47s] test DBT_TEST__AUDIT.unique_reco_run_metrics_run_at [pass]
+04:53:38.102811 [info ]:     Passed [  0.48s] test  unique_reco_run_metrics_run_at
+04:53:38.107235 [debug]: Query executed on node test.abacus_analytics.not_null_reco_run_metrics_run_at.9ee7cf559a:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select run_at
+from ABACUS_DEV.MARTS.reco_run_metrics
+where run_at is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_reco_run_metrics_run_at.9ee7cf559a", "profile_name": "abacus", "target_name": "dev"} */
+04:53:38.107784 [info ]: Finished running [  0.48s] test DBT_TEST__AUDIT.not_null_reco_run_metrics_run_at [pass]
+04:53:38.107814 [info ]:     Passed [  0.48s] test  not_null_reco_run_metrics_run_at
+04:53:38.119933 [debug]: Query executed on node test.abacus_analytics.not_null_reco_run_metrics_actors.a432589070:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select actors
+from ABACUS_DEV.MARTS.reco_run_metrics
+where actors is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_reco_run_metrics_actors.a432589070", "profile_name": "abacus", "target_name": "dev"} */
+04:53:38.120492 [info ]: Finished running [  0.49s] test DBT_TEST__AUDIT.not_null_reco_run_metrics_actors [pass]
+04:53:38.120524 [info ]:     Passed [  0.49s] test  not_null_reco_run_metrics_actors
+04:53:38.267249 [debug]: Query executed on node test.abacus_analytics.unique_reco_hit_rate_daily_reco_date.c7b671dbc1:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    reco_date as unique_field,
+    count(*) as n_records
+
+from ABACUS_DEV.MARTS.reco_hit_rate_daily
+where reco_date is not null
+group by reco_date
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_reco_hit_rate_daily_reco_date.c7b671dbc1", "profile_name": "abacus", "target_name": "dev"} */
+04:53:38.268064 [info ]: Finished running [  0.20s] test DBT_TEST__AUDIT.unique_reco_hit_rate_daily_reco_date [pass]
+04:53:38.268107 [info ]:     Passed [  0.20s] test  unique_reco_hit_rate_daily_reco_date
+04:53:38.268185 [debug]: Query executed on node test.abacus_analytics.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0.aa7d8e5ab2:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+
+with meet_condition as(
+  select *
+  from ABACUS_DEV.MARTS.reco_hit_rate_daily
+),
+
+validation_errors as (
+  select *
+  from meet_condition
+  where
+    -- never true, defaults to an empty result set. Exists to ensure any combo of the `or` clauses below succeeds
+    1 = 2
+    -- records with a value >= min_value are permitted. The `not` flips this to find records that don't meet the rule.
+    or not hit_rate >= 0
+    -- records with a value <= max_value are permitted. The `not` flips this to find records that don't meet the rule.
+    or not hit_rate <= 1
+)
+
+select *
+from validation_errors
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0.aa7d8e5ab2", "profile_name": "abacus", "target_name": "dev"} */
+04:53:38.268510 [info ]: Finished running [  0.20s] test DBT_TEST__AUDIT.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0 [pass]
+04:53:38.268525 [info ]:     Passed [  0.20s] test  dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0
+04:53:38.268804 [debug]: Query executed on node test.abacus_analytics.not_null_reco_hit_rate_daily_reco_date.177c9445d3:
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select reco_date
+from ABACUS_DEV.MARTS.reco_hit_rate_daily
+where reco_date is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_reco_hit_rate_daily_reco_date.177c9445d3", "profile_name": "abacus", "target_name": "dev"} */
+04:53:38.269249 [info ]: Finished running [  0.20s] test DBT_TEST__AUDIT.not_null_reco_hit_rate_daily_reco_date [pass]
+04:53:38.269265 [info ]: Finished running [ 23.60s] (44 nodes, 0 skipped, 0 errors)
+04:53:38.269290 [info ]:     Passed [  0.20s] test  not_null_reco_hit_rate_daily_reco_date
+04:53:38.985583 [info ]: 
+==================== Execution Summary =====================
+Finished 'build' successfully for target 'dev' [26.8s]
+Processed: 12 models | 31 tests | 1 seed
+Summary: 44 total | 44 success

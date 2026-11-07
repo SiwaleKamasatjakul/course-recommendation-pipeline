@@ -14,7 +14,7 @@ Usage:
     python scripts/bench_ingest.py --expected 10000 --since-ms 1730000000000
 
 Connection (key-pair, same as dbt dev). Override with environment variables:
-    SNOWFLAKE_ACCOUNT           default KNSMANR-BL10477
+    SNOWFLAKE_ACCOUNT           default WUMMBRQ-LB67529
     SNOWFLAKE_USER              default BANASPIH
     SNOWFLAKE_PRIVATE_KEY_PATH  default ~/.snowflake/dbt_rsa_key.p8
     SNOWFLAKE_ROLE              default DBT_ROLE
@@ -48,7 +48,7 @@ def connect():
     der = key.private_bytes(serialization.Encoding.DER, serialization.PrivateFormat.PKCS8,
                             serialization.NoEncryption())
     return snowflake.connector.connect(
-        account=os.environ.get("SNOWFLAKE_ACCOUNT", "KNSMANR-BL10477"),
+        account=os.environ.get("SNOWFLAKE_ACCOUNT", "WUMMBRQ-LB67529"),
         user=os.environ.get("SNOWFLAKE_USER", "BANASPIH"),
         private_key=der,
         role=os.environ.get("SNOWFLAKE_ROLE", "DBT_ROLE"),
@@ -84,6 +84,9 @@ def main():
 
     conn = connect()
     cur = conn.cursor()
+    who = cur.execute("select current_organization_name() || '-' || current_account_name(), "
+                      "current_user(), current_role(), current_warehouse()").fetchone()
+    print(f"connected as  account={who[0]}  user={who[1]}  role={who[2]}  warehouse={who[3]}")
     count, done_ms, t_start = 0, None, time.time()
     try:
         while time.time() - t_start < args.timeout:
@@ -92,6 +95,13 @@ def main():
             except Exception as e:                      # table is created by the connector on first write
                 if "does not exist" in str(e):
                     count = 0
+                elif "is suspended" in str(e):
+                    raise SystemExit(
+                        f"Warehouse {who[3]} is suspended and this role cannot wake it up.\n"
+                        "Fix in Snowflake (ACCOUNTADMIN):\n"
+                        "  show warehouses like 'ABACUS_WH';   -- check auto_resume and resource_monitor\n"
+                        "  alter warehouse ABACUS_WH set auto_resume = true;\n"
+                        f"  grant usage, operate on warehouse ABACUS_WH to role {who[2]};")
                 else:
                     raise
             now_ms = int(time.time() * 1000)

@@ -6,7 +6,7 @@ with affinity as (
         actor_id, 
         course as course_key, 
         affinity_score
-    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_actor_course_affinity
+    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
 
 ),
 
@@ -22,7 +22,7 @@ similar as (
         1                                               as priority
     
     from affinity as a 
-    join ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_coocurrence as c 
+    join ABACUS_DEV.INTERMEDIATE.int_course_coocurrence as c 
         on a.course_key = c.course_key
         group by a.actor_id, c.other_course_key
 
@@ -39,7 +39,7 @@ popular as (
         'popular'                           as reason,
         2                                   as priority
     from (select distinct actor_id from affinity) as actors
-    cross join ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_popularity as p
+    cross join ABACUS_DEV.INTERMEDIATE.int_course_popularity as p
 ),
 
 candidates as (
@@ -101,9 +101,9 @@ select
     cat.program,
     r.score,
     r.reason,
-    '2026-11-01 07:48:06.137590+00:00'::timestamp_tz as generated_at
+    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz as generated_at
 from ranked as r 
-left join ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_catalog as cat 
+left join ABACUS_DEV.INTERMEDIATE.int_course_catalog as cat 
     on r.course_key = cat.course_key
 where r.recommendation_rank <= 5
     

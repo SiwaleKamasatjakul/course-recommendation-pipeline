@@ -13,13 +13,13 @@
 
 with child as (
     select other_course_key as from_field
-    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_coocurrence
+    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
     where other_course_key is not null
 ),
 
 parent as (
     select course_key as to_field
-    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_catalog
+    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
 )
 
 select

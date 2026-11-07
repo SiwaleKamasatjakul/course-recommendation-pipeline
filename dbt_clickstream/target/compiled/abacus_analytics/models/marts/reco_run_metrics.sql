@@ -3,7 +3,7 @@
 with recs as (
 
     select actor_id, course_key, reason
-    from ABACUS_DEV.PR_TEST_MARTS.course_recommendations
+    from ABACUS_DEV.MARTS.course_recommendations
 
 ),
 
@@ -22,7 +22,7 @@ summary as (
 catalog as (
 
     select count(*) as catalog_size
-    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_catalog
+    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
 
 ),
 
@@ -31,13 +31,13 @@ clicks as (
     select 
         count(*)                as interactions_total,
         max(event_ts_utc)       as newest_click_at
-    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_interactions
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
 
 
 )
 
 select
-    '2026-11-01 07:48:06.137590+00:00'::timestamp_tz                         as run_at,
+    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz                         as run_at,
     s.actors,
     s.rec_rows,
     round(s.rec_rows / nullif(s.actors, 0), 2)                   as avg_recs_per_actor,

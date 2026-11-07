@@ -13,13 +13,13 @@
 
 with child as (
     select action as from_field
-    from ABACUS_DEV.PR_TEST_INTERMEDIATE.int_course_interactions
+    from ABACUS_DEV.INTERMEDIATE.int_course_interactions
     where action is not null
 ),
 
 parent as (
     select action as to_field
-    from ABACUS_DEV.PR_TEST_SEEDS.course_action_weights
+    from ABACUS_DEV.SEEDS.course_action_weights
 )
 
 select
