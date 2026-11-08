@@ -1013,6 +1013,11 @@ SELECT run_at, actors, avg_recs_per_actor, pct_personal, catalog_coverage, data_
 FROM ABACUS_ANALYTICS.MARTS.RECO_RUN_METRICS
 ORDER BY run_at DESC;
 ```
+| RUN_AT | ACTORS | REC_ROWS | AVG_RECS_PER_ACTOR | PCT_PERSONAL | COURSES_RECOMMENDED | CATALOG_SIZE | CATALOG_COVERAGE | INTERACTIONS_TOTAL | NEWEST_CLICK_AT | DATA_LAG_MINUTES |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 2026-11-08 07:17:35.743 Z | 136 | 680 | 5 | 1 | 20 | 20 | 1 | 992 | 31:33.9 | 526 |
+| 2026-11-07 05:28:08.968 Z | 40 | 200 | 5 | 0.995 | 19 | 20 | 0.95 | 291 | 08:56.5 | 560 |
+| 2026-11-07 06:24:54.701 Z | 40 | 200 | 5 | 0.995 | 19 | 20 | 0.95 | 291 | 08:56.5 | 617 |
 
 ### 23. `reco_hit_rate_daily`: are the recommendations useful?
 
@@ -1024,6 +1029,10 @@ D+1.
 ```sql
 SELECT * FROM ABACUS_ANALYTICS.MARTS.RECO_HIT_RATE_DAILY ORDER BY reco_date;
 ```
+
+| RECO_DATE | ACTORS_WITH_RECS | ACTORS_WHO_CLICKED_A_REC | HIT_RATE |
+| :--- | ---: | ---: | ---: |
+| 2026-11-07 | 40 | 0 | 0 |
 
 With generator data the hit rate is chance, because synthetic parents never look at
 their recommendations. Treat it as a **pipeline validation** (inject a known
