@@ -95,6 +95,11 @@ def main():
             except Exception as e:                      # table is created by the connector on first write
                 if "does not exist" in str(e):
                     count = 0
+                    if not getattr(main, "_warned", False):
+                        main._warned = True
+                        print(f"  note: RAW.{table} is not visible to role {who[2]} yet. Normal for the first "
+                              "seconds; if it stays at 0, the table may exist but this role lacks SELECT:\n"
+                              f"    grant select on all tables in schema ABACUS_ANALYTICS.RAW to role {who[2]};")
                 elif "is suspended" in str(e):
                     raise SystemExit(
                         f"Warehouse {who[3]} is suspended and this role cannot wake it up.\n"
