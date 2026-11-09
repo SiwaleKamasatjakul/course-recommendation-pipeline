@@ -37,7 +37,7 @@ clicks as (
 )
 
 select
-    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz                         as run_at,
+    '2026-11-09 03:52:02.723628+00:00'::timestamp_tz                         as run_at,
     s.actors,
     s.rec_rows,
     round(s.rec_rows / nullif(s.actors, 0), 2)                   as avg_recs_per_actor,

@@ -1,204 +1,108 @@
--- created_at: 2026-11-07T04:53:14.116070+00:00
--- finished_at: 2026-11-07T04:53:14.210287+00:00
--- elapsed: 94ms
+-- created_at: 2026-11-09T03:52:03.220957+00:00
+-- finished_at: 2026-11-09T03:52:03.283309+00:00
+-- elapsed: 62ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: not available
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061202
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4d2
 -- desc: execute adapter call
 show terse schemas in database ABACUS_DEV
     limit 10000
 /* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:14.212156+00:00
--- finished_at: 2026-11-07T04:53:14.359223+00:00
--- elapsed: 147ms
+-- created_at: 2026-11-09T03:52:03.310943+00:00
+-- finished_at: 2026-11-09T03:52:03.364812+00:00
+-- elapsed: 53ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: not available
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006022a
--- desc: execute adapter call
-create schema if not exists ABACUS_DEV.INTERMEDIATE
-/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:14.360022+00:00
--- finished_at: 2026-11-07T04:53:14.451318+00:00
--- elapsed: 91ms
--- outcome: success
--- dialect: snowflake
--- node_id: not available
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006022e
--- desc: execute adapter call
-create schema if not exists ABACUS_DEV.MARTS
-/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:14.452015+00:00
--- finished_at: 2026-11-07T04:53:14.575998+00:00
--- elapsed: 123ms
--- outcome: success
--- dialect: snowflake
--- node_id: not available
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061206
--- desc: execute adapter call
-create schema if not exists ABACUS_DEV.SEEDS
-/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:14.576322+00:00
--- finished_at: 2026-11-07T04:53:14.667256+00:00
--- elapsed: 90ms
--- outcome: success
--- dialect: snowflake
--- node_id: not available
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006120a
--- desc: execute adapter call
-create schema if not exists ABACUS_DEV.STAGING
-/* {"app": "dbt", "connection_name": "", "dbt_version": "2.0.0", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:14.678880+00:00
--- finished_at: 2026-11-07T04:53:14.771961+00:00
--- elapsed: 93ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.stg_page_dwell
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060232
+-- node_id: model.abacus_analytics.stg_course_card_clicked
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3ba
 -- desc: execute adapter call
 show parameters like 'query_tag' in session
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:14.773375+00:00
--- finished_at: 2026-11-07T04:53:14.850474+00:00
--- elapsed: 77ms
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:03.366981+00:00
+-- finished_at: 2026-11-09T03:52:03.413503+00:00
+-- elapsed: 46ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: model.abacus_analytics.stg_page_dwell
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060236
+-- node_id: model.abacus_analytics.stg_course_card_clicked
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3be
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:14.851842+00:00
--- finished_at: 2026-11-07T04:53:15.123158+00:00
--- elapsed: 271ms
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:03.414555+00:00
+-- finished_at: 2026-11-09T03:52:03.481694+00:00
+-- elapsed: 67ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: model.abacus_analytics.stg_page_dwell
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006120e
+-- node_id: model.abacus_analytics.stg_course_card_clicked
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3c2
 -- desc: get_relation > list_relations call
 SHOW OBJECTS IN SCHEMA "ABACUS_DEV"."STAGING" LIMIT 10000;
--- created_at: 2026-11-07T04:53:15.109338+00:00
--- finished_at: 2026-11-07T04:53:15.193662+00:00
--- elapsed: 84ms
+-- created_at: 2026-11-09T03:52:03.484081+00:00
+-- finished_at: 2026-11-09T03:52:03.533416+00:00
+-- elapsed: 49ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: model.abacus_analytics.stg_course_card_clicked
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061212
+-- node_id: model.abacus_analytics.stg_competition_viewed
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4d6
 -- desc: execute adapter call
 show parameters like 'query_tag' in session
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.171677+00:00
--- finished_at: 2026-11-07T04:53:15.379669+00:00
--- elapsed: 207ms
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:03.486131+00:00
+-- finished_at: 2026-11-09T03:52:03.539720+00:00
+-- elapsed: 53ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.stg_page_dwell
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3c6
+-- desc: execute adapter call
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:03.488850+00:00
+-- finished_at: 2026-11-09T03:52:03.550366+00:00
+-- elapsed: 61ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: seed.abacus_analytics.course_action_weights
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006023e
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3ca
 -- desc: get_relation > list_relations call
 SHOW OBJECTS IN SCHEMA "ABACUS_DEV"."SEEDS" LIMIT 10000;
--- created_at: 2026-11-07T04:53:15.194682+00:00
--- finished_at: 2026-11-07T04:53:15.379669+00:00
--- elapsed: 184ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.stg_course_card_clicked
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060242
--- desc: execute adapter call
-alter session set query_tag = 'dbt_abacus_dev_local'
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.136571+00:00
--- finished_at: 2026-11-07T04:53:15.380848+00:00
--- elapsed: 244ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.stg_page_dwell
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061216
--- desc: execute adapter call
-create or replace   view ABACUS_DEV.STAGING.stg_page_dwell
-  
-  
-  
-  
-  as (
-    -- models/staging/stg_course_card_clicked.sql
--- Materialization comes from the folder default in dbt_project.yml (view)
-
-
-WITH source AS (
-    SELECT *
-    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
-    WHERE EVENT_TYPE = 'page_dwell'
-),
-
-flattened AS (
-SELECT
-    EVENT_TYPE                        AS event_type,
-    SESSION_ID                        AS session_id,
-    USER_ID                           AS user_id,
-    "TIMESTAMP"                    AS event_ts_utc,
-    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,   
-     METADATA:dwell_seconds::INT       AS dwell_seconds,
-    METADATA:scroll_depth_pct::INT    AS scroll_depth_pct,
-    METADATA:page::STRING             AS page,
-    METADATA:referer::STRING          AS referer,
-    METADATA:ip::STRING               AS ip,
-    METADATA:user_agent::STRING       AS user_agent,
-    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz    AS dbt_built_at
-
-    FROM source
-)
-
-SELECT * FROM flattened
-  )
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.171769+00:00
--- finished_at: 2026-11-07T04:53:15.381730+00:00
--- elapsed: 209ms
+-- created_at: 2026-11-09T03:52:03.534632+00:00
+-- finished_at: 2026-11-09T03:52:03.581486+00:00
+-- elapsed: 46ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.stg_competition_viewed
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006023a
--- desc: execute adapter call
-show parameters like 'query_tag' in session
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.383294+00:00
--- finished_at: 2026-11-07T04:53:15.469689+00:00
--- elapsed: 86ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.stg_competition_viewed
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006121e
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4de
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.382472+00:00
--- finished_at: 2026-11-07T04:53:15.486+00:00
--- elapsed: 103ms
+-- created_at: 2026-11-09T03:52:03.540963+00:00
+-- finished_at: 2026-11-09T03:52:03.589096+00:00
+-- elapsed: 48ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.stg_page_dwell
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060246
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4e2
 -- desc: execute adapter call
-alter session unset query_tag
+alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.383485+00:00
--- finished_at: 2026-11-07T04:53:15.555200+00:00
--- elapsed: 171ms
+-- created_at: 2026-11-09T03:52:03.552499+00:00
+-- finished_at: 2026-11-09T03:52:03.607564+00:00
+-- elapsed: 55ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: seed.abacus_analytics.course_action_weights
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006121a
--- desc: execute adapter call
-create table ABACUS_DEV.SEEDS.course_action_weights (ACTION text,WEIGHT float8,DESCRIPTION text)
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "seed.abacus_analytics.course_action_weights", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.383132+00:00
--- finished_at: 2026-11-07T04:53:15.590725+00:00
--- elapsed: 207ms
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3ce
+-- desc: add_query adapter call
+BEGIN;
+-- created_at: 2026-11-09T03:52:03.487620+00:00
+-- finished_at: 2026-11-09T03:52:03.674090+00:00
+-- elapsed: 186ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.stg_course_card_clicked
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006024a
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4da
 -- desc: execute adapter call
 create or replace   view ABACUS_DEV.STAGING.stg_course_card_clicked
   
@@ -212,7 +116,7 @@ create or replace   view ABACUS_DEV.STAGING.stg_course_card_clicked
 
 WITH source AS (
     SELECT *
-    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
+    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS_BENCH
     WHERE EVENT_TYPE = 'course_card_clicked'
 ),
 
@@ -237,7 +141,7 @@ flattened AS (
         METADATA:referer::STRING                AS referer,
         METADATA:source::STRING                 AS source,
         METADATA:user_agent::STRING             AS user_agent,
-        '2026-11-07 04:53:12.168497+00:00'::timestamp_tz    AS dbt_built_at
+        '2026-11-09 03:52:02.723628+00:00'::timestamp_tz    AS dbt_built_at
 
     FROM source
 
@@ -246,22 +150,23 @@ flattened AS (
 SELECT * FROM flattened
   )
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.557532+00:00
--- finished_at: 2026-11-07T04:53:15.640023+00:00
--- elapsed: 82ms
+-- created_at: 2026-11-09T03:52:03.675026+00:00
+-- finished_at: 2026-11-09T03:52:03.723287+00:00
+-- elapsed: 48ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: seed.abacus_analytics.course_action_weights
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006024e
--- desc: add_query adapter call
-BEGIN;
--- created_at: 2026-11-07T04:53:15.473453+00:00
--- finished_at: 2026-11-07T04:53:15.661546+00:00
--- elapsed: 188ms
+-- node_id: model.abacus_analytics.stg_course_card_clicked
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4ea
+-- desc: execute adapter call
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:03.584700+00:00
+-- finished_at: 2026-11-09T03:52:03.755723+00:00
+-- elapsed: 171ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.stg_competition_viewed
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061222
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3d2
 -- desc: execute adapter call
 create or replace   view ABACUS_DEV.STAGING.stg_competition_viewed
   
@@ -274,7 +179,7 @@ create or replace   view ABACUS_DEV.STAGING.stg_competition_viewed
 
 WITH source AS (
     SELECT * 
-    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
+    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS_BENCH
     WHERE EVENT_TYPE = 'competition_viewed'
 ),
 
@@ -298,7 +203,7 @@ flattened AS (
     METADATA:referer::STRING                AS referer,
     METADATA:ip::STRING                     AS ip,
     METADATA:user_agent::STRING             AS user_agent,
-    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz    AS dbt_built_at
+    '2026-11-09 03:52:02.723628+00:00'::timestamp_tz    AS dbt_built_at
 
 FROM source
 )
@@ -306,33 +211,88 @@ FROM source
 SELECT * FROM flattened
   )
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.592155+00:00
--- finished_at: 2026-11-07T04:53:15.670110+00:00
--- elapsed: 77ms
+-- created_at: 2026-11-09T03:52:03.591595+00:00
+-- finished_at: 2026-11-09T03:52:03.756695+00:00
+-- elapsed: 165ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: model.abacus_analytics.stg_course_card_clicked
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060252
+-- node_id: model.abacus_analytics.stg_page_dwell
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3d6
+-- desc: execute adapter call
+create or replace   view ABACUS_DEV.STAGING.stg_page_dwell
+  
+  
+  
+  
+  as (
+    -- models/staging/stg_course_card_clicked.sql
+-- Materialization comes from the folder default in dbt_project.yml (view)
+
+
+WITH source AS (
+    SELECT *
+    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS_BENCH
+    WHERE EVENT_TYPE = 'page_dwell'
+),
+
+flattened AS (
+SELECT
+    EVENT_TYPE                        AS event_type,
+    SESSION_ID                        AS session_id,
+    USER_ID                           AS user_id,
+    "TIMESTAMP"                    AS event_ts_utc,
+    CONVERT_TIMEZONE('UTC', 'Asia/Bangkok', "TIMESTAMP") AS event_ts_local,   
+     METADATA:dwell_seconds::INT       AS dwell_seconds,
+    METADATA:scroll_depth_pct::INT    AS scroll_depth_pct,
+    METADATA:page::STRING             AS page,
+    METADATA:referer::STRING          AS referer,
+    METADATA:ip::STRING               AS ip,
+    METADATA:user_agent::STRING       AS user_agent,
+    '2026-11-09 03:52:02.723628+00:00'::timestamp_tz    AS dbt_built_at
+
+    FROM source
+)
+
+SELECT * FROM flattened
+  )
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:03.757654+00:00
+-- finished_at: 2026-11-09T03:52:03.802189+00:00
+-- elapsed: 44ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.stg_page_dwell
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3da
 -- desc: execute adapter call
 alter session unset query_tag
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_course_card_clicked", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.662933+00:00
--- finished_at: 2026-11-07T04:53:15.740651+00:00
--- elapsed: 77ms
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_page_dwell", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:03.756769+00:00
+-- finished_at: 2026-11-09T03:52:03.804324+00:00
+-- elapsed: 47ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.stg_competition_viewed
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006025a
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4ee
 -- desc: execute adapter call
 alter session unset query_tag
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.stg_competition_viewed", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.748701+00:00
--- finished_at: 2026-11-07T04:53:16.012786+00:00
--- elapsed: 264ms
+-- created_at: 2026-11-09T03:52:03.608339+00:00
+-- finished_at: 2026-11-09T03:52:03.896211+00:00
+-- elapsed: 287ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: seed.abacus_analytics.course_action_weights
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4e6
+-- desc: add_query adapter call
+insert overwrite into ABACUS_DEV.SEEDS.course_action_weights (ACTION, WEIGHT, DESCRIPTION) values
+            ('expand_details',1.0,'Opened the course details card'),('view_course_from_path',2.0,'Went from the learning path to the course page'),('   search_click',1.5,'Clicked a course from search results');
+-- created_at: 2026-11-09T03:52:03.810630+00:00
+-- finished_at: 2026-11-09T03:52:03.924708+00:00
+-- elapsed: 114ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.not_null_stg_competition_viewed_event_ts_utc.9b1def047c
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061226
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3de
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -358,13 +318,13 @@ where event_ts_utc is null
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_stg_competition_viewed_event_ts_utc.9b1def047c", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.748952+00:00
--- finished_at: 2026-11-07T04:53:16.013265+00:00
--- elapsed: 264ms
+-- created_at: 2026-11-09T03:52:03.810706+00:00
+-- finished_at: 2026-11-09T03:52:03.968544+00:00
+-- elapsed: 157ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.not_null_stg_competition_viewed_session_id.25044d0714
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006122a
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4f2
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -390,13 +350,13 @@ where session_id is null
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_stg_competition_viewed_session_id.25044d0714", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.748888+00:00
--- finished_at: 2026-11-07T04:53:16.039528+00:00
--- elapsed: 290ms
+-- created_at: 2026-11-09T03:52:03.810564+00:00
+-- finished_at: 2026-11-09T03:52:03.978984+00:00
+-- elapsed: 168ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.not_null_stg_competition_viewed_competition_id.aa85bbb0b9
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006025e
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4f6
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -422,96 +382,22 @@ where competition_id is null
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_stg_competition_viewed_competition_id.aa85bbb0b9", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:15.640970+00:00
--- finished_at: 2026-11-07T04:53:16.159032+00:00
--- elapsed: 518ms
+-- created_at: 2026-11-09T03:52:03.897816+00:00
+-- finished_at: 2026-11-09T03:52:04.057962+00:00
+-- elapsed: 160ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: seed.abacus_analytics.course_action_weights
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060256
--- desc: add_query adapter call
-insert overwrite into ABACUS_DEV.SEEDS.course_action_weights (ACTION, WEIGHT, DESCRIPTION) values
-            ('expand_details',1.0,'Opened the course details card'),('view_course_from_path',2.0,'Went from the learning path to the course page'),('   search_click',1.5,'Clicked a course from search results');
--- created_at: 2026-11-07T04:53:16.161106+00:00
--- finished_at: 2026-11-07T04:53:16.359279+00:00
--- elapsed: 198ms
--- outcome: success
--- dialect: snowflake
--- node_id: seed.abacus_analytics.course_action_weights
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006122e
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4fa
 -- desc: add_query adapter call
 COMMIT;
--- created_at: 2026-11-07T04:53:16.370947+00:00
--- finished_at: 2026-11-07T04:53:16.553249+00:00
--- elapsed: 182ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_course_action_weights_weight.c6d2a82126
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061232
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select weight
-from ABACUS_DEV.SEEDS.course_action_weights
-where weight is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_course_action_weights_weight.c6d2a82126", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:16.371067+00:00
--- finished_at: 2026-11-07T04:53:16.553942+00:00
--- elapsed: 182ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_course_action_weights_action.1375e990e8
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006123a
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select action
-from ABACUS_DEV.SEEDS.course_action_weights
-where action is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_course_action_weights_action.1375e990e8", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:16.371030+00:00
--- finished_at: 2026-11-07T04:53:16.563639+00:00
--- elapsed: 192ms
+-- created_at: 2026-11-09T03:52:04.065464+00:00
+-- finished_at: 2026-11-09T03:52:04.154646+00:00
+-- elapsed: 89ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.unique_course_action_weights_action.4b4d8b2df1
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061236
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e4fe
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -540,42 +426,106 @@ having count(*) > 1
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_course_action_weights_action.4b4d8b2df1", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:16.565388+00:00
--- finished_at: 2026-11-07T04:53:16.643253+00:00
--- elapsed: 77ms
+-- created_at: 2026-11-09T03:52:04.065100+00:00
+-- finished_at: 2026-11-09T03:52:04.169705+00:00
+-- elapsed: 104ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_course_action_weights_weight.c6d2a82126
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3e6
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select weight
+from ABACUS_DEV.SEEDS.course_action_weights
+where weight is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_course_action_weights_weight.c6d2a82126", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:04.065237+00:00
+-- finished_at: 2026-11-09T03:52:04.171477+00:00
+-- elapsed: 106ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_course_action_weights_action.1375e990e8
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3e2
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select action
+from ABACUS_DEV.SEEDS.course_action_weights
+where action is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_course_action_weights_action.1375e990e8", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:04.173235+00:00
+-- finished_at: 2026-11-09T03:52:04.217312+00:00
+-- elapsed: 44ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_interactions
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060262
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e502
 -- desc: execute adapter call
 show parameters like 'query_tag' in session
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_interactions", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:16.644702+00:00
--- finished_at: 2026-11-07T04:53:16.763149+00:00
--- elapsed: 118ms
+-- created_at: 2026-11-09T03:52:04.218342+00:00
+-- finished_at: 2026-11-09T03:52:04.264167+00:00
+-- elapsed: 45ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_interactions
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060266
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3ea
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_interactions", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:16.763937+00:00
--- finished_at: 2026-11-07T04:53:16.854042+00:00
--- elapsed: 90ms
+-- created_at: 2026-11-09T03:52:04.264921+00:00
+-- finished_at: 2026-11-09T03:52:04.328040+00:00
+-- elapsed: 63ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_interactions
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006123e
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3ee
 -- desc: get_relation > list_relations call
 SHOW OBJECTS IN SCHEMA "ABACUS_DEV"."INTERMEDIATE" LIMIT 10000;
--- created_at: 2026-11-07T04:53:16.860382+00:00
--- finished_at: 2026-11-07T04:53:17.545325+00:00
--- elapsed: 684ms
+-- created_at: 2026-11-09T03:52:04.330440+00:00
+-- finished_at: 2026-11-09T03:52:05.052818+00:00
+-- elapsed: 722ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_interactions
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061242
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e506
 -- desc: execute adapter call
 create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_interactions
     
@@ -620,23 +570,23 @@ select
     )
 
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_interactions", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:17.550123+00:00
--- finished_at: 2026-11-07T04:53:17.659374+00:00
--- elapsed: 109ms
+-- created_at: 2026-11-09T03:52:05.056135+00:00
+-- finished_at: 2026-11-09T03:52:05.114610+00:00
+-- elapsed: 58ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_interactions
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006026a
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e50a
 -- desc: execute adapter call
 alter session unset query_tag
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_interactions", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:17.686375+00:00
--- finished_at: 2026-11-07T04:53:17.861986+00:00
--- elapsed: 175ms
+-- created_at: 2026-11-09T03:52:05.124409+00:00
+-- finished_at: 2026-11-09T03:52:05.257785+00:00
+-- elapsed: 133ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.not_null_int_course_interactions_interaction_id.8b507b5973
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061246
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e50e
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -662,13 +612,13 @@ where interaction_id is null
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_interaction_id.8b507b5973", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:17.686289+00:00
--- finished_at: 2026-11-07T04:53:17.891226+00:00
--- elapsed: 204ms
+-- created_at: 2026-11-09T03:52:05.126919+00:00
+-- finished_at: 2026-11-09T03:52:05.259096+00:00
+-- elapsed: 132ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_int_course_interactions_actor_id.8d54c7258e
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060272
+-- node_id: test.abacus_analytics.not_null_int_course_interactions_course_key.7354ea13c7
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3f2
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -683,9 +633,9 @@ select
 
 
 
-select actor_id
+select course_key
 from ABACUS_DEV.INTERMEDIATE.int_course_interactions
-where actor_id is null
+where course_key is null
 
 
 
@@ -693,14 +643,14 @@ where actor_id is null
   
       
     ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_actor_id.8d54c7258e", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:17.686532+00:00
--- finished_at: 2026-11-07T04:53:17.898923+00:00
--- elapsed: 212ms
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_course_key.7354ea13c7", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:05.127020+00:00
+-- finished_at: 2026-11-09T03:52:05.259097+00:00
+-- elapsed: 132ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: test.abacus_analytics.unique_int_course_interactions_interaction_id.c39047826c
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006026e
+-- node_id: test.abacus_analytics.not_null_int_course_interactions_action_weight.e82ac37955
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e512
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -713,14 +663,11 @@ select
     
     
 
-select
-    interaction_id as unique_field,
-    count(*) as n_records
 
+
+select action_weight
 from ABACUS_DEV.INTERMEDIATE.int_course_interactions
-where interaction_id is not null
-group by interaction_id
-having count(*) > 1
+where action_weight is null
 
 
 
@@ -728,14 +675,14 @@ having count(*) > 1
   
       
     ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_int_course_interactions_interaction_id.c39047826c", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:17.686433+00:00
--- finished_at: 2026-11-07T04:53:17.953360+00:00
--- elapsed: 266ms
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_action_weight.e82ac37955", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:05.126958+00:00
+-- finished_at: 2026-11-09T03:52:05.307431+00:00
+-- elapsed: 180ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.relationships_int_course_interactions_action__action__ref_course_action_weights_.969abd2555
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006124a
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3f6
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -775,13 +722,13 @@ where parent.to_field is null
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_course_interactions_action__action__ref_course_action_weights_.969abd2555", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.003581+00:00
--- finished_at: 2026-11-07T04:53:18.101703+00:00
--- elapsed: 98ms
+-- created_at: 2026-11-09T03:52:05.299248+00:00
+-- finished_at: 2026-11-09T03:52:05.377196+00:00
+-- elapsed: 77ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_int_course_interactions_course_key.7354ea13c7
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006124e
+-- node_id: test.abacus_analytics.not_null_int_course_interactions_actor_id.8d54c7258e
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e51a
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -796,9 +743,9 @@ select
 
 
 
-select course_key
+select actor_id
 from ABACUS_DEV.INTERMEDIATE.int_course_interactions
-where course_key is null
+where actor_id is null
 
 
 
@@ -806,14 +753,14 @@ where course_key is null
   
       
     ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_course_key.7354ea13c7", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.008435+00:00
--- finished_at: 2026-11-07T04:53:18.110491+00:00
--- elapsed: 102ms
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_actor_id.8d54c7258e", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:05.295492+00:00
+-- finished_at: 2026-11-09T03:52:05.392879+00:00
+-- elapsed: 97ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_int_course_interactions_action_weight.e82ac37955
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060276
+-- node_id: test.abacus_analytics.unique_int_course_interactions_interaction_id.c39047826c
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e516
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -826,11 +773,14 @@ select
     
     
 
+select
+    interaction_id as unique_field,
+    count(*) as n_records
 
-
-select action_weight
 from ABACUS_DEV.INTERMEDIATE.int_course_interactions
-where action_weight is null
+where interaction_id is not null
+group by interaction_id
+having count(*) > 1
 
 
 
@@ -838,74 +788,74 @@ where action_weight is null
   
       
     ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_interactions_action_weight.e82ac37955", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.112889+00:00
--- finished_at: 2026-11-07T04:53:18.187395+00:00
--- elapsed: 74ms
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_int_course_interactions_interaction_id.c39047826c", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:05.394743+00:00
+-- finished_at: 2026-11-09T03:52:05.454354+00:00
+-- elapsed: 59ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_catalog
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061252
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f402
 -- desc: execute adapter call
 show parameters like 'query_tag' in session
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_catalog", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.112727+00:00
--- finished_at: 2026-11-07T04:53:18.188715+00:00
--- elapsed: 75ms
+-- created_at: 2026-11-09T03:52:05.394801+00:00
+-- finished_at: 2026-11-09T03:52:05.457311+00:00
+-- elapsed: 62ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_actor_course_affinity
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006027a
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3fe
 -- desc: execute adapter call
 show parameters like 'query_tag' in session
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_actor_course_affinity", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.112980+00:00
--- finished_at: 2026-11-07T04:53:18.202502+00:00
--- elapsed: 89ms
+-- created_at: 2026-11-09T03:52:05.394837+00:00
+-- finished_at: 2026-11-09T03:52:05.457311+00:00
+-- elapsed: 62ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_popularity
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061256
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f3fa
 -- desc: execute adapter call
 show parameters like 'query_tag' in session
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_popularity", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.189477+00:00
--- finished_at: 2026-11-07T04:53:18.275514+00:00
--- elapsed: 86ms
+-- created_at: 2026-11-09T03:52:05.455341+00:00
+-- finished_at: 2026-11-09T03:52:05.503020+00:00
+-- elapsed: 47ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_catalog
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006125a
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f406
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_catalog", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.191024+00:00
--- finished_at: 2026-11-07T04:53:18.277911+00:00
--- elapsed: 86ms
+-- created_at: 2026-11-09T03:52:05.458511+00:00
+-- finished_at: 2026-11-09T03:52:05.504595+00:00
+-- elapsed: 46ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_actor_course_affinity
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006125e
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e522
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_actor_course_affinity", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.203936+00:00
--- finished_at: 2026-11-07T04:53:18.285906+00:00
--- elapsed: 81ms
+-- created_at: 2026-11-09T03:52:05.458499+00:00
+-- finished_at: 2026-11-09T03:52:05.504618+00:00
+-- elapsed: 46ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_popularity
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061262
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e51e
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_popularity", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.281691+00:00
--- finished_at: 2026-11-07T04:53:18.694185+00:00
--- elapsed: 412ms
+-- created_at: 2026-11-09T03:52:05.506999+00:00
+-- finished_at: 2026-11-09T03:52:06.001839+00:00
+-- elapsed: 494ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_actor_course_affinity
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060282
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f40a
 -- desc: execute adapter call
 create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
     
@@ -946,13 +896,160 @@ SELECT
     )
 
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_actor_course_affinity", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.281404+00:00
--- finished_at: 2026-11-07T04:53:18.715781+00:00
--- elapsed: 434ms
+-- created_at: 2026-11-09T03:52:06.003757+00:00
+-- finished_at: 2026-11-09T03:52:06.068851+00:00
+-- elapsed: 65ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.int_actor_course_affinity
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f40e
+-- desc: execute adapter call
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_actor_course_affinity", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.079519+00:00
+-- finished_at: 2026-11-09T03:52:06.201692+00:00
+-- elapsed: 122ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_int_actor_course_affinity_actor_id.5e3a9e26ef
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f412
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select actor_id
+from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+where actor_id is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_actor_course_affinity_actor_id.5e3a9e26ef", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.079578+00:00
+-- finished_at: 2026-11-09T03:52:06.203268+00:00
+-- elapsed: 123ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_int_actor_course_affinity_affinity_score.4754ad9c06
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f41a
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select affinity_score
+from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+where affinity_score is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_actor_course_affinity_affinity_score.4754ad9c06", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.078592+00:00
+-- finished_at: 2026-11-09T03:52:06.210121+00:00
+-- elapsed: 131ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_int_actor_course_affinity_course.e2ac6559e0
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e52e
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select course
+from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+where course is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_actor_course_affinity_course.e2ac6559e0", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.078950+00:00
+-- finished_at: 2026-11-09T03:52:06.215075+00:00
+-- elapsed: 136ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course.ab32ed82c2
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f416
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+
+
+
+
+
+with validation_errors as (
+
+    select
+        actor_id, course
+    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+    group by actor_id, course
+    having count(*) > 1
+
+)
+
+select *
+from validation_errors
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course.ab32ed82c2", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:05.506999+00:00
+-- finished_at: 2026-11-09T03:52:06.229087+00:00
+-- elapsed: 722ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_catalog
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006027e
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e526
 -- desc: execute adapter call
 create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_catalog
     
@@ -988,13 +1085,13 @@ select * from course_catalog
     )
 
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_catalog", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.294261+00:00
--- finished_at: 2026-11-07T04:53:18.748950+00:00
--- elapsed: 454ms
+-- created_at: 2026-11-09T03:52:05.506999+00:00
+-- finished_at: 2026-11-09T03:52:06.255072+00:00
+-- elapsed: 748ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_popularity
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061266
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e52a
 -- desc: execute adapter call
 create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_popularity
     
@@ -1034,515 +1131,53 @@ from per_course
     )
 
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_popularity", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.695703+00:00
--- finished_at: 2026-11-07T04:53:18.769182+00:00
--- elapsed: 73ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.int_actor_course_affinity
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060286
--- desc: execute adapter call
-alter session unset query_tag
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_actor_course_affinity", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.717654+00:00
--- finished_at: 2026-11-07T04:53:18.793373+00:00
--- elapsed: 75ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.int_course_catalog
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006028a
--- desc: execute adapter call
-alter session unset query_tag
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_catalog", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.750479+00:00
--- finished_at: 2026-11-07T04:53:18.852025+00:00
--- elapsed: 101ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.int_course_popularity
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006028e
--- desc: execute adapter call
-alter session unset query_tag
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_popularity", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.777294+00:00
--- finished_at: 2026-11-07T04:53:18.921161+00:00
--- elapsed: 143ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_int_actor_course_affinity_course.e2ac6559e0
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060296
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select course
-from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
-where course is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_actor_course_affinity_course.e2ac6559e0", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.777190+00:00
--- finished_at: 2026-11-07T04:53:18.922590+00:00
--- elapsed: 145ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_int_actor_course_affinity_affinity_score.4754ad9c06
--- query_id: 01c83ea5-000e-2967-0002-ff9e00060292
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select affinity_score
-from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
-where affinity_score is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_actor_course_affinity_affinity_score.4754ad9c06", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.777195+00:00
--- finished_at: 2026-11-07T04:53:18.927502+00:00
--- elapsed: 150ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course.ab32ed82c2
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006029a
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-
-
-
-
-
-with validation_errors as (
-
-    select
-        actor_id, course
-    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
-    group by actor_id, course
-    having count(*) > 1
-
-)
-
-select *
-from validation_errors
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_actor_course_affinity_actor_id__course.ab32ed82c2", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.777320+00:00
--- finished_at: 2026-11-07T04:53:18.946976+00:00
--- elapsed: 169ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_int_actor_course_affinity_actor_id.5e3a9e26ef
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006126a
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select actor_id
-from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
-where actor_id is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_actor_course_affinity_actor_id.5e3a9e26ef", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.949009+00:00
--- finished_at: 2026-11-07T04:53:27.284765+00:00
--- elapsed: 8.3s
+-- created_at: 2026-11-09T03:52:06.217165+00:00
+-- finished_at: 2026-11-09T03:52:06.259015+00:00
+-- elapsed: 41ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_coocurrence
--- query_id: 01c83ea5-000e-2967-0002-ff9e0006029e
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e532
 -- desc: execute adapter call
 show parameters like 'query_tag' in session
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:27.286954+00:00
--- finished_at: 2026-11-07T04:53:27.371460+00:00
--- elapsed: 84ms
+-- created_at: 2026-11-09T03:52:06.230187+00:00
+-- finished_at: 2026-11-09T03:52:06.281244+00:00
+-- elapsed: 51ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.int_course_catalog
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f41e
+-- desc: execute adapter call
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_catalog", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.260060+00:00
+-- finished_at: 2026-11-09T03:52:06.302976+00:00
+-- elapsed: 42ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.int_course_coocurrence
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602a2
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f422
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:27.383045+00:00
--- finished_at: 2026-11-07T04:53:27.904577+00:00
--- elapsed: 521ms
+-- created_at: 2026-11-09T03:52:06.256332+00:00
+-- finished_at: 2026-11-09T03:52:06.304747+00:00
+-- elapsed: 48ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: model.abacus_analytics.int_course_coocurrence
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061272
--- desc: execute adapter call
-create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
-    
-    
-    
-    
-    as (with actor_courses as (
-
-    select actor_id, 
-            course as course_key
-    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
-
-),
-
-pairs as (
-
-    select 
-     a.actor_id,
-     a.course_key,
-     b.course_key as other_course_key
-     from actor_courses as a 
-     join actor_courses as b 
-        on a.actor_id = b.actor_id
-        and a.course_key <> b.course_key
-
-
-)
-
-select 
-    course_key,
-    other_course_key,
-    count(DISTINCT actor_id) as co_actor_count
-from pairs
-group by course_key,other_course_key
-HAVING count(DISTINCT actor_id) >= 2
-    )
-
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:27.906020+00:00
--- finished_at: 2026-11-07T04:53:27.999141+00:00
--- elapsed: 93ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.int_course_coocurrence
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061276
+-- node_id: model.abacus_analytics.int_course_popularity
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f426
 -- desc: execute adapter call
 alter session unset query_tag
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:28.011823+00:00
--- finished_at: 2026-11-07T04:53:28.159045+00:00
--- elapsed: 147ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_int_course_coocurrence_other_course_key.992158ab8e
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006127e
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select other_course_key
-from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
-where other_course_key is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_coocurrence_other_course_key.992158ab8e", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:28.011970+00:00
--- finished_at: 2026-11-07T04:53:28.169281+00:00
--- elapsed: 157ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_int_course_coocurrence_co_actor_count.12188e68ce
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602ae
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select co_actor_count
-from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
-where co_actor_count is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_coocurrence_co_actor_count.12188e68ce", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:28.011996+00:00
--- finished_at: 2026-11-07T04:53:28.170660+00:00
--- elapsed: 158ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key.21c6673769
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006127a
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-
-
-
-select
-    1
-from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
-
-where not(course_key <> other_course_key)
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key.21c6673769", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:28.013785+00:00
--- finished_at: 2026-11-07T04:53:28.181773+00:00
--- elapsed: 167ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_int_course_coocurrence_course_key.2eec6f118c
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602aa
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select course_key
-from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
-where course_key is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_coocurrence_course_key.2eec6f118c", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:28.012332+00:00
--- finished_at: 2026-11-07T04:53:28.256483+00:00
--- elapsed: 244ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_.2012314292
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602a6
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-with child as (
-    select course_key as from_field
-    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
-    where course_key is not null
-),
-
-parent as (
-    select course_key as to_field
-    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
-)
-
-select
-    from_field
-
-from child
-left join parent
-    on child.from_field = parent.to_field
-
-where parent.to_field is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_.2012314292", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:28.451443+00:00
--- finished_at: 2026-11-07T04:53:28.563270+00:00
--- elapsed: 111ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key.81d740470b
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602b2
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-
-
-
-
-
-with validation_errors as (
-
-    select
-        course_key, other_course_key
-    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
-    group by course_key, other_course_key
-    having count(*) > 1
-
-)
-
-select *
-from validation_errors
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key.81d740470b", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:28.422139+00:00
--- finished_at: 2026-11-07T04:53:28.584568+00:00
--- elapsed: 162ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_.a490c6181d
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061282
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-with child as (
-    select other_course_key as from_field
-    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
-    where other_course_key is not null
-),
-
-parent as (
-    select course_key as to_field
-    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
-)
-
-select
-    from_field
-
-from child
-left join parent
-    on child.from_field = parent.to_field
-
-where parent.to_field is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_.a490c6181d", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:18.799543+00:00
--- finished_at: 2026-11-07T04:53:35.090166+00:00
--- elapsed: 16.3s
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_popularity", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.307045+00:00
+-- finished_at: 2026-11-09T03:52:06.503004+00:00
+-- elapsed: 195ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_.d6cf4f8052
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006126e
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e536
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -1582,42 +1217,357 @@ where parent.to_field is null
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_actor_course_affinity_course__COURSE_KEY__ref_int_course_catalog_.d6cf4f8052", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:35.093436+00:00
--- finished_at: 2026-11-07T04:53:35.236546+00:00
--- elapsed: 143ms
+-- created_at: 2026-11-09T03:52:06.307269+00:00
+-- finished_at: 2026-11-09T03:52:06.849931+00:00
+-- elapsed: 542ms
 -- outcome: success
 -- dialect: snowflake
--- node_id: model.abacus_analytics.course_recommendations
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061286
+-- node_id: model.abacus_analytics.int_course_coocurrence
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e53a
 -- desc: execute adapter call
-show parameters like 'query_tag' in session
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:35.238492+00:00
--- finished_at: 2026-11-07T04:53:35.359527+00:00
+create or replace transient  table ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+    
+    
+    
+    
+    as (with actor_courses as (
+
+    select actor_id, 
+            course as course_key
+    from ABACUS_DEV.INTERMEDIATE.int_actor_course_affinity
+
+),
+
+pairs as (
+
+    select 
+     a.actor_id,
+     a.course_key,
+     b.course_key as other_course_key
+     from actor_courses as a 
+     join actor_courses as b 
+        on a.actor_id = b.actor_id
+        and a.course_key <> b.course_key
+
+
+)
+
+select 
+    course_key,
+    other_course_key,
+    count(DISTINCT actor_id) as co_actor_count
+from pairs
+group by course_key,other_course_key
+HAVING count(DISTINCT actor_id) >= 2
+    )
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.853092+00:00
+-- finished_at: 2026-11-09T03:52:06.933741+00:00
+-- elapsed: 80ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.int_course_coocurrence
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e53e
+-- desc: execute adapter call
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.int_course_coocurrence", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.940595+00:00
+-- finished_at: 2026-11-09T03:52:07.186350+00:00
+-- elapsed: 245ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_int_course_coocurrence_co_actor_count.12188e68ce
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f432
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select co_actor_count
+from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+where co_actor_count is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_coocurrence_co_actor_count.12188e68ce", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.942584+00:00
+-- finished_at: 2026-11-09T03:52:07.187387+00:00
+-- elapsed: 244ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key.81d740470b
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e54a
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+
+
+
+
+
+with validation_errors as (
+
+    select
+        course_key, other_course_key
+    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+    group by course_key, other_course_key
+    having count(*) > 1
+
+)
+
+select *
+from validation_errors
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_unique_combination_of_columns_int_course_coocurrence_course_key__other_course_key.81d740470b", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.942053+00:00
+-- finished_at: 2026-11-09T03:52:07.187414+00:00
+-- elapsed: 245ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_int_course_coocurrence_course_key.2eec6f118c
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e542
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select course_key
+from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+where course_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_coocurrence_course_key.2eec6f118c", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.942466+00:00
+-- finished_at: 2026-11-09T03:52:07.187402+00:00
+-- elapsed: 244ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key.21c6673769
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e546
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+
+
+
+select
+    1
+from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+
+where not(course_key <> other_course_key)
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_expression_is_true_int_course_coocurrence_course_key_other_course_key.21c6673769", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.942275+00:00
+-- finished_at: 2026-11-09T03:52:07.203618+00:00
+-- elapsed: 261ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_int_course_coocurrence_other_course_key.992158ab8e
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f42e
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select other_course_key
+from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+where other_course_key is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_int_course_coocurrence_other_course_key.992158ab8e", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:06.942401+00:00
+-- finished_at: 2026-11-09T03:52:07.263299+00:00
+-- elapsed: 320ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_.2012314292
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f42a
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select course_key as from_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+    where course_key is not null
+),
+
+parent as (
+    select course_key as to_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_course_coocurrence_course_key__course_key__ref_int_course_catalog_.2012314292", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:07.426298+00:00
+-- finished_at: 2026-11-09T03:52:07.539838+00:00
+-- elapsed: 113ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_.a490c6181d
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f436
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+with child as (
+    select other_course_key as from_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_coocurrence
+    where other_course_key is not null
+),
+
+parent as (
+    select course_key as to_field
+    from ABACUS_DEV.INTERMEDIATE.int_course_catalog
+)
+
+select
+    from_field
+
+from child
+left join parent
+    on child.from_field = parent.to_field
+
+where parent.to_field is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.relationships_int_course_coocurrence_other_course_key__course_key__ref_int_course_catalog_.a490c6181d", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:07.542854+00:00
+-- finished_at: 2026-11-09T03:52:07.663888+00:00
 -- elapsed: 121ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.course_recommendations
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602b6
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e54e
+-- desc: execute adapter call
+show parameters like 'query_tag' in session
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:07.666027+00:00
+-- finished_at: 2026-11-09T03:52:07.848099+00:00
+-- elapsed: 182ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e552
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:35.360695+00:00
--- finished_at: 2026-11-07T04:53:35.467111+00:00
--- elapsed: 106ms
+-- created_at: 2026-11-09T03:52:07.849619+00:00
+-- finished_at: 2026-11-09T03:52:08.014145+00:00
+-- elapsed: 164ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.course_recommendations
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602ba
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f43a
 -- desc: get_relation > list_relations call
 SHOW OBJECTS IN SCHEMA "ABACUS_DEV"."MARTS" LIMIT 10000;
--- created_at: 2026-11-07T04:53:35.471455+00:00
--- finished_at: 2026-11-07T04:53:36.188623+00:00
--- elapsed: 717ms
+-- created_at: 2026-11-09T03:52:08.017131+00:00
+-- finished_at: 2026-11-09T03:52:08.852410+00:00
+-- elapsed: 835ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.course_recommendations
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006128a
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e556
 -- desc: execute adapter call
 create or replace transient  table ABACUS_DEV.MARTS.course_recommendations
     
@@ -1727,7 +1677,7 @@ select
     cat.program,
     r.score,
     r.reason,
-    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz as generated_at
+    '2026-11-09 03:52:02.723628+00:00'::timestamp_tz as generated_at
 from ranked as r 
 left join ABACUS_DEV.INTERMEDIATE.int_course_catalog as cat 
     on r.course_key = cat.course_key
@@ -1736,90 +1686,91 @@ where r.recommendation_rank <= 5
     )
 
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:36.189910+00:00
--- finished_at: 2026-11-07T04:53:36.279992+00:00
--- elapsed: 90ms
+-- created_at: 2026-11-09T03:52:08.854439+00:00
+-- finished_at: 2026-11-09T03:52:09.026624+00:00
+-- elapsed: 172ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.course_recommendations
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006128e
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f43e
 -- desc: execute adapter call
 alter session unset query_tag
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:36.285162+00:00
--- finished_at: 2026-11-07T04:53:36.357434+00:00
--- elapsed: 72ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.course_recommendations_history
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602be
--- desc: execute adapter call
-show parameters like 'query_tag' in session
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:36.285232+00:00
--- finished_at: 2026-11-07T04:53:36.368927+00:00
--- elapsed: 83ms
+-- created_at: 2026-11-09T03:52:09.033479+00:00
+-- finished_at: 2026-11-09T03:52:09.264+00:00
+-- elapsed: 230ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.reco_run_metrics
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602c2
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f442
 -- desc: execute adapter call
 show parameters like 'query_tag' in session
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:36.358665+00:00
--- finished_at: 2026-11-07T04:53:36.505315+00:00
--- elapsed: 146ms
+-- created_at: 2026-11-09T03:52:09.033245+00:00
+-- finished_at: 2026-11-09T03:52:09.296629+00:00
+-- elapsed: 263ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.course_recommendations_history
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602c6
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f446
 -- desc: execute adapter call
-alter session set query_tag = 'dbt_abacus_dev_local'
+show parameters like 'query_tag' in session
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:36.369903+00:00
--- finished_at: 2026-11-07T04:53:36.509328+00:00
--- elapsed: 139ms
+-- created_at: 2026-11-09T03:52:09.265168+00:00
+-- finished_at: 2026-11-09T03:52:09.338952+00:00
+-- elapsed: 73ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.reco_run_metrics
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061292
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f44a
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:36.508868+00:00
--- finished_at: 2026-11-07T04:53:36.939120+00:00
--- elapsed: 430ms
+-- created_at: 2026-11-09T03:52:09.297979+00:00
+-- finished_at: 2026-11-09T03:52:09.344247+00:00
+-- elapsed: 46ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.course_recommendations_history
--- query_id: 01c83ea5-000e-296d-0002-ff9e00061296
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e55a
 -- desc: execute adapter call
-create or replace transient  table ABACUS_DEV.MARTS.course_recommendations_history
+alter session set query_tag = 'dbt_abacus_dev_local'
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:09.345699+00:00
+-- finished_at: 2026-11-09T03:52:09.506096+00:00
+-- elapsed: 160ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations_history
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e562
+-- desc: execute adapter call
+create or replace  temporary view ABACUS_DEV.MARTS.course_recommendations_history__dbt_tmp
+  
+  
+  
+  
+  as (
     
-    
-    
-    
-    as (
 
 
 select * from ABACUS_DEV.MARTS.course_recommendations
-    )
-
+  )
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:36.511968+00:00
--- finished_at: 2026-11-07T04:53:37.008645+00:00
--- elapsed: 496ms
+-- created_at: 2026-11-09T03:52:09.340987+00:00
+-- finished_at: 2026-11-09T03:52:09.507887+00:00
+-- elapsed: 166ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.reco_run_metrics
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006129a
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e55e
 -- desc: execute adapter call
-create or replace transient  table ABACUS_DEV.MARTS.reco_run_metrics
+create or replace  temporary view ABACUS_DEV.MARTS.reco_run_metrics__dbt_tmp
+  
+  
+  
+  
+  as (
     
-    
-    
-    
-    as (
 
 with recs as (
 
@@ -1858,7 +1809,7 @@ clicks as (
 )
 
 select
-    '2026-11-07 04:53:12.168497+00:00'::timestamp_tz                         as run_at,
+    '2026-11-09 03:52:02.723628+00:00'::timestamp_tz                         as run_at,
     s.actors,
     s.rec_rows,
     round(s.rec_rows / nullif(s.actors, 0), 2)                   as avg_recs_per_actor,
@@ -1872,46 +1823,243 @@ select
 from summary as s
 cross join catalog as cat
 cross join clicks as c
-    )
-
+  )
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:36.940593+00:00
--- finished_at: 2026-11-07T04:53:37.015705+00:00
--- elapsed: 75ms
+-- created_at: 2026-11-09T03:52:09.508124+00:00
+-- finished_at: 2026-11-09T03:52:09.571008+00:00
+-- elapsed: 62ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.course_recommendations_history
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602ca
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f44e
 -- desc: execute adapter call
-drop view if exists ABACUS_DEV.MARTS.course_recommendations_history__dbt_tmp cascade
+describe table ABACUS_DEV.MARTS.course_recommendations_history__dbt_tmp
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.017045+00:00
--- finished_at: 2026-11-07T04:53:37.213304+00:00
--- elapsed: 196ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.course_recommendations_history
--- query_id: 01c83ea5-000e-296d-0002-ff9e0006129e
--- desc: execute adapter call
-alter session unset query_tag
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.010069+00:00
--- finished_at: 2026-11-07T04:53:37.215135+00:00
--- elapsed: 205ms
+-- created_at: 2026-11-09T03:52:09.509090+00:00
+-- finished_at: 2026-11-09T03:52:09.573998+00:00
+-- elapsed: 64ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.reco_run_metrics
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602ce
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e566
+-- desc: execute adapter call
+describe table ABACUS_DEV.MARTS.reco_run_metrics__dbt_tmp
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:09.573325+00:00
+-- finished_at: 2026-11-09T03:52:09.615696+00:00
+-- elapsed: 42ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations_history
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f452
+-- desc: execute adapter call
+describe table ABACUS_DEV.MARTS.course_recommendations_history
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:09.575166+00:00
+-- finished_at: 2026-11-09T03:52:09.621211+00:00
+-- elapsed: 46ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.reco_run_metrics
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f456
+-- desc: execute adapter call
+describe table ABACUS_DEV.MARTS.reco_run_metrics
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:09.622873+00:00
+-- finished_at: 2026-11-09T03:52:09.774194+00:00
+-- elapsed: 151ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.reco_run_metrics
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f45a
+-- desc: execute adapter call
+describe table ABACUS_DEV.MARTS.reco_run_metrics__dbt_tmp
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:09.618601+00:00
+-- finished_at: 2026-11-09T03:52:09.775212+00:00
+-- elapsed: 156ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations_history
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e56a
+-- desc: execute adapter call
+describe table ABACUS_DEV.MARTS.course_recommendations_history__dbt_tmp
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:09.776641+00:00
+-- finished_at: 2026-11-09T03:52:09.905654+00:00
+-- elapsed: 129ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations_history
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e56e
+-- desc: execute adapter call
+describe table "ABACUS_DEV"."MARTS"."COURSE_RECOMMENDATIONS_HISTORY"
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:09.776495+00:00
+-- finished_at: 2026-11-09T03:52:09.907325+00:00
+-- elapsed: 130ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.reco_run_metrics
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e572
+-- desc: execute adapter call
+describe table "ABACUS_DEV"."MARTS"."RECO_RUN_METRICS"
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:09.911007+00:00
+-- finished_at: 2026-11-09T03:52:10.051075+00:00
+-- elapsed: 140ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.reco_run_metrics
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e57a
+-- desc: execute adapter call
+begin
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:09.909991+00:00
+-- finished_at: 2026-11-09T03:52:10.052338+00:00
+-- elapsed: 142ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations_history
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e576
+-- desc: execute adapter call
+begin
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:10.052432+00:00
+-- finished_at: 2026-11-09T03:52:10.454625+00:00
+-- elapsed: 402ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations_history
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f45e
+-- desc: execute adapter call
+
+    insert into ABACUS_DEV.MARTS.course_recommendations_history ("ACTOR_ID", "RECOMMENDATION_RANK", "COURSE_KEY", "COURSE_NAME_EN", "COURSE_NAME_TH", "PROGRAM", "SCORE", "REASON", "GENERATED_AT")
+    (
+        select "ACTOR_ID", "RECOMMENDATION_RANK", "COURSE_KEY", "COURSE_NAME_EN", "COURSE_NAME_TH", "PROGRAM", "SCORE", "REASON", "GENERATED_AT"
+        from ABACUS_DEV.MARTS.course_recommendations_history__dbt_tmp
+    )
+
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:10.051373+00:00
+-- finished_at: 2026-11-09T03:52:10.459507+00:00
+-- elapsed: 408ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.reco_run_metrics
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e57e
+-- desc: execute adapter call
+
+    insert into ABACUS_DEV.MARTS.reco_run_metrics ("RUN_AT", "ACTORS", "REC_ROWS", "AVG_RECS_PER_ACTOR", "PCT_PERSONAL", "COURSES_RECOMMENDED", "CATALOG_SIZE", "CATALOG_COVERAGE", "INTERACTIONS_TOTAL", "NEWEST_CLICK_AT", "DATA_LAG_MINUTES")
+    (
+        select "RUN_AT", "ACTORS", "REC_ROWS", "AVG_RECS_PER_ACTOR", "PCT_PERSONAL", "COURSES_RECOMMENDED", "CATALOG_SIZE", "CATALOG_COVERAGE", "INTERACTIONS_TOTAL", "NEWEST_CLICK_AT", "DATA_LAG_MINUTES"
+        from ABACUS_DEV.MARTS.reco_run_metrics__dbt_tmp
+    )
+
+
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:10.459581+00:00
+-- finished_at: 2026-11-09T03:52:10.716011+00:00
+-- elapsed: 256ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.reco_run_metrics
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f466
+-- desc: execute adapter call
+
+    commit
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:10.454798+00:00
+-- finished_at: 2026-11-09T03:52:10.717191+00:00
+-- elapsed: 262ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations_history
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f462
+-- desc: execute adapter call
+
+    commit
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:10.719843+00:00
+-- finished_at: 2026-11-09T03:52:10.891917+00:00
+-- elapsed: 172ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.reco_run_metrics
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f46a
 -- desc: execute adapter call
 drop view if exists ABACUS_DEV.MARTS.reco_run_metrics__dbt_tmp cascade
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.219215+00:00
--- finished_at: 2026-11-07T04:53:37.377597+00:00
--- elapsed: 158ms
+-- created_at: 2026-11-09T03:52:10.719843+00:00
+-- finished_at: 2026-11-09T03:52:10.893140+00:00
+-- elapsed: 173ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations_history
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e582
+-- desc: execute adapter call
+drop view if exists ABACUS_DEV.MARTS.course_recommendations_history__dbt_tmp cascade
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:10.894423+00:00
+-- finished_at: 2026-11-09T03:52:11.073032+00:00
+-- elapsed: 178ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.course_recommendations_history
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e586
+-- desc: execute adapter call
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.course_recommendations_history", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:10.894088+00:00
+-- finished_at: 2026-11-09T03:52:11.074549+00:00
+-- elapsed: 180ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: model.abacus_analytics.reco_run_metrics
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e58a
+-- desc: execute adapter call
+alter session unset query_tag
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:11.082523+00:00
+-- finished_at: 2026-11-09T03:52:11.245907+00:00
+-- elapsed: 163ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_reco_run_metrics_run_at.9ee7cf559a
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e596
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select run_at
+from ABACUS_DEV.MARTS.reco_run_metrics
+where run_at is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_reco_run_metrics_run_at.9ee7cf559a", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:11.082620+00:00
+-- finished_at: 2026-11-09T03:52:11.247056+00:00
+-- elapsed: 164ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.not_null_course_recommendations_history_generated_at.7494d185fc
--- query_id: 01c83ea5-000e-296d-0002-ff9e000612a2
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e592
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -1937,43 +2085,100 @@ where generated_at is null
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_course_recommendations_history_generated_at.7494d185fc", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.379202+00:00
--- finished_at: 2026-11-07T04:53:37.467479+00:00
--- elapsed: 88ms
+-- created_at: 2026-11-09T03:52:11.082870+00:00
+-- finished_at: 2026-11-09T03:52:11.247073+00:00
+-- elapsed: 164ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_reco_run_metrics_actors.a432589070
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f46e
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select actors
+from ABACUS_DEV.MARTS.reco_run_metrics
+where actors is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_reco_run_metrics_actors.a432589070", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:11.082785+00:00
+-- finished_at: 2026-11-09T03:52:11.248204+00:00
+-- elapsed: 165ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.unique_reco_run_metrics_run_at.231c895403
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e58e
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+select
+    run_at as unique_field,
+    count(*) as n_records
+
+from ABACUS_DEV.MARTS.reco_run_metrics
+where run_at is not null
+group by run_at
+having count(*) > 1
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_reco_run_metrics_run_at.231c895403", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:11.253570+00:00
+-- finished_at: 2026-11-09T03:52:11.421685+00:00
+-- elapsed: 168ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.reco_hit_rate_daily
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602d6
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e59a
 -- desc: execute adapter call
 show parameters like 'query_tag' in session
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_hit_rate_daily", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.470560+00:00
--- finished_at: 2026-11-07T04:53:37.566411+00:00
--- elapsed: 95ms
+-- created_at: 2026-11-09T03:52:11.423160+00:00
+-- finished_at: 2026-11-09T03:52:11.593280+00:00
+-- elapsed: 170ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.reco_hit_rate_daily
--- query_id: 01c83ea5-000e-296d-0002-ff9e000612a6
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f472
 -- desc: execute adapter call
 alter session set query_tag = 'dbt_abacus_dev_local'
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_hit_rate_daily", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.216631+00:00
--- finished_at: 2026-11-07T04:53:37.622945+00:00
--- elapsed: 406ms
--- outcome: success
--- dialect: snowflake
--- node_id: model.abacus_analytics.reco_run_metrics
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602d2
--- desc: execute adapter call
-alter session unset query_tag
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_run_metrics", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.569872+00:00
--- finished_at: 2026-11-07T04:53:37.917514+00:00
--- elapsed: 347ms
+-- created_at: 2026-11-09T03:52:11.597124+00:00
+-- finished_at: 2026-11-09T03:52:12.263896+00:00
+-- elapsed: 666ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.reco_hit_rate_daily
--- query_id: 01c83ea5-000e-296d-0002-ff9e000612aa
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f476
 -- desc: execute adapter call
 create or replace transient  table ABACUS_DEV.MARTS.reco_hit_rate_daily
     
@@ -2039,122 +2244,23 @@ group by reco_date
     )
 
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_hit_rate_daily", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.918922+00:00
--- finished_at: 2026-11-07T04:53:38.066085+00:00
--- elapsed: 147ms
+-- created_at: 2026-11-09T03:52:12.266113+00:00
+-- finished_at: 2026-11-09T03:52:12.320257+00:00
+-- elapsed: 54ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: model.abacus_analytics.reco_hit_rate_daily
--- query_id: 01c83ea5-000e-296d-0002-ff9e000612b6
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e59e
 -- desc: execute adapter call
 alter session unset query_tag
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "model.abacus_analytics.reco_hit_rate_daily", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.637486+00:00
--- finished_at: 2026-11-07T04:53:38.102179+00:00
--- elapsed: 464ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.unique_reco_run_metrics_run_at.231c895403
--- query_id: 01c83ea5-000e-296d-0002-ff9e000612b2
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-select
-    run_at as unique_field,
-    count(*) as n_records
-
-from ABACUS_DEV.MARTS.reco_run_metrics
-where run_at is not null
-group by run_at
-having count(*) > 1
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_reco_run_metrics_run_at.231c895403", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.637631+00:00
--- finished_at: 2026-11-07T04:53:38.107235+00:00
--- elapsed: 469ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_reco_run_metrics_run_at.9ee7cf559a
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602da
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select run_at
-from ABACUS_DEV.MARTS.reco_run_metrics
-where run_at is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_reco_run_metrics_run_at.9ee7cf559a", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:37.638110+00:00
--- finished_at: 2026-11-07T04:53:38.119933+00:00
--- elapsed: 481ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_reco_run_metrics_actors.a432589070
--- query_id: 01c83ea5-000e-296d-0002-ff9e000612ae
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select actors
-from ABACUS_DEV.MARTS.reco_run_metrics
-where actors is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_reco_run_metrics_actors.a432589070", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:38.070981+00:00
--- finished_at: 2026-11-07T04:53:38.267249+00:00
--- elapsed: 196ms
+-- created_at: 2026-11-09T03:52:12.328358+00:00
+-- finished_at: 2026-11-09T03:52:12.443596+00:00
+-- elapsed: 115ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.unique_reco_hit_rate_daily_reco_date.c7b671dbc1
--- query_id: 01c83ea5-000e-296d-0002-ff9e000612be
+-- query_id: 01c849a8-000e-2ad2-0002-ff9e0009f47a
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -2183,13 +2289,45 @@ having count(*) > 1
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.unique_reco_hit_rate_daily_reco_date.c7b671dbc1", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:38.072494+00:00
--- finished_at: 2026-11-07T04:53:38.268185+00:00
--- elapsed: 195ms
+-- created_at: 2026-11-09T03:52:12.328475+00:00
+-- finished_at: 2026-11-09T03:52:12.452800+00:00
+-- elapsed: 124ms
+-- outcome: success
+-- dialect: snowflake
+-- node_id: test.abacus_analytics.not_null_reco_hit_rate_daily_reco_date.177c9445d3
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e5a2
+-- desc: execute adapter call
+select
+      count(*) as failures,
+      count(*) != 0 as should_warn,
+      count(*) != 0 as should_error
+    from (
+      
+    
+  
+    
+    
+
+
+
+select reco_date
+from ABACUS_DEV.MARTS.reco_hit_rate_daily
+where reco_date is null
+
+
+
+  
+  
+      
+    ) dbt_internal_test
+/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_reco_hit_rate_daily_reco_date.177c9445d3", "profile_name": "abacus", "target_name": "dev"} */;
+-- created_at: 2026-11-09T03:52:12.328371+00:00
+-- finished_at: 2026-11-09T03:52:12.455719+00:00
+-- elapsed: 127ms
 -- outcome: success
 -- dialect: snowflake
 -- node_id: test.abacus_analytics.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0.aa7d8e5ab2
--- query_id: 01c83ea5-000e-2967-0002-ff9e000602de
+-- query_id: 01c849a8-000e-2ad4-0002-ff9e0009e5a6
 -- desc: execute adapter call
 select
       count(*) as failures,
@@ -2226,35 +2364,3 @@ from validation_errors
       
     ) dbt_internal_test
 /* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.dbt_utils_accepted_range_reco_hit_rate_daily_hit_rate__1__0.aa7d8e5ab2", "profile_name": "abacus", "target_name": "dev"} */;
--- created_at: 2026-11-07T04:53:38.072425+00:00
--- finished_at: 2026-11-07T04:53:38.268804+00:00
--- elapsed: 196ms
--- outcome: success
--- dialect: snowflake
--- node_id: test.abacus_analytics.not_null_reco_hit_rate_daily_reco_date.177c9445d3
--- query_id: 01c83ea5-000e-296d-0002-ff9e000612ba
--- desc: execute adapter call
-select
-      count(*) as failures,
-      count(*) != 0 as should_warn,
-      count(*) != 0 as should_error
-    from (
-      
-    
-  
-    
-    
-
-
-
-select reco_date
-from ABACUS_DEV.MARTS.reco_hit_rate_daily
-where reco_date is null
-
-
-
-  
-  
-      
-    ) dbt_internal_test
-/* {"app": "dbt", "dbt_version": "2.0.0", "node_id": "test.abacus_analytics.not_null_reco_hit_rate_daily_reco_date.177c9445d3", "profile_name": "abacus", "target_name": "dev"} */;

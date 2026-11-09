@@ -11,7 +11,7 @@
 
 WITH source AS (
     SELECT *
-    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS
+    FROM ABACUS_ANALYTICS.RAW.CLICKSTREAM_EVENTS_BENCH
     WHERE EVENT_TYPE = 'course_card_clicked'
 ),
 
@@ -36,7 +36,7 @@ flattened AS (
         METADATA:referer::STRING                AS referer,
         METADATA:source::STRING                 AS source,
         METADATA:user_agent::STRING             AS user_agent,
-        '2026-11-07 04:53:12.168497+00:00'::timestamp_tz    AS dbt_built_at
+        '2026-11-09 03:52:02.723628+00:00'::timestamp_tz    AS dbt_built_at
 
     FROM source
 

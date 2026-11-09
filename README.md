@@ -1192,6 +1192,32 @@ minutes** from the first event produced to a fresh `course_recommendations` tabl
   `int_course_interactions` to incremental starts paying off at 10M+ events or with
   frequent (hourly) runs.
 
+**Output at scale** (`reco_run_metrics` from a dev build on each bench size:
+`dbt build --vars '{raw_events_table: CLICKSTREAM_EVENTS_BENCH}'`)
+
+| Events | Course clicks sent | `int_course_interactions` (after dedupe) | Parents | Recommendations | Avg recs / parent | Personal share | Courses recommended / catalog |
+|---|---|---|---|---|---|---|---|
+| 10,000 | — | 4,105 | 554 | 2,770 | 5.00 | 1.00 | 20 / 20 |
+| 100,000 | 42,464 | 41,207 | 5,529 | 27,645 | 5.00 | 1.00 | 20 / 20 |
+| 1,000,000 | 424,008 | 411,617 | 55,403 | 277,015 | 5.00 | 1.00 | 20 / 20 |
+
+**What the output shows**
+
+- **Every parent gets a full list at every size**: exactly 5.00 recommendations per
+  parent, and `rec_rows = 5 × parents`.
+- **Deduplication works at scale.** The generator injects ~3% exact duplicates to mimic
+  Kafka re-delivery; `int_course_interactions` removes 2.96% (100K) and 2.92% (1M) of
+  course clicks.
+- **Output grows linearly with input**: about 1 parent per 18 events, as designed in the
+  generator.
+- **The 47 course offerings collapse into 20 courses** through `course_key` (one key
+  per course across time slots), and all 20 are recommended.
+- **Personal share is 1.00** because synthetic parents overlap heavily, so every parent
+  has co-occurrence partners and the popular fallback is never needed. Real, sparser
+  traffic will use the fallback more; watch `pct_personal` in production.
+- `data_lag_minutes` is not meaningful here: generator timestamps are spread over the
+  previous 30 days, and the builds ran after the loads. Use it only on production runs.
+
 **Incident found by the benchmark: 1.12M messages committed but not written**
 
 During an earlier 1M attempt, the Connect container lost network access to Snowflake
