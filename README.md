@@ -1116,24 +1116,106 @@ all runs. For 1M, pass `--timeout 3600` to `bench_ingest.py`.
 
 ### 27. Results
 
-Environment: Kafka + Connect in Docker on a MacBook (Apple Silicon), connector v4 with
-4 tasks, Snowflake XS warehouse.
+Environment: Kafka + Connect in Docker on a MacBook (Apple Silicon), Snowflake sink
+connector v4 with 4 tasks, bench topic with 3 partitions, Snowflake XS warehouse.
+Raw numbers: `bench_results/ingest_results.csv`.
 
-| Events | Produce (events/s) | Ingest end-to-end (s) | Ingest (events/s) | dbt build, median (s) | Slowest model |
+**Ingest (Kafka → Snowflake), measured with `bench_ingest.py`**
+
+| Events | Produce (events/s) | Ingest end-to-end (s) | Lag after last send (s) | Ingest (events/s) | Run |
 |---|---|---|---|---|---|
-| 1,000 | 67,602 | 36.4 | 27 | | |
-| 10,000 | 89,140 | 26.1 | 383 | | |
-| 100,000 | | | | | |
-| 1,000,000 | | | | | |
+| 1,000 | 21,847 | 28.7 | 28.7 | 35 | 7 Nov, after reset |
+| 10,000 | 89,140 | 26.1 | 26.0 | 383 | 2 Nov |
+| 100,000 | 137,204 | 59.3 | 58.6 | 1,686 | 7 Nov |
+| 1,000,000 | 127,324 | **132.4** | 124.5 | **7,555** | 7 Nov |
 
-The 1K run includes first-write overhead (the connector creating the bench table and
-opening its Snowpipe Streaming channels), which is why it is slower end-to-end than
-10K. Ingest time is dominated by the connector's flush interval, not by volume, so
-events/s rises with batch size until the connector or warehouse becomes the limit.
+Accuracy is about ±5 s (the polling interval). Every run arrived complete
+(`arrived = expected`). A second 10K run on 7 Nov took 245.8 s while the connector was
+unstable (see the incident below) and is excluded as an outlier; re-run pending.
 
-**Next:** run the 100K and 1M baselines, make `int_course_interactions` incremental
-(`unique_key='interaction_id'`, `merge`, 6-hour late-event lookback, `cluster_by` on
-the event date), and re-run 1M to record the before/after build time.
+**What the numbers show**
+
+- **Producing is not the bottleneck.** The Python producer sends 90K–140K events/s;
+  1M events leave the laptop in under 8 s.
+- **Ingest scales sub-linearly.** 100× more data (10K → 1M) takes only ~5× longer
+  end-to-end (26 s → 132 s), and throughput rises ~20× (383 → 7,555 events/s).
+- **Small loads are dominated by fixed latency.** 1K and 10K both take ~25–30 s: the
+  connector's buffer flush and Snowpipe Streaming commit interval, not the volume.
+  Larger batches amortise that fixed cost.
+- **Ingest is far faster than the business needs.** Real traffic is a few thousand
+  events a day; the pipeline absorbed 1M events in about two minutes.
+
+**Transform (dbt), measured with the `dbt benchmark` workflow** (GitHub Actions,
+`--full-refresh`, 3 runs per size, median; 12 models + 1 seed + 31 tests = 44 nodes,
+`threads: 4`, XS warehouse)
+
+| Events | dbt build, median (s) | min – max (s) | Nodes passed |
+|---|---|---|---|
+| 10,000 | 20.0 | 18.1 – 21.2 | 44 / 44 |
+| 100,000 | 22.1 | 20.3 – 22.6 | 44 / 44 |
+| 1,000,000 | **24.7** | 22.1 – 25.5 | 44 / 44 |
+
+Per-model medians (seconds):
+
+| Model | Layer | 10K | 100K | 1M |
+|---|---|---|---|---|
+| `course_recommendations_history` | marts (incremental) | 3.7 | 4.3 | 5.0 |
+| `reco_run_metrics` | marts (incremental) | 3.8 | 4.2 | 4.3 |
+| `course_recommendations` | marts | 1.7 | 1.9 | 2.3 |
+| `int_course_interactions` | intermediate | 1.7 | 1.8 | 2.2 |
+| `int_actor_course_affinity` | intermediate | 1.5 | 1.6 | 1.8 |
+| `int_course_popularity` | intermediate | 1.5 | 1.6 | 1.8 |
+| `int_course_catalog` | intermediate | 1.5 | 1.6 | 1.7 |
+| `int_course_coocurrence` | intermediate | 1.4 | 1.6 | 1.7 |
+| `reco_hit_rate_daily` | marts | 1.4 | 1.5 | 1.6 |
+| slowest staging view | staging | 1.2 | 1.5 | 1.4 |
+
+**Click to recommendation, 1M events:** 132.4 s ingest + 24.7 s dbt build ≈ **2.6
+minutes** from the first event produced to a fresh `course_recommendations` table.
+
+**What the dbt numbers show**
+
+- **Build time is almost flat.** 100× more events (10K → 1M) adds only 4.7 s (+24%).
+  An XS warehouse is nowhere near its limit at this volume.
+- **Fixed per-model overhead dominates.** Every model costs ~1.2–1.5 s even at 10K
+  (compile, `create or replace`, metadata round-trips). With 12 models and 31 tests,
+  that overhead is most of the 20 s.
+- **The two incremental marts are the slowest**, not because of data volume but
+  because an incremental model runs several statements (create a temp relation, check
+  the schema for `on_schema_change`, insert). `--full-refresh` does not rebuild them
+  (`full_refresh = false`), so each benchmark run appends.
+- **Real data-driven growth shows in the models that touch every event:**
+  `int_course_interactions` (+29% from 10K to 1M), `course_recommendations` (+35%) and
+  `course_recommendations_history` (+35%).
+- **Optimisation priorities follow from this:** at ≤1M events, more `threads` (more
+  models in parallel) would cut time more than incremental models. Converting
+  `int_course_interactions` to incremental starts paying off at 10M+ events or with
+  frequent (hourly) runs.
+
+**Incident found by the benchmark: 1.12M messages committed but not written**
+
+During an earlier 1M attempt, the Connect container lost network access to Snowflake
+and all 4 tasks failed (`JDBC driver encountered communication error`). The compose
+file installed `snowflake-kafka-connector:latest` on every container start, so the
+restart also upgraded the connector (to 4.2.3). Afterwards Kafka reported **LAG 0** on
+all three bench partitions (1,121,000 messages marked consumed) while
+`CLICKSTREAM_EVENTS_BENCH` held **0 rows**, and the dead-letter queue was empty.
+
+- **Detected by** reconciling Kafka consumer-group offsets against Snowflake row
+  counts: `bench_ingest.py` stayed at 0 while `kafka-consumer-groups.sh` showed LAG 0.
+- **Recovered by** recreating the bench topic, dropping the bench table (fresh
+  Snowpipe Streaming channels), and restarting all tasks; the 1K, 100K and 1M runs
+  above were made afterwards and all arrived complete.
+- **Prevention:** pin the connector version and bake it into the image
+  (`docker/Dockerfile`, `build:` in compose, no install-on-start `command:`); keep the
+  Mac awake during loads (`caffeinate -dimsu`); always reconcile row counts after a
+  load instead of trusting LAG 0 alone.
+
+**Next:** test `threads: 8` against `threads: 4` at 1M; benchmark 10M events to find
+where volume starts to dominate; then make `int_course_interactions` incremental
+(`unique_key='interaction_id'`, `merge`, 6-hour late-event lookback, `cluster_by` on the
+event date) and record the before/after. Add per-layer totals, row counts and credits
+to the workflow summary.
 
 **Reliability checks to run with the same tools:**
 
@@ -1475,15 +1557,17 @@ git check-ignore -v connectors/snowflake-sink-v4.json     # silence = NOT ignore
 - CI/CD: PR checks in isolated schemas, deploy on merge and daily, query tags per run.
 - Monitoring: `reco_run_metrics`, `course_recommendations_history`,
   `reco_hit_rate_daily`, source freshness.
-- Benchmark: isolated bench topic/table, ingest timing script, timed dbt workflow;
-  1K and 10K ingest baselines recorded.
+- Benchmark: isolated bench topic/table, ingest timing script, timed dbt workflow.
+  1M events: ingest 132 s (7,555 events/s) + dbt build 24.7 s (10K: 20.0 s), all 44
+  nodes passing; a connector-failure incident found and documented.
 - Security: connector key rotated after an accidental commit; dedicated users and keys
   per system.
 
 **Next work, in priority order**
 
-1. **Benchmark** 100K and 1M (ingest + dbt), then make `int_course_interactions`
-   incremental and record the before/after.
+1. **Benchmark round 2**: pin the connector in the Docker image, re-run a clean 10K
+   ingest on the new account, compare `threads: 4` vs `8`, try 10M events, then make
+   `int_course_interactions` incremental and record the before/after.
 2. **Hit-rate validation**: generator mode where returning parents click a
    recommended course with a known probability; the metric should recover it.
 3. **Kafka off the laptop**: managed Kafka or a cloud VM so ingestion runs 24/7.
